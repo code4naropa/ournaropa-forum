@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = OurnaropaForum::VERSION
   s.authors     = ["Finn Woelm"]
   s.email       = ["finn.woelm@gmail.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of OurnaropaForum."
-  s.description = "TODO: Description of OurnaropaForum."
+  s.homepage    = "spaceholder"
+  s.summary     = "spaceholder"
+  s.description = "spaceholder"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
