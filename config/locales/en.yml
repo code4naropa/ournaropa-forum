@@ -1,0 +1,13 @@
+#en:
+#  activerecord:
+#    attributes:
+#      ournaropa_forum/conversation:
+#        title: "Title"
+#    errors:
+#      models:
+#        ournaropa_forum/conversation:
+#          attributes:
+#            title:
+#            blank: "Please fill in your %{attribute}"
+
+en:

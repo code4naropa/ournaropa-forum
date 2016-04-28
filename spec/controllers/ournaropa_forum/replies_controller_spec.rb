@@ -23,6 +23,10 @@ module OurnaropaForum
 
     routes { OurnaropaForum::Engine.routes }
           
+    before do
+      @conversation = Conversation.create! FactoryGirl.attributes_for(:ournaropa_forum_conversation)
+    end
+    
     # This should return the minimal set of attributes required to create a valid
     # Reply. As you add validations to Reply, be sure to
     # adjust the attributes here as well.
@@ -46,7 +50,7 @@ module OurnaropaForum
     describe "GET #index" do
       it "assigns all replies as @replies" do
         reply = Reply.create! valid_attributes
-        get :index, {}, valid_session
+        get :index, {:conversation_id => @conversation.id}, valid_session
         expect(assigns(:replies)).to eq([reply])
       end
     end
@@ -54,14 +58,14 @@ module OurnaropaForum
     describe "GET #show" do
       it "assigns the requested reply as @reply" do
         reply = Reply.create! valid_attributes
-        get :show, {:id => reply.to_param}, valid_session
+        get :show, {:conversation_id => @conversation.id, :id => reply.to_param}, valid_session
         expect(assigns(:reply)).to eq(reply)
       end
     end
 
     describe "GET #new" do
       it "assigns a new reply as @reply" do
-        get :new, {}, valid_session
+        get :new, {:conversation_id => @conversation.id}, valid_session
         expect(assigns(:reply)).to be_a_new(Reply)
       end
     end
@@ -69,7 +73,7 @@ module OurnaropaForum
     describe "GET #edit" do
       it "assigns the requested reply as @reply" do
         reply = Reply.create! valid_attributes
-        get :edit, {:id => reply.to_param}, valid_session
+        get :edit, {:conversation_id => @conversation.id, :id => reply.to_param}, valid_session
         expect(assigns(:reply)).to eq(reply)
       end
     end
@@ -78,30 +82,30 @@ module OurnaropaForum
       context "with valid params" do
         it "creates a new Reply" do
           expect {
-            post :create, {:reply => valid_attributes}, valid_session
+            post :create, {:conversation_id => @conversation.id, :reply => valid_attributes}, valid_session
           }.to change(Reply, :count).by(1)
         end
 
         it "assigns a newly created reply as @reply" do
-          post :create, {:reply => valid_attributes}, valid_session
+          post :create, {:conversation_id => @conversation.id, :reply => valid_attributes}, valid_session
           expect(assigns(:reply)).to be_a(Reply)
           expect(assigns(:reply)).to be_persisted
         end
 
         it "redirects to the created reply" do
-          post :create, {:reply => valid_attributes}, valid_session
-          expect(response).to redirect_to(Reply.last)
+          post :create, {:conversation_id => @conversation.id, :reply => valid_attributes}, valid_session
+          expect(response).to redirect_to([@conversation, Reply.last])
         end
       end
 
       context "with invalid params" do
         it "assigns a newly created but unsaved reply as @reply" do
-          post :create, {:reply => invalid_attributes}, valid_session
+          post :create, {:conversation_id => @conversation.id, :reply => invalid_attributes}, valid_session
           expect(assigns(:reply)).to be_a_new(Reply)
         end
 
         it "re-renders the 'new' template" do
-          post :create, {:reply => invalid_attributes}, valid_session
+          post :create, {:conversation_id => @conversation.id, :reply => invalid_attributes}, valid_session
           expect(response).to render_template("new")
         end
       end
@@ -116,7 +120,7 @@ module OurnaropaForum
 
         it "updates the requested reply" do
           reply = Reply.create! valid_attributes
-          put :update, {:id => reply.to_param, :reply => new_attributes}, valid_session
+          put :update, {:conversation_id => @conversation.id, :id => reply.to_param, :reply => new_attributes}, valid_session
           reply.reload
           expect(assigns(:reply).title).to eq("new_title_is_awesome")
           #skip("Add assertions for updated state")
@@ -124,27 +128,27 @@ module OurnaropaForum
 
         it "assigns the requested reply as @reply" do
           reply = Reply.create! valid_attributes
-          put :update, {:id => reply.to_param, :reply => valid_attributes}, valid_session
+          put :update, {:conversation_id => @conversation.id, :id => reply.to_param, :reply => valid_attributes}, valid_session
           expect(assigns(:reply)).to eq(reply)
         end
 
         it "redirects to the reply" do
           reply = Reply.create! valid_attributes
-          put :update, {:id => reply.to_param, :reply => valid_attributes}, valid_session
-          expect(response).to redirect_to(reply)
+          put :update, {:conversation_id => @conversation.id, :id => reply.to_param, :reply => valid_attributes}, valid_session
+          expect(response).to redirect_to([@conversation, reply])
         end
       end
 
       context "with invalid params" do
         it "assigns the reply as @reply" do
           reply = Reply.create! valid_attributes
-          put :update, {:id => reply.to_param, :reply => invalid_attributes}, valid_session
+          put :update, {:conversation_id => @conversation.id, :id => reply.to_param, :reply => invalid_attributes}, valid_session
           expect(assigns(:reply)).to eq(reply)
         end
 
         it "re-renders the 'edit' template" do
           reply = Reply.create! valid_attributes
-          put :update, {:id => reply.to_param, :reply => invalid_attributes}, valid_session
+          put :update, {:conversation_id => @conversation.id, :id => reply.to_param, :reply => invalid_attributes}, valid_session
           expect(response).to render_template("edit")
         end
       end
@@ -154,14 +158,14 @@ module OurnaropaForum
       it "destroys the requested reply" do
         reply = Reply.create! valid_attributes
         expect {
-          delete :destroy, {:id => reply.to_param}, valid_session
+          delete :destroy, {:conversation_id => @conversation.id, :id => reply.to_param}, valid_session
         }.to change(Reply, :count).by(-1)
       end
 
       it "redirects to the replies list" do
         reply = Reply.create! valid_attributes
-        delete :destroy, {:id => reply.to_param}, valid_session
-        expect(response).to redirect_to(replies_url)
+        delete :destroy, {:conversation_id => @conversation.id, :id => reply.to_param}, valid_session
+        expect(response).to redirect_to(conversation_replies_url)
       end
     end
 

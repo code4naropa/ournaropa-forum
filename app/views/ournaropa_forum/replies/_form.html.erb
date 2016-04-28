@@ -1,4 +1,4 @@
-<%= form_for(@reply) do |f| %>
+<%= form_for [@conversation, @reply] do |f| %>
   <% if @reply.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@reply.errors.count, "error") %> prohibited this reply from being saved:</h2>
@@ -22,10 +22,6 @@
   <div class="field">
     <%= f.label :author_id %><br>
     <%= f.number_field :author_id %>
-  </div>
-  <div class="field">
-    <%= f.label :conversation_id %><br>
-    <%= f.text_field :conversation_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

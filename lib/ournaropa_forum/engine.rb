@@ -1,6 +1,6 @@
 module OurnaropaForum
   class Engine < ::Rails::Engine
-    isolate_namespace OurnaropaForum
+    isolate_namespace OurnaropaForum    
     
      config.generators do |g|
      g.test_framework :rspec, :fixture => false

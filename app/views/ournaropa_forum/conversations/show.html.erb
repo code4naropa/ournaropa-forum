@@ -1,19 +1,48 @@
-<p id="notice"><%= notice %></p>
+<div id="ournaropa_forum_show" class="container">
 
-<p>
-  <strong>Title:</strong>
-  <%= @conversation.title %>
-</p>
+  
+  <div class="row">
+    <div class="col s12">
+      <div class="section">
+        <%= link_to conversations_path, class: "waves-effect waves-light btn purple" do %>
+          <i class="material-icons left">arrow_back</i>Back</a>
+        <% end %>  
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Body:</strong>
-  <%= @conversation.body %>
-</p>
+  <div class="row">
+    
+    <div class="col s12">
+    
+      <div class="topic z-depth-2">
+        <%= image_tag "ournaropa_forum/finn.JPG", class: "author circle responsive-img" %>
+        <div class="content">
+          <h3><%= @conversation.title %></h3>
+          <div class="chip">Finn Woelm</div>
+          <p><%= @conversation.body %></p>
+        </div>
+      </div>
 
-<p>
-  <strong>Author:</strong>
-  <%= @conversation.author_id %>
-</p>
+      <div class="reply z-depth-1">
+        <h4><%= @conversation.title %></h4>
+        <p><%= @conversation.body %></p>
+      </div>
 
-<%= link_to 'Edit', edit_conversation_path(@conversation) %> |
-<%= link_to 'Back', conversations_path %>
+    </div>
+    
+  </div>
+
+
+  <div class="row">
+    <div class="col s12">
+      <div class="section">
+        <%= link_to conversations_path, class: "waves-effect waves-light btn purple" do %>
+          <i class="material-icons left">arrow_back</i>Back</a>
+        <% end %>  
+      </div>
+    </div>
+  </div>
+
+
+</div>

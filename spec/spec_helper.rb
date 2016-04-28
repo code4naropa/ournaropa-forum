@@ -1,8 +1,10 @@
 #This code requires all the gems you need for writing your specs, loads the dummy application, and configures RSpec.
 
-ENV['RAILS_ENV'] ||= 'test'
+#ENV['RAILS_ENV'] ||= 'test'
 
+ENV['RAILS_ENV'] = 'test'
 require File.expand_path("../dummy/config/environment.rb", __FILE__)
+
 require 'rspec/rails' 
 #require 'rspec/autorun' #no longer needed
 require 'capybara/rspec'
@@ -11,9 +13,12 @@ require 'faker'
 require 'shoulda/matchers'
 require 'database_cleaner'
 
+abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort("The Rails environment is running in development mode!") if Rails.env.development?
+
 # Factory Girl compatbility
-FactoryGirl.definition_file_paths << File.join(File.dirname(__FILE__), 'factories')
-FactoryGirl.find_definitions
+#FactoryGirl.definition_file_paths << File.join(File.dirname(__FILE__), 'factories')
+#FactoryGirl.find_definitions
 
 Rails.backtrace_cleaner.remove_silencers!
 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OurNaropa - Elevating Collaboration and Empowering Community</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+ <nav>
+  <div class="nav-wrapper purple">
+    <div class="container">
+      <%= link_to "OurNaropa", "#", :class => "brand-logo" %>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <%# ADD IMAGE OF USER HERE %>
+        <li><a href="#"><i class="material-icons right">person</i>Hi, Karen!</a></li>
+        <li><a href="#"><i class="material-icons right">exit_to_app</i>Log Out</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>  
+
+<%= yield %>
+
+<% # if there is a notice, display for 5 seconds
+  if notice %>
+  <script type="text/javascript">
+    Materialize.toast("<%= escape_javascript notice %>", 5000) // 4000 is the duration of the toast
+  </script>
+<% end %>
+  
+</body>
+</html>

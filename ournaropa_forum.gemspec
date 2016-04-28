@@ -27,6 +27,15 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'pry-rails'
   
   
+  s.add_dependency 'jquery-rails'
+  s.add_dependency 'turbolinks'
+  s.add_dependency 'jquery-turbolinks'
+  
+  s.add_dependency 'sass-rails'
+  s.add_dependency 'materialize-sass'
+  s.add_dependency 'material_icons'
+  
+  
   s.test_files = Dir["spec/**/*"]
   
 end
