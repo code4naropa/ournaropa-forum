@@ -11,6 +11,7 @@ module OurnaropaForum
 
     # GET /conversations/1
     def show
+      @replies = @conversation.replies
     end
 
     # GET /conversations/new

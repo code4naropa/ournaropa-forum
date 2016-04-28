@@ -8,7 +8,8 @@
           
         <h1>Conversations</h1>
         
-        <%= link_to new_conversation_path, class: "waves-effect waves-light btn-large purple" do %>
+        <%#= link_to new_conversation_path, class: "waves-effect waves-light btn-large purple" do %>
+        <%= link_to "#", class: "waves-effect waves-light btn-large purple" do %>
           <i class="material-icons left">add</i>Start A Conversation</a>
         <% end %>
       </div>
@@ -18,30 +19,30 @@
   </div>
 
 
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Body</th>
-        <th>Author</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+  <% @conversations.each do |conversation| %>
+  <div class="row">
 
-    <tbody>
-      <% @conversations.each do |conversation| %>
-        <tr>
-          <td><%= conversation.title %></td>
-          <td><%= conversation.body %></td>
-          <td><%= conversation.author_id %></td>
-          <td><%= link_to 'Show', conversation %></td>
-          <td><%= link_to 'Edit', edit_conversation_path(conversation) %></td>
-          <td><%= link_to 'Destroy', conversation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
+    <div class="col s12">
+
+      <%= link_to conversation, :class => "open-conversation" do %>
+        <div class="topic z-depth-2">
+
+          <%= render :partial => "render_author", :locals => {:author_id => conversation.author_id} %>
+
+          <div class="content">
+            <p class="time right right-align grey-text">
+              <i class="material-icons tiny">event</i> <%= conversation.created_at.in_time_zone.strftime("%a, %b %e, %Y") %><br/>
+              <i class="material-icons tiny">schedule</i> <%= conversation.created_at.in_time_zone.strftime("%l:%M%P %Z") %>
+            </p>
+            <h3><%= conversation.title %></h3>
+            <p class="grey-text"><%= conversation.body.truncate_words(50) %></p>
+          </div>
+        </div>
       <% end %>
-    </tbody>
-  </table>
+    </div>
+  </div>
 
-  <br>
+  <% end %>
+
   
 </div>

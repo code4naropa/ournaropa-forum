@@ -1,0 +1,16 @@
+ 
+<% puts case author_id %>
+<% when 1 %>
+  <div class="author center-align">
+    <%= image_tag "ournaropa_forum/finn.JPG", class: "circle responsive-img" %>
+    <div class="custom-chip purple white-text">Finn</div>
+  </div>
+
+<% else %>
+
+  <div class="author center-align">
+    <%= image_tag "ournaropa_forum/sara.JPG", class: "circle responsive-img" %>
+    <div class="custom-chip grey lighten-2">Sara</div>
+  </div>
+
+<% end %>
