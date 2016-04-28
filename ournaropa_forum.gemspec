@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = OurnaropaForum::VERSION
   s.authors     = ["Finn Woelm"]
   s.email       = ["finn.woelm@gmail.com"]
-  s.homepage    = "spaceholder"
+  s.homepage    = "http://www.ournaropa.org"
   s.summary     = "spaceholder"
   s.description = "spaceholder"
   s.license     = "MIT"
