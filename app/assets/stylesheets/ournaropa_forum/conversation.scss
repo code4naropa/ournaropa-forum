@@ -22,12 +22,13 @@
     margin-bottom: 30px;
     
     // style the author icon
+    $author_width: 150px;
     .author {
       
-      width: 150px;
+      width: $author_width;
       position: relative;
       left: -95px;
-      margin-right: -95px;
+      margin-right: - $author_width;
       top: -10px;
       float: left;
       
@@ -53,7 +54,7 @@
     }
     
     .content {
-      padding-left:50px;
+      padding-left:55px;
     }
     
     .content > .time {
