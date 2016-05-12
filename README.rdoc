@@ -10,3 +10,10 @@ config.action_view.field_error_proc = Proc.new { |html_tag, instance|
 }
 Source: http://stackoverflow.com/a/5268106
 + migrate database
++ set auth cookies to last 30 days
+
+
+To-Do:
++ redirect to original page after sign_in
++ forgot password option
++ "about 3 days ago" instead of exact date and time on conversations and replies

@@ -1,14 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>OurnaropaForum</title>
-  <%= stylesheet_link_tag    "ournaropa_forum/application", media: "all" %>
-  <%= javascript_include_tag "ournaropa_forum/application" %>
+  <title>OurNaropa - Elevating Collaboration and Empowering Community</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
-<body>
+<body id="ournaropa_forum">
+
+
+  
+ <nav>
+  <div class="nav-wrapper purple">
+    <div class="container">
+      <%= link_to "OurNaropa", root_path, :class => "brand-logo" %>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul id="nav-desktop" class="right hide-on-med-and-down">
+        <% if current_user %>
+          <li><a href="#"><i class="material-icons left">build</i>Manage Access</a></li>
+          <li><a href="#"><i class="material-icons left">person_pin</i>Student Directory</a></li>
+          <%# ADD IMAGE OF USER HERE %>
+          <li><a href="#"><i class="material-icons left">person</i><%= current_user.name %></a></li>
+          <li><%= link_to logout_path do %><i class="material-icons left">power_settings_new</i>Log Out<% end %></li>
+        <% else %>
+          <li><%= link_to login_path do %><i class="material-icons left">exit_to_app</i>Login<% end %></li>
+        <% end %>
+      </ul>
+      <ul class="side-nav" id="nav-mobile">
+        <% if current_user %>
+          <%# ADD IMAGE OF USER HERE %>
+          <li><a href="#"><i class="material-icons left">person</i>Hi, <%= current_user.name %>!</a></li>
+          <li><%= link_to logout_path do %><i class="material-icons left">exit_to_app</i>Log Out<% end %></li>
+        <% else %>
+          <li><%= link_to login_path do %><i class="material-icons left">exit_to_app</i>Login<% end %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>  
 
 <%= yield %>
 
+<% # if there is a notice, display for 5 seconds
+  if notice %>
+  <script type="text/javascript">
+    Materialize.toast("<%= escape_javascript notice %>", 5000) // 4000 is the duration of the toast
+  </script>
+<% end %>
+  
+<!-- Initialize mobile menu -->  
+<script type="text/javascript">
+  $(".button-collapse").sideNav();  
+</script>  
+  
 </body>
 </html>

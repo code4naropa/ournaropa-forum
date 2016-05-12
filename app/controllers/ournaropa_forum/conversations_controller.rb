@@ -2,6 +2,7 @@ require_dependency "ournaropa_forum/application_controller"
 
 module OurnaropaForum
   class ConversationsController < ApplicationController
+    before_filter :authorize
     before_action :set_conversation, only: [:show, :edit, :update, :destroy]
     
     # GET /conversations

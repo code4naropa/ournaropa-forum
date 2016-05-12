@@ -16,6 +16,10 @@ module OurnaropaForum
       @password = Password.create(new_password)
       self.password_hash = @password
     end
+    
+    def authenticate password
+      return self.password == password
+    end
 
     before_save do
       self.email.downcase!

@@ -27,7 +27,7 @@
       <%= link_to conversation, :class => "open-conversation" do %>
         <div class="topic z-depth-2">
 
-          <%= render :partial => "render_author", :locals => {:author_id => conversation.author_id} %>
+          <%= render :partial => "/ournaropa_forum/conversations/render_author", :locals => {:author_id => conversation.author_id} %>
 
           <div class="content">
             <p class="time right right-align grey-text">

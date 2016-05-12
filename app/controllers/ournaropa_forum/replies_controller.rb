@@ -2,6 +2,7 @@ require_dependency "ournaropa_forum/application_controller"
 
 module OurnaropaForum
   class RepliesController < ApplicationController
+    before_filter :authorize
     before_action :set_conversation
     before_action :set_reply, only: [:show, :edit, :update, :destroy]
     

@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Login</h1>
+
+  <%= form_tag attempt_login_path do %>
+
+    <% if @login_failed %>
+      <p><strong>Sign in failed: Please check your email and password</strong></p>
+      <script>Materialize.toast("Sign in failed: Please check your email and password", 5000)</script>
+    <% end %>
+  
+    Email: <%= text_field_tag :email, params[:email] %>
+    Password: <%= password_field_tag :password %>
+    <%= submit_tag "Log In" %>
+
+  <% end %>
+</div>

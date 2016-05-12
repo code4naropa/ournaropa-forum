@@ -2,6 +2,7 @@ require_dependency "ournaropa_forum/application_controller"
 
 module OurnaropaForum
   class UsersController < ApplicationController
+    before_filter :authorize
     before_action :set_user, only: [:show, :edit, :update, :destroy]
 
     # GET /users
