@@ -15,6 +15,7 @@ gemspec
 
 gem 'materialize-sass'
 gem 'material_icons'
+gem 'bcrypt'
 
 group :development, :test do
   gem 'jquery-rails'
@@ -22,6 +23,7 @@ group :development, :test do
   gem 'turbolinks'
   # Fix turbolinks issues
   gem 'jquery-turbolinks'
+  gem 'pry-rails'
 end
 
 group :test do

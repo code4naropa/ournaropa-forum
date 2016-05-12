@@ -1,5 +1,9 @@
 OurnaropaForum::Engine.routes.draw do
   
+  get 'profile/edit'
+
+  get 'profile/update'
+
   get 'home/welcome'
 
   # Sessions Controller
@@ -12,13 +16,18 @@ OurnaropaForum::Engine.routes.draw do
   get 'verification', to: redirect("/forum/signup")
   match 'verification', to: 'registrations#verify', via: :post, as: 'verify_email'
   match 'signup', to: 'registrations#create', via: :post
-
-  resources :permitted_users, only: [:index, :new, :create, :destroy]
-
-  resources :users, only: [:edit, :update]
   
-  resources :conversations do
-    resources :replies
+  # Manage Access
+  get '/manage-access', to: 'permitted_users#index', as: 'manage_access'
+  resources :permitted_users, only: [:index, :new, :create, :destroy], path: '/manage-access'
+
+  # Edit User Profile
+  get '/profile', to: 'profile#edit', as: 'profile'
+  match '/profile', to: 'profile#update', as: 'update_profile', via: [:patch, :put]
+  
+  get '/conversation/:id/reply', to: 'conversations#show'
+  resources :conversations, path: '/conversation', only: [:show, :new, :create] do
+    resources :replies, path: '/reply', only: [:create]
   end
   
   root :to => "home#welcome"

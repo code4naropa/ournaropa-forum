@@ -4,7 +4,7 @@ class CreateOurnaropaForumReplies < ActiveRecord::Migration
     create_table :ournaropa_forum_replies do |t|
       t.string :title
       t.text :body
-      t.integer :author_id
+      t.uuid :author_id, index: true, foreign_key: true
       t.uuid :conversation_id, index: true, foreign_key: true
 
       t.timestamps null: false

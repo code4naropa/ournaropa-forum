@@ -4,6 +4,7 @@ module OurnaropaForum
   class RepliesController < ApplicationController
     before_filter :authorize
     before_action :set_conversation
+    before_action :set_user
     before_action :set_reply, only: [:show, :edit, :update, :destroy]
     
     # GET /replies
@@ -28,11 +29,13 @@ module OurnaropaForum
     def create
       @reply = Reply.new(reply_params)
       @reply.conversation = @conversation
+      @reply.author = @user
 
       if @reply.save
-        redirect_to [@conversation, @reply], notice: 'Reply was successfully created.'
+        redirect_to @conversation, notice: 'Reply successfully posted.'
       else
-        render :new
+        @replies = @conversation.replies
+        render 'ournaropa_forum/conversations/show'
       end
     end
 
@@ -61,10 +64,14 @@ module OurnaropaForum
       def set_reply
         @reply = Reply.find(params[:id])
       end
+    
+      def set_user
+        @user = current_user
+      end
 
       # Only allow a trusted parameter "white list" through.
       def reply_params
-        params.require(:reply).permit(:title, :body, :author_id, :conversation_id)
+        params.require(:reply).permit(:body, :author_id, :conversation_id)
       end
   end
 end

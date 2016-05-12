@@ -4,9 +4,9 @@ class CreateOurnaropaForumConversations < ActiveRecord::Migration
   
   def change
     create_table :ournaropa_forum_conversations, id: :uuid do |t|
-      t.string :title, :null => false
-      t.text :body, :null => false
-      t.integer :author_id, :null => false
+      t.string :title, null: false
+      t.text :body, null: false
+      t.uuid :author_id, index: true, foreign_key: true
 
       t.timestamps null: false
     end

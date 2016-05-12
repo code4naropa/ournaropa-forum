@@ -14,14 +14,16 @@ $primary_color: #9c27b0;
    }
    /* label focus color */
    .input-field input[type=text]:focus + label,
-   .input-field input[type=email]:focus + label{
+   .input-field input[type=email]:focus + label,
+   .input-field textarea:focus + label {
      color: $primary_color;
    }
    /* label underline focus color */
    .input-field input[type=text]:focus,
-   .input-field input[type=email]:focus{
-     border-bottom: 1px solid $primary_color;
-     box-shadow: 0 1px 0 0 $primary_color;
+   .input-field input[type=email]:focus,
+   .input-field textarea:focus {
+     border-bottom: 1px solid $primary_color !important;
+     box-shadow: 0 1px 0 0 $primary_color !important;
    }
    /* valid color */
    /*.input-field input[type=text].valid {
@@ -45,7 +47,16 @@ $primary_color: #9c27b0;
   a.btn, a.btn-large, button[type=submit] {
     background-color: $primary_color;
   }
-    
+  
+  // remove margin from bottom of row
+  .row.no-margin-bottom {
+    margin-bottom: 0px !important;
+  }
+  
+  p.no-margin-top {
+    margin-top: 0px !important;
+  }
+
 }
 
 @import "conversation"

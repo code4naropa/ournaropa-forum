@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col s12">
       <div class="section">
-        <%= link_to conversations_path, class: "waves-effect waves-light btn purple" do %>
+        <%= link_to root_path, class: "waves-effect waves-light btn grey" do %>
           <i class="material-icons left">arrow_back</i>Back</a>
         <% end %>  
       </div>
@@ -15,46 +15,53 @@
     
     <div class="col s12">
         
+      <%= render :partial => "ournaropa_forum/conversations/render_author", :locals => {:author => @conversation.author} %>      
+      
       <div class="topic z-depth-2">
-       
-        <%= render :partial => "render_author", :locals => {:author_id => @conversation.author_id} %>
         
         <div class="content">
           <p class="time right right-align grey-text">
-            <i class="material-icons tiny">event</i> <%= @conversation.created_at.in_time_zone.strftime("%a, %b %e, %Y") %><br/>
-            <i class="material-icons tiny">schedule</i> <%= @conversation.created_at.in_time_zone.strftime("%l:%M%P %Z") %>
+            <i class="material-icons tiny">schedule</i> <%= time_ago_in_words(@conversation.created_at.in_time_zone) %> ago
           </p>
           <h3><%= @conversation.title %></h3>
-          <p><%= @conversation.body %></p>
+          <%= render_text @conversation.body %>
         </div>
         
       </div>
+    </div>
+  </div>
 
       <% @replies.each do |reply| %>
-        <div class="reply z-depth-1">
+        <div class="row">
+          <div class="col s12 reply-wrapper">  
+            
+            <%= render :partial => "ournaropa_forum/conversations/render_author", :locals => {:author => reply.author} %>
+            
+            <div class="reply z-depth-1">
 
-          <%= render :partial => "render_author", :locals => {:author_id => reply.author_id} %>
+              <div class="content">
+                <p class="time right right-align grey-text">
+                  <i class="material-icons tiny">schedule</i> <%= time_ago_in_words(@conversation.created_at.in_time_zone) %> ago
+                </p>
+                <p class="no-margin-top"><%= render_text reply.body %></p>
+              </div>
 
-          <div class="content">
-            <p class="time right right-align grey-text">
-              <i class="material-icons tiny">event</i> <%= @conversation.created_at.in_time_zone.strftime("%a, %b %e, %Y") %><br/>
-              <i class="material-icons tiny">schedule</i> <%= @conversation.created_at.in_time_zone.strftime("%l:%M%P %Z") %>
-            </p>
-            <p><%= reply.body %></p>
+            </div>
           </div>
-
         </div>
       <% end %>
 
+    <div class="row">
+      <div class="col s12 reply-wrapper">  
+        <%= render :partial => "ournaropa_forum/replies/form" %>
+      </div>
     </div>
-    
-  </div>
 
 
   <div class="row">
     <div class="col s12">
       <div class="section">
-        <%= link_to conversations_path, class: "waves-effect waves-light btn purple" do %>
+        <%= link_to root_path, class: "waves-effect waves-light btn grey" do %>
           <i class="material-icons left">arrow_back</i>Back</a>
         <% end %>  
       </div>
@@ -63,3 +70,7 @@
 
 
 </div>
+
+<script type="text/javascript">
+  $('.modal-trigger').leanModal();
+</script>

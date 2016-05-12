@@ -1,16 +1,28 @@
- 
-<% puts case author_id %>
-<% when 1 %>
-  <div class="author center-align">
-    <%= image_tag "ournaropa_forum/finn.JPG", class: "circle responsive-img" %>
-    <div class="custom-chip purple white-text">Finn</div>
+<div class="author center-align">
+  <!--<a class="modal-trigger" data-target="<%= author.id %>">-->
+  <%= image_tag "ournaropa_forum/finn.JPG", class: "circle responsive-img modal-trigger", data: {target: author.id} %>
+  <!--</a>-->
+    <div class="custom-chip <%= author.role.parameterize %>"><%= author.first_name %></div> 
+</div>
+
+
+<div id="<%= author.id %>" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col s12 m6 l4 push-m3 push-l4">
+        <%= image_tag "ournaropa_forum/finn.JPG", class: "circle responsive-img" %>
+      </div>
+    </div>
+    <h4 class="center-align"><%= author.first_name + " " + author.last_name %></h4>
+    <p>
+    <strong>Hometown:</strong> <%= author.info.hometown %><br/>
+    <strong>Major:</strong> <%= author.info.major %><br/>
+    <strong>Age:</strong> <%= author.info.age %><br/>
+    <strong>About:</strong> <%= author.info.description %>
+    </p>
   </div>
-
-<% else %>
-
-  <div class="author center-align">
-    <%= image_tag "ournaropa_forum/sara.JPG", class: "circle responsive-img" %>
-    <div class="custom-chip grey lighten-2">Sara</div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
   </div>
-
-<% end %>
+</div>
+<!-- purple white-text and grey lighten-2 -->

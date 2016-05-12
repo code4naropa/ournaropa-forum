@@ -2,8 +2,9 @@ module OurnaropaForum
   class Conversation < ActiveRecord::Base
     
     has_many :replies
+    belongs_to :author, class_name: "User"
     
-    validates :title, :body, :author_id, presence: true
+    validates_presence_of :title, :body, :author_id
     
   end
 end

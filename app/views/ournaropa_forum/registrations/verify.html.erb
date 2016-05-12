@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h1>Awesome, <%= @p_user.name %>!</h1>
+  <h1>Awesome, <%= @p_user.first_name %>!</h1>
   <p>We found an account associated with the email address you entered. This is you, right?</p>
 
   <div class="row">
@@ -10,7 +10,7 @@
         <tbody>
           <tr>
             <td><strong>Name</strong></td>
-            <td><%= @p_user.name %></td>
+            <td><%= @p_user.first_name + " " + @p_user.last_name%></td>
           </tr>
           <tr>
             <td><strong>Email Address</strong></td>

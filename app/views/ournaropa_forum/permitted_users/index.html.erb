@@ -1,12 +1,18 @@
 <div class="container">
 
-<h1>Listing Permitted Users</h1>
-
+<h1>Manage Access to Forum</h1>
+<p>This forum can only be accessed by users with an email address that is listed below. You can allow new users by clicking on the <i>New User</i> button.</p>
+  
+  <%= link_to new_permitted_user_path, class: "waves-effect waves-light btn" do %>  
+    <i class="material-icons left">add</i>new user</a>
+  <% end %>
+  
 <table>
   <thead>
     <tr>
       <th>Email</th>
-      <th>Name</th>
+      <th>First Name</th>
+      <th>Last Name</th>
       <th>Role</th>
       <th>Has signed up?</th>
       <th colspan="3"></th>
@@ -17,7 +23,8 @@
     <% @permitted_users.each do |permitted_user| %>
       <tr class="<%= permitted_user.has_signed_up ? "green lighten-4" : "" %>">
         <td><%= permitted_user.email %></td>
-        <td><%= permitted_user.name %></td>
+        <td><%= permitted_user.first_name %></td>
+        <td><%= permitted_user.last_name %></td>
         <td><%= permitted_user.role %></td>
         <td><%= permitted_user.has_signed_up ? "Yes" : "No" %></td>
         <td><%= permitted_user.has_signed_up ? "" : (link_to 'Delete', permitted_user, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
@@ -25,9 +32,5 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Permitted user', new_permitted_user_path %>
 
 </div>

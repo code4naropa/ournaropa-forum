@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160512000204) do
+ActiveRecord::Schema.define(version: 20160512104255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,14 +20,17 @@ ActiveRecord::Schema.define(version: 20160512000204) do
   create_table "ournaropa_forum_conversations", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "title",      null: false
     t.text     "body",       null: false
-    t.integer  "author_id",  null: false
+    t.uuid     "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "ournaropa_forum_conversations", ["author_id"], name: "index_ournaropa_forum_conversations_on_author_id", using: :btree
+
   create_table "ournaropa_forum_permitted_users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "email"
-    t.string   "name"
+    t.string   "email",                         null: false
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "role"
     t.boolean  "has_signed_up", default: false, null: false
     t.datetime "created_at",                    null: false
@@ -39,21 +42,38 @@ ActiveRecord::Schema.define(version: 20160512000204) do
   create_table "ournaropa_forum_replies", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
-    t.integer  "author_id"
+    t.uuid     "author_id"
     t.uuid     "conversation_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
 
+  add_index "ournaropa_forum_replies", ["author_id"], name: "index_ournaropa_forum_replies_on_author_id", using: :btree
   add_index "ournaropa_forum_replies", ["conversation_id"], name: "index_ournaropa_forum_replies_on_conversation_id", using: :btree
 
+  create_table "ournaropa_forum_user_infos", force: :cascade do |t|
+    t.string   "hometown"
+    t.string   "major"
+    t.string   "age"
+    t.text     "description"
+    t.boolean  "show_email",  default: false, null: false
+    t.uuid     "user_id"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "ournaropa_forum_user_infos", ["user_id"], name: "index_ournaropa_forum_user_infos_on_user_id", using: :btree
+
   create_table "ournaropa_forum_users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "email"
-    t.string   "name"
-    t.string   "password_hash"
+    t.string   "email",                         null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "role"
+    t.string   "password_hash",                 null: false
     t.string   "reset_token"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.boolean  "is_superuser",  default: false, null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   add_index "ournaropa_forum_users", ["email"], name: "index_ournaropa_forum_users_on_email", unique: true, using: :btree

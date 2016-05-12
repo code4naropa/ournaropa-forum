@@ -3,6 +3,7 @@ require_dependency "ournaropa_forum/application_controller"
 module OurnaropaForum
   class ConversationsController < ApplicationController
     before_filter :authorize
+    before_action :set_user
     before_action :set_conversation, only: [:show, :edit, :update, :destroy]
     
     # GET /conversations
@@ -13,6 +14,7 @@ module OurnaropaForum
     # GET /conversations/1
     def show
       @replies = @conversation.replies
+      @reply = Reply.new
     end
 
     # GET /conversations/new
@@ -27,6 +29,7 @@ module OurnaropaForum
     # POST /conversations
     def create
       @conversation = Conversation.new(conversation_params)
+      @conversation.author = @user
 
       if @conversation.save
         redirect_to @conversation, notice: 'Conversation was successfully created.'
@@ -54,6 +57,10 @@ module OurnaropaForum
       # Use callbacks to share common setup or constraints between actions.
       def set_conversation
         @conversation = Conversation.find(params[:id])
+      end
+    
+      def set_user
+        @user = current_user
       end
 
       # Only allow a trusted parameter "white list" through.

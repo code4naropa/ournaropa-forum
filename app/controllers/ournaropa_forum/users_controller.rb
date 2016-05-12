@@ -57,7 +57,7 @@ module OurnaropaForum
 
       # Only allow a trusted parameter "white list" through.
       def user_params
-        params.require(:user).permit(:email, :name, :password_hash, :reset_token)
+        params.require(:user).permit(:email, :first_name, :last_name, :reset_token)
       end
   end
 end

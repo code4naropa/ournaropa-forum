@@ -23,9 +23,10 @@ module OurnaropaForum
       p_user = PermittedUser.find params[:p_user_id]
       
       @user = User.new
-      @user.name = p_user.name
+      @user.first_name = p_user.first_name
+      @user.last_name = p_user.last_name
       @user.email = p_user.email
-      #@user.role = p_user.role
+      @user.role = p_user.role
       @user.password = SecureRandom.uuid  
       
       @user.save

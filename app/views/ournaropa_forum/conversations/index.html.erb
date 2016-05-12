@@ -9,7 +9,7 @@
         <h1>Conversations</h1>
         
         <%#= link_to new_conversation_path, class: "waves-effect waves-light btn-large purple" do %>
-        <%= link_to "#", class: "waves-effect waves-light btn-large purple" do %>
+        <%= link_to new_conversation_path, class: "waves-effect waves-light btn-large purple" do %>
           <i class="material-icons left">add</i>Start A Conversation</a>
         <% end %>
       </div>
@@ -24,18 +24,18 @@
 
     <div class="col s12">
 
+     <%= render :partial => "ournaropa_forum/conversations/render_author", :locals => {:author => conversation.author} %>
+      
       <%= link_to conversation, :class => "open-conversation" do %>
         <div class="topic z-depth-2">
 
-          <%= render :partial => "/ournaropa_forum/conversations/render_author", :locals => {:author_id => conversation.author_id} %>
-
-          <div class="content">
-            <p class="time right right-align grey-text">
-              <i class="material-icons tiny">event</i> <%= conversation.created_at.in_time_zone.strftime("%a, %b %e, %Y") %><br/>
-              <i class="material-icons tiny">schedule</i> <%= conversation.created_at.in_time_zone.strftime("%l:%M%P %Z") %>
+          <div class="content grey-text">
+            <p class="time right right-align">
+              <i class="material-icons tiny">schedule</i> <%= time_ago_in_words(conversation.updated_at.in_time_zone) %> ago<br/>
+              <i class="material-icons tiny">message</i> <%= pluralize(conversation.replies.count, "reply") %> 
             </p>
-            <h3><%= conversation.title %></h3>
-            <p class="grey-text"><%= conversation.body.truncate_words(50) %></p>
+            <h3 class="color-inherit"><%= conversation.title %></h3>
+            <p class=""><%= conversation.body.truncate_words(50) %></p>
           </div>
         </div>
       <% end %>
@@ -46,3 +46,7 @@
 
   
 </div>
+
+<script type="text/javascript">
+  $('.modal-trigger').leanModal();
+</script>

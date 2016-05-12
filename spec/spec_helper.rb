@@ -35,6 +35,8 @@ RSpec.configure do |config|
  config.use_transactional_fixtures = false
  config.infer_base_class_for_anonymous_controllers = false
  config.order = "random"
+ config.default_formatter = 'doc'
+ config.color = true
   
  #config.filter_run :focus unless ENV["SKIP_RSPEC_FOCUS"].present?
  #config.run_all_when_everything_filtered = true

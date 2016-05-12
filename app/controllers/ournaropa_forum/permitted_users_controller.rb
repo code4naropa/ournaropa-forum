@@ -2,7 +2,7 @@ require_dependency "ournaropa_forum/application_controller"
 
 module OurnaropaForum
   class PermittedUsersController < ApplicationController
-    before_filter :authorize
+    before_filter :authorize_superuser
     before_action :set_permitted_user, only: [:show, :edit, :update, :destroy]
 
     # GET /permitted_users
@@ -59,7 +59,7 @@ module OurnaropaForum
 
       # Only allow a trusted parameter "white list" through.
       def permitted_user_params
-        params.require(:permitted_user).permit(:email, :name, :role)
+        params.require(:permitted_user).permit(:email, :first_name, :last_name, :role)
       end
   end
 end

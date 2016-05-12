@@ -6,7 +6,7 @@ feature 'authentication' do
     @PASSWORD = "ABC"
     @p_user = OurnaropaForum::PermittedUser.create! FactoryGirl.attributes_for(:ournaropa_forum_permitted_user)
     #puts FactoryGirl.attributes_for(:ournaropa_forum_permitted_user)
-    @user = OurnaropaForum::User.new({:name => @p_user.name, :email => @p_user.email})
+    @user = OurnaropaForum::User.new({:first_name => @p_user.first_name, :last_name => @p_user.last_name, :email => @p_user.email})
     @user.password = @PASSWORD
     @user.save
   end
