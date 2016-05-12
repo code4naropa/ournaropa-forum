@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160428052015) do
+ActiveRecord::Schema.define(version: 20160512000204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 20160428052015) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "ournaropa_forum_permitted_users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "email"
+    t.string   "name"
+    t.string   "role"
+    t.boolean  "has_signed_up", default: false, null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "ournaropa_forum_permitted_users", ["email"], name: "index_ournaropa_forum_permitted_users_on_email", unique: true, using: :btree
+
   create_table "ournaropa_forum_replies", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
@@ -35,5 +46,16 @@ ActiveRecord::Schema.define(version: 20160428052015) do
   end
 
   add_index "ournaropa_forum_replies", ["conversation_id"], name: "index_ournaropa_forum_replies_on_conversation_id", using: :btree
+
+  create_table "ournaropa_forum_users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
+    t.string   "email"
+    t.string   "name"
+    t.string   "password_hash"
+    t.string   "reset_token"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "ournaropa_forum_users", ["email"], name: "index_ournaropa_forum_users_on_email", unique: true, using: :btree
 
 end

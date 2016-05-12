@@ -1,0 +1,33 @@
+<div class="container">
+
+<h1>Listing Permitted Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Role</th>
+      <th>Has signed up?</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @permitted_users.each do |permitted_user| %>
+      <tr class="<%= permitted_user.has_signed_up ? "green lighten-4" : "" %>">
+        <td><%= permitted_user.email %></td>
+        <td><%= permitted_user.name %></td>
+        <td><%= permitted_user.role %></td>
+        <td><%= permitted_user.has_signed_up ? "Yes" : "No" %></td>
+        <td><%= permitted_user.has_signed_up ? "" : (link_to 'Delete', permitted_user, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Permitted user', new_permitted_user_path %>
+
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+
+  <h1>Awesome, <%= @p_user.name %>!</h1>
+  <p>We found an account associated with the email address you entered. This is you, right?</p>
+
+  <div class="row">
+    <div class="col s12 m8 l6 push-m2 push-l3">
+    
+      <table class="bordered">
+        <tbody>
+          <tr>
+            <td><strong>Name</strong></td>
+            <td><%= @p_user.name %></td>
+          </tr>
+          <tr>
+            <td><strong>Email Address</strong></td>
+            <td><%= @p_user.email %></td>
+          </tr>
+          <tr>
+            <td><strong>Role</strong></td>
+            <td><%= @p_user.role %></td>
+          </tr>
+        </tbody>
+      </table>
+      
+      
+    </div>
+  </div>
+  
+  <div class="section"></div>
+  
+  <%= form_tag signup_path do %>
+
+    <%= hidden_field_tag "p_user_id", @p_user.id %>
+  
+    <div class="row">
+      
+      <div class="col s6 left-align">
+
+        <%= link_to signup_path, class: "waves-effect waves-light btn grey" do %>
+          <i class="material-icons left">arrow_back</i>no... go back!
+        <% end %>
+
+      </div>
+      
+      <div class="col s6 right-align">
+
+        <button class="btn-large waves-effect waves-light" type="submit" name="action">
+          <i class="material-icons right">cloud</i>yup, that's me!
+        </button>
+
+      </div>
+    </div>
+  <% end %>
+  
+</div>

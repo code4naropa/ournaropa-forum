@@ -1,0 +1,54 @@
+
+<div class="row">
+  <%= form_for @permitted_user, class: "col s12" do |f| %>
+    <% if @permitted_user.errors.any? %>
+      <div class="row">
+        <div class="col s12">
+        
+          <div id="error_explanation">
+            <h2><%= pluralize(@permitted_user.errors.count, "error") %> prohibited this permitted_user from being saved:</h2>
+
+            <ul>
+            <% @permitted_user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.select(:role, options_for_select(OurnaropaForum::PermittedUser.available_roles.unshift(["Select an option", "", {"disabled" => "disabled", "selected" => "selected"}]))) %>
+        <%= f.label(:role) %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<script type="application/javascript">
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+
+</script>

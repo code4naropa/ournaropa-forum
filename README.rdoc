@@ -1,3 +1,12 @@
 = OurnaropaForum
 
 This project rocks and uses MIT-LICENSE.
+
+To-Do in Mount:
+
++ eliminate the error wrapper, i.e. add this to config/application.rb:
+config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+  html_tag
+}
+Source: http://stackoverflow.com/a/5268106
++ migrate database

@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   
   s.add_development_dependency 'pry-rails'
   
+  s.add_dependency 'bcrypt', "~> 3.1.11"
   
   s.add_dependency 'jquery-rails'
   s.add_dependency 'turbolinks'

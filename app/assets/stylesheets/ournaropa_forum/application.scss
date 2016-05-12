@@ -1,1 +1,51 @@
+$primary_color: #9c27b0;  
+  
+#ournaropa_forum {
+  
+  // super large icons
+  i.material-icons.superlarge {
+    font-size: 10rem;
+  }
+  
+  // style all form input fields
+   /* label color */
+   .input-field label {
+     color: #9e9e9e;
+   }
+   /* label focus color */
+   .input-field input[type=text]:focus + label,
+   .input-field input[type=email]:focus + label{
+     color: $primary_color;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:focus,
+   .input-field input[type=email]:focus{
+     border-bottom: 1px solid $primary_color;
+     box-shadow: 0 1px 0 0 $primary_color;
+   }
+   /* valid color */
+   /*.input-field input[type=text].valid {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }
+   //invalid color
+   .input-field input[type=text].invalid {
+     border-bottom: 1px solid #000;
+     box-shadow: 0 1px 0 0 #000;
+   }*/
+   // icon prefix no focus color
+   .input-field .prefix:not(.active) {
+     //color: #9e9e9e;
+   }
+   /* icon prefix focus color */
+   .input-field .prefix.active {
+     color: $primary_color;
+   }
+  
+  a.btn, a.btn-large, button[type=submit] {
+    background-color: $primary_color;
+  }
+    
+}
+
 @import "conversation"
