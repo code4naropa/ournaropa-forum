@@ -7,7 +7,7 @@ module OurnaropaForum
 
     # GET /users
     def index
-      @users = User.all
+      @users = User.all.order(role: :desc)
     end
 
     # GET /users/1

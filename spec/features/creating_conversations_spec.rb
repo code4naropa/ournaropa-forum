@@ -18,8 +18,8 @@ feature 'Conversations' do
     visit '/forum'
     click_link 'Start A Conversation'
     fill_in 'Title', with: title
-    fill_in 'Body', with: body
-    click_button 'Create Conversation'
+    fill_in 'Message', with: body
+    click_button 'start conversation'
     
     expect(page).to have_content(title)
     expect(page).to have_content(body)

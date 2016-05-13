@@ -1,33 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<h1>Listing Users</h1>
+<h1>Directory</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Name</th>
-      <th>Password hash</th>
-      <th>Reset token</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="row">
 
-  <tbody>
     <% @users.each do |user| %>
-      <tr>
-        <td><%= user.email %></td>
-        <td><%= user.name %></td>
-        <td><%= user.password_hash %></td>
-        <td><%= user.reset_token %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class="col s12 m6 l3">
+
+        <%= render :partial => "ournaropa_forum/conversations/render_author", :locals => {:author => user} %>
+
+        <div class="section hide-med-and-up"></div>
+        
+      </div>
     <% end %>
-  </tbody>
-</table>
+  
+  </div>
 
-<br>
+</div>
 
-<%= link_to 'New User', new_user_path %>
+<script type="text/javascript">
+  $('.modal-trigger').leanModal();
+</script>

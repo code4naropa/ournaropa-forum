@@ -43,15 +43,18 @@ module OurnaropaForum
     end
 
     def update      
-      redirect_to new_password_path, notice: "Your current password does not match what you entered." and return unless current_user.authenticate params[:current_password]
+      
+      @user = current_user
+      
+      redirect_to new_password_path, notice: "Your current password does not match what you entered." and return unless @user.authenticate params[:current_password]
       
       redirect_to new_password_path, notice: "Please enter a new password and confirm it by entering it again." and return if params[:password].blank? or params[:password_confirmation].blank?
         
       redirect_to new_password_path, notice: "Your new password and password confirmation did not match." and return unless params[:password] == params[:password_confirmation]
 
-      current_user.password = params[:password]
-      current_user.reset_token = nil
-      current_user.save
+      @user.password = params[:password]
+      @user.reset_token = nil
+      @user.save
       
       redirect_to profile_path, notice: "Your password has been successfully updated."
     end

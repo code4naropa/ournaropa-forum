@@ -36,7 +36,7 @@ feature 'managing access' do
     expect(page).not_to have_content("Role")
     
     
-    click_link "Manage Access"
+    click_link "Manage Access", match: :first
     
     expect(page).to have_content("Email")
     expect(page).to have_content("First Name")

@@ -13,9 +13,8 @@ OurnaropaForum::Engine.routes.draw do
   get 'change-password', to: 'passwords#new', as: 'new_password'
   match 'change-password', to: 'passwords#update', via: :post, as: 'update_password'  
   
-  get 'profile/edit'
-
-  get 'profile/update'
+  # Users Controller
+  get '/directory', to: 'users#index', as: 'directory'
 
   get 'home/welcome'
 

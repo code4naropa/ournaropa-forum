@@ -24,12 +24,13 @@ feature 'personal info' do
     
     click_button "Update Password"
     
+    expect(page).not_to have_content("Choose a new password")
+    
     expect(page).to have_content("Your Profile")
     
 
-    #binding.pry
-    
-    @user.reload
+    # reload user
+    @user = OurnaropaForum::User.find_by email: @user.email
     
     expect(@user.authenticate(@new_password)).to be true
     
@@ -63,9 +64,9 @@ feature 'personal info' do
     fill_in 'Hometown', with: data[:hometown]
     fill_in 'Major',  with: data[:major]
     fill_in 'Age', with: data[:age]
-    fill_in 'Description', with: data[:description]
+    fill_in 'About Me', with: data[:description]
     
-    click_button "Update"
+    click_button "Save"
     
     # reload data
     @user.info.reload

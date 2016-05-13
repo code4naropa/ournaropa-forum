@@ -6,7 +6,7 @@
   <body>
     <h1>Howdy, <%= @user.name %>!</h1>
     <p>There has been a new reply in <a href="<%= @domain_base %>/forum/conversation/<%= @reply.conversation.id %>"><%= @reply.conversation.title %></a> by <%= @reply.author.first_name + " " + @reply.author.last_name %>:</p>
-    <p><%= h(@reply.body).gsub!( /((http(s?):\/\/)?(\S*\.\S*\.\S*))/, '<a href="http\3://\4" target="_blank">\1</a>' ).gsub!("\n","<br />").html_safe %></p>
+    <p><%= h(@reply.body).gsub( /((http(s?):\/\/)?(\S*\.\S*\.\S*))/, '<a href="http\3://\4" target="_blank">\1</a>' ).gsub("\n","<br />").html_safe %></p>
     
     <p>-----------------</p>
     <p>Unsubscribe from email notifications about new replies in this conversation: <a href="<%= @domain_base %>/forum/conversation/<%= @reply.conversation.id %>/unsubscribe">Unsubscribe</a> </p>

@@ -51,7 +51,7 @@ feature 'Reset Password' do
     visit '/forum/logout'
     
     visit '/forum'
-    click_link 'Forgot Password'
+    click_link 'forgot password'
     fill_in 'Email', with: @user.email
     click_button 'Reset'
 
