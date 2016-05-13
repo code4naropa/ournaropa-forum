@@ -10,16 +10,15 @@
   <div class="modal-content">
     <div class="row">
       <div class="col s12 m6 l4 push-m3 push-l4">
-        <%= image_tag "ournaropa_forum/finn.JPG", class: "circle responsive-img" %>
+        <%= image_tag "ournaropa_forum/finn.JPG", class: "circle responsive-img z-depth-1" %>
       </div>
     </div>
     <h4 class="center-align"><%= author.first_name + " " + author.last_name %></h4>
-    <p>
-    <strong>Hometown:</strong> <%= author.info.hometown %><br/>
-    <strong>Major:</strong> <%= author.info.major %><br/>
-    <strong>Age:</strong> <%= author.info.age %><br/>
-    <strong>About:</strong> <%= author.info.description %>
+    <h5 class="center-align grey-text"><%= author.role %></h5>
+    <p class="center-align">
+      <i class="material-icons">location_city</i> <%= author.info.hometown %> &middot; <i class="material-icons">school</i> <%= author.info.major %>  &middot;  <i class="material-icons">today</i> Age: <%= author.info.age %><br/>
     </p>
+    <p class="center-align"><strong>About Me:</strong><br/><%= render_text author.info.description %></p>
   </div>
   <div class="modal-footer">
     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>

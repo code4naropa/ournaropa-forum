@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>Forgot Your Password?</h1>
+  <p>No problem! Just enter your email address and we will help you set a brand new one.</p>
+  <div class="row">
+    <%= form_tag reset_password_path, class: "col s12" do %>
+    
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">mail</i>
+          <%= email_field_tag :email, params[:email] %>
+          <%= label_tag :email %>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="col s12 right-align">
+          <button class="btn waves-effect waves-light" type="submit" name="action">
+            <i class="material-icons left">settings_backup_restore</i> Reset Password
+          </button>
+        </div>
+      </div>
+    
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  Materialize.toast("<%= escape_javascript @error %>", 5000) // 4000 is the duration of the toast
+</script>

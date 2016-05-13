@@ -13,6 +13,7 @@ gemspec
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
 
+gem 'sass-rails'
 gem 'materialize-sass'
 gem 'material_icons'
 gem 'bcrypt'
@@ -24,6 +25,7 @@ group :development, :test do
   # Fix turbolinks issues
   gem 'jquery-turbolinks'
   gem 'pry-rails'
+  gem 'figaro'
 end
 
 group :test do

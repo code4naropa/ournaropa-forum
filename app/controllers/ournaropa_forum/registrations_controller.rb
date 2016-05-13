@@ -27,12 +27,13 @@ module OurnaropaForum
       @user.last_name = p_user.last_name
       @user.email = p_user.email
       @user.role = p_user.role
+      @user.reset_token = User.generate_reset_token
       @user.password = SecureRandom.uuid  
       
       @user.save
       
       # send email
-      
+      UserNotifier.send_signup_email(@user, request.base_url).deliver_later
       
     end
   end

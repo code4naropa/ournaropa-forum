@@ -1,21 +1,37 @@
 require 'rails_helper.rb'
 
+require "shared.rb"
+
 feature 'personal info' do
       
+  include_context "shared functions"
+  
   before do
-    @PASSWORD = "ABC"
-    @p_user = OurnaropaForum::PermittedUser.create! FactoryGirl.attributes_for(:ournaropa_forum_permitted_user)
-    @user = OurnaropaForum::User.new({:first_name => @p_user.first_name, :last_name => @p_user.last_name, :email => @p_user.email})
-    @user.password = @PASSWORD
-    @user.save
-    
+    create_and_sign_in_user
+  end
+  
+  scenario 'change password' do
     visit '/forum'
-    click_link 'Log In'
+    click_link("Hi, " + @user.name + "!", :match => :first)
     
-    fill_in 'email', with: @user.email
-    fill_in 'password', with: @PASSWORD
+    click_link "Change Password"
     
-    click_button 'Log In'    
+    @new_password = SecureRandom.hex(5)
+    
+    fill_in "current_password", with: @PASSWORD
+    fill_in "password", with: @new_password
+    fill_in "password_confirmation", with: @new_password
+    
+    click_button "Update Password"
+    
+    expect(page).to have_content("Your Profile")
+    
+
+    #binding.pry
+    
+    @user.reload
+    
+    expect(@user.authenticate(@new_password)).to be true
     
   end
   

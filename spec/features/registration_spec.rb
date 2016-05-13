@@ -4,6 +4,8 @@ feature 'registration' do
       
   before do
     @p_user = OurnaropaForum::PermittedUser.create! FactoryGirl.attributes_for(:ournaropa_forum_permitted_user)
+    @p_user.email = "fwoelm@students.naropa.edu"
+    @p_user.save
   end
   
   scenario "user signs up" do

@@ -11,6 +11,17 @@ config.action_view.field_error_proc = Proc.new { |html_tag, instance|
 Source: http://stackoverflow.com/a/5268106
 + migrate database
 + set auth cookies to last 30 days
++ config action mailer, i.e. add this to config/environment.rb:
+ActionMailer::Base.smtp_settings = {
+  :user_name => 'your_sendgrid_username',
+  :password => 'your_sendgrid_password',
+  :domain => 'yourdomain.com',
+  :address => 'smtp.sendgrid.net',
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true
+}
+
 
 
 To-Do:

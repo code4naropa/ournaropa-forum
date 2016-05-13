@@ -55,5 +55,10 @@ module OurnaropaForum
       
     end
     
+    
+    def self.generate_reset_token
+      return SecureRandom.hex(2).upcase + "-" + SecureRandom.hex(2).upcase + "-" + SecureRandom.hex(2).upcase + "-" + SecureRandom.hex(2).upcase
+    end
+    
   end
 end
