@@ -10,17 +10,17 @@
   }
   
   a.open-conversation:hover .topic {
-    background-color: #ab47bc;
-    color: white;
-    //@extend .purple, .lighten-1;
-    //@extend .white-text;
+    //background-color: #ab47bc;
+    //color: white;
+    @extend .purple, .lighten-1;
+    @extend .white-text;
     //transform: scale(1.02);
     //background-color: color()
     box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.5), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
     
     .content h3, p {
-      color: white;
-      //@extend .white-text;
+      //color: white;
+      @extend .white-text;
     }
   }
   
@@ -76,12 +76,23 @@
       line-height: 32px;
       padding: 0 12px;
       border-radius: 16px;
-
+            
+      &.incoming-student {
+        @extend .grey, .lighten-2;
+      }
+      
       &.current-student {
-        background-color: #9c27b0;
-        color: white;
-        //@extend .purple;
-        //@extend .white-text;
+        //background-color: #9c27b0;
+        //color: white;
+        @extend .purple;
+        @extend .white-text;
+      }
+      
+      &.staff {
+        @extend .purple;
+        @extend .amber-text;
+        border: 2px solid #ffc107;
+        box-shadow: 0px 0px 3px rgba(0,0,0,.3);
       }
     }
   }

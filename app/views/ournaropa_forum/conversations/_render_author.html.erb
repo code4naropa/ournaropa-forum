@@ -1,6 +1,6 @@
 <div class="author center-align">
   <!--<a class="modal-trigger" data-target="<%= author.id %>">-->
-  <%= image_tag "ournaropa_forum/finn.JPG", class: "circle responsive-img modal-trigger", data: {target: author.id} %>
+  <%= image_tag author.info.avatar.url(:standard), class: "circle responsive-img modal-trigger", data: {target: author.id} %>
   <!--</a>-->
     <div class="custom-chip <%= author.role.parameterize %>"><%= author.first_name %></div> 
 </div>
@@ -10,7 +10,7 @@
   <div class="modal-content">
     <div class="row">
       <div class="col s12 m6 l4 push-m3 push-l4">
-        <%= image_tag "ournaropa_forum/finn.JPG", class: "circle responsive-img z-depth-1" %>
+        <%= image_tag author.info.avatar.url(:large), class: "circle responsive-img z-depth-1" %>
       </div>
     </div>
     <h4 class="center-align"><%= author.first_name + " " + author.last_name %></h4>

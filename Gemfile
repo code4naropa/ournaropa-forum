@@ -26,6 +26,7 @@ group :development, :test do
   gem 'jquery-turbolinks'
   gem 'pry-rails'
   gem 'figaro'
+  gem 'paperclip'
 end
 
 group :test do

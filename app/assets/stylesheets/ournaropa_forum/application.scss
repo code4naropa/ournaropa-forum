@@ -2,6 +2,22 @@ $primary_color: #9c27b0;
   
 #ournaropa_forum {
   
+  // images in navbar
+  #nav-mobile li img {
+    width: 28px;
+    height: auto;
+    padding: 18px 0px;
+    float: left;
+    margin-right: 15px;
+  }
+  
+  #nav-desktop li img {
+    height: 64px;
+    padding: 12px 0px;
+    float: left;
+    margin-right: 15px;
+  }
+  
   // super large icons
   i.material-icons.superlarge {
     font-size: 10rem;
@@ -46,7 +62,7 @@ $primary_color: #9c27b0;
      color: $primary_color;
    }
   
-  a.btn, a.btn-large, button[type=submit] {
+  a.btn, a.btn-large, button[type=submit], .file-field > .btn {
     background-color: $primary_color;
   }
   
