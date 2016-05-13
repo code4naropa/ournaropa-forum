@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Howdy, <%= @user.name %>!</h1>
+    <p>There has been a new reply in <a href="<%= @domain_base %>/forum/conversation/<%= @reply.conversation.id %>"><%= @reply.conversation.title %></a>:</p>
+    <p>Author: <%= @reply.author.first_name + " " + @reply.author.last_name %></p>
+    <p>Reply: <%= @reply.body %></p>
+  </body>
+</html>

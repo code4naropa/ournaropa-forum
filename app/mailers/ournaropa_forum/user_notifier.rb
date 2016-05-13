@@ -17,6 +17,15 @@ module OurnaropaForum
         :subject => '[OurNaropa] Password Recovery' )
     end     
       
+    def send_new_reply_email(user, reply, domain_base)
+      @user = user
+      @reply = reply
+      @domain_base = domain_base
+      mail( :to => "#{@user.first_name} #{@user.last_name} <#{@user.email}>",
+        :subject => "[OurNaropa] New Reply in #{@reply.conversation.title}" )
+      
+    end
+    
   end
 end
 

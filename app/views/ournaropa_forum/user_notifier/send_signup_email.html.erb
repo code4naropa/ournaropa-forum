@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to OurNaropa, <%= @user.name %>!</h1>
+    <p>Click here to set your password: <a href="http://www.ournaropa.org/forum/<%= @user.id %>/reset-password/<%= @user.reset_token %>">http://www.ournaropa.org/forum/<%= @user.id %>/reset-password/<%= @user.reset_token %></a></p>
+  </body>
+</html>

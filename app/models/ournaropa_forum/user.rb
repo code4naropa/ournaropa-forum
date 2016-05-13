@@ -9,6 +9,8 @@ module OurnaropaForum
     has_many :conversations, foreign_key: 'author_id'
     has_many :replies, foreign_key: 'author_id'
     
+    has_and_belongs_to_many :subscriptions, :class_name => "Conversation"
+    
     validates_uniqueness_of :email
     validates_presence_of :first_name, :last_name, :email, :password_hash
     

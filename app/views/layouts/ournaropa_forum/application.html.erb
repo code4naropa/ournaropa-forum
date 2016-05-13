@@ -23,8 +23,7 @@
           <% if current_user.is_superuser %>
           <li><%= link_to manage_access_path do %><i class="material-icons left">build</i>Manage Access<% end %></li>
           <% end %>
-          <li><a href="#"><i class="material-icons left">person_pin</i>Student Directory</a></li>
-          <%# ADD IMAGE OF USER HERE %>
+          <li><a href="#" onclick="alert('Coming Soon!');"><i class="material-icons left">person_pin</i>Student Directory</a></li>
           <li><%= link_to profile_path do %><%= image_tag current_user.info.avatar.url(:standard), class: "responsive-img circle" %> Hi, <%= current_user.name %>!<% end %></li>
           <li><%= link_to logout_path do %><i class="material-icons left">power_settings_new</i>Log Out<% end %></li>
         <% else %>
@@ -36,8 +35,7 @@
           <% if current_user.is_superuser %>
           <li><%= link_to manage_access_path do %><i class="material-icons left">build</i>Manage Access<% end %></li>
           <% end %>
-          <li><a href="#"><i class="material-icons left">person_pin</i>Student Directory</a></li>
-          <%# ADD IMAGE OF USER HERE %>
+          <li><a href="#" onclick="alert('Coming Soon!');"><i class="material-icons left">person_pin</i>Student Directory</a></li>
           <li><%= link_to profile_path do %><%= image_tag current_user.info.avatar.url(:standard), class: "responsive-img circle" %> Hi, <%= current_user.name %>!<% end %></li>
           <li><%= link_to logout_path do %><i class="material-icons left">power_settings_new</i>Log Out<% end %></li>
         <% else %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513005527) do
+ActiveRecord::Schema.define(version: 20160513022331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(version: 20160513005527) do
   end
 
   add_index "ournaropa_forum_conversations", ["author_id"], name: "index_ournaropa_forum_conversations_on_author_id", using: :btree
+
+  create_table "ournaropa_forum_conversations_users", force: :cascade do |t|
+    t.uuid "user_id"
+    t.uuid "conversation_id"
+  end
+
+  add_index "ournaropa_forum_conversations_users", ["conversation_id"], name: "index_ournaropa_forum_conversations_users_on_conversation_id", using: :btree
+  add_index "ournaropa_forum_conversations_users", ["user_id"], name: "index_ournaropa_forum_conversations_users_on_user_id", using: :btree
 
   create_table "ournaropa_forum_permitted_users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
     t.string   "email",                         null: false

@@ -32,6 +32,12 @@ module OurnaropaForum
       @reply.author = @user
 
       if @reply.save
+        
+        # check subscriptions
+        @reply.conversation.subscriptions.each do |sub|
+          UserNotifier.send_new_reply_email(sub, @reply, request.base_url).deliver_later unless sub.id == current_user.id
+        end
+        
         redirect_to @conversation, notice: 'Reply successfully posted.'
       else
         @replies = @conversation.replies

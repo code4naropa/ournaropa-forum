@@ -9,6 +9,7 @@ module OurnaropaForum
     # update conversation time
     after_create do
       self.conversation.touch
+      self.conversation.subscriptions << self.author unless self.conversation.subscriptions.exists?(self.author.id)
     end
   end
 end
