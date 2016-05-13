@@ -8,6 +8,8 @@ RSpec.shared_context "shared functions", :a => :b do
     
     create_access_for_user
     
+    user_count = OurnaropaForum::User.count
+    
     visit '/forum'
     click_link 'Sign Up'
     
@@ -22,9 +24,9 @@ RSpec.shared_context "shared functions", :a => :b do
     expect(page).to have_content("Ready to go!")
     
     # expect creation of a user
-    expect(OurnaropaForum::User.count).to eq(1)
+    expect(OurnaropaForum::User.count).to eq(user_count+1)
     
-    @user = OurnaropaForum::User.first
+    @user = OurnaropaForum::User.find_by email: @p_user.email
     expect(@user.email).to eq(@p_user.email)
     expect(@user.first_name).to eq(@p_user.first_name)
     expect(@user.last_name).to eq(@p_user.last_name)

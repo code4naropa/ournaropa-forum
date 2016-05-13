@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20160513022331) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "role"
+    t.boolean  "is_superuser",  default: false, null: false
     t.boolean  "has_signed_up", default: false, null: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false

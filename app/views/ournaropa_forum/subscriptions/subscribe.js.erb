@@ -1,0 +1,9 @@
+$("#subscribe-switch-loader").hide(200);
+
+$("#subscription-subscribed-help-text").show(0);
+$("#subscription-unsubscribed-help-text").hide(0);
+
+$("#subscription-subscribed-icon").show(0);
+$("#subscription-unsubscribed-icon").hide(0);
+
+Materialize.toast("<%= escape_javascript @notice %>", 5000)

@@ -29,6 +29,7 @@ module OurnaropaForum
       @user.last_name = p_user.last_name
       @user.email = p_user.email
       @user.role = p_user.role
+      @user.is_superuser = p_user.is_superuser
       @user.reset_token = User.generate_reset_token
       @user.password = SecureRandom.uuid  
       

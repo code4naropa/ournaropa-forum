@@ -21,11 +21,9 @@ ActionMailer::Base.smtp_settings = {
   :authentication => :plain,
   :enable_starttls_auto => true
 }
++ add missing avatar styles to public directory
 
 
 
 To-Do:
 + redirect to original page after sign_in
-+ forgot password option
-+ "about 3 days ago" instead of exact date and time on conversations and replies
-+ add missing styles to public directory

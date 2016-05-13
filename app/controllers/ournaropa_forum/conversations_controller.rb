@@ -32,7 +32,7 @@ module OurnaropaForum
       @conversation.author = @user
 
       if @conversation.save
-        redirect_to @conversation, notice: 'Conversation was successfully created.'
+        redirect_to @conversation, notice: 'Conversation was successfully created. You will receive email notifications about new replies.'
       else
         render :new
       end

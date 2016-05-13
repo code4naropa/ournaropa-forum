@@ -1,6 +1,10 @@
 OurnaropaForum::Engine.routes.draw do
   
   
+  # Subscriptions Controller
+  get 'conversation/:conversation_id/subscribe', to: 'subscriptions#subscribe', as: 'subscribe'
+  get 'conversation/:conversation_id/unsubscribe', to: 'subscriptions#unsubscribe', as: 'unsubscribe'
+
   # Passwords Controller
   get 'passwords/forgot', to: 'passwords#forgot', as: 'forgot_password'
   match 'passwords/reset', to: 'passwords#reset', via: :post, as: 'reset_password'

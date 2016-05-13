@@ -12,6 +12,41 @@
   </div>
 
   <div class="row">
+    <div class="col s12">
+      
+      <div id="subscribe-switch-loader" class="preloader-wrapper small active">
+        <div class="spinner-layer spinner-green-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+      
+      <i id="subscription-subscribed-icon" class="material-icons small left">notifications_active</i>
+      <i id="subscription-unsubscribed-icon" class="material-icons small left">notifications_off</i>
+
+        <strong>Email Notifications: </strong>
+        <!-- Switch -->
+        <div class="switch">
+          <label>
+            Off
+            <%= check_box_tag :subscription, 'subscribe', current_user.is_subscribed_to?(@conversation) %>
+            <span id="subscribe-switch" class="lever"></span>
+            On
+          </label>
+        </div>
+      <p id="subscription-subscribed-help-text" class="grey-text text-darken-2 subscription-help-text">You are currently receiving email notifications about new replies in this conversation.</p>
+      <p id="subscription-unsubscribed-help-text" class="grey-text text-darken-2 subscription-help-text">You are currently not receiving email notifications about new replies in this conversation.</p>
+    </div>
+  </div>
+
+  <div class="section"></div>
+
+  <div class="row">
     
     <div class="col s12">
         
@@ -73,4 +108,27 @@
 
 <script type="text/javascript">
   $('.modal-trigger').leanModal();
+  
+  if($("#subscription").prop("checked")) {
+    $("#subscription-unsubscribed-help-text").hide(0);
+    $("#subscription-unsubscribed-icon").hide(0);
+  }
+  else {
+    $("#subscription-subscribed-help-text").hide(0);
+    $("#subscription-subscribed-icon").hide(0);
+  }
+  
+  $('#subscribe-switch').click(function(){    
+
+    $('#subscribe-switch-loader').show(200);
+    
+    if($("#subscription").prop("checked")) {
+      $.ajax({url: "<%= unsubscribe_path(@conversation) %>", dataType: "script"}).done(function() {});
+    }
+    else {
+      $.ajax({url: "<%= subscribe_path(@conversation) %>", dataType: "script"}).done(function() {});
+    }
+    
+  });
+  
 </script>

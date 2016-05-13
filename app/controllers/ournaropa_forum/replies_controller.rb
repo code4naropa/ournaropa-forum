@@ -38,7 +38,10 @@ module OurnaropaForum
           UserNotifier.send_new_reply_email(sub, @reply, request.base_url).deliver_later unless sub.id == current_user.id
         end
         
-        redirect_to @conversation, notice: 'Reply successfully posted.'
+        @subscription_notice = ""
+        @subscription_notice = " You will receive email notifications about new replies in this conversation." if @reply.author.is_subscribed_to?(@conversation)
+        
+        redirect_to @conversation, notice: 'Reply successfully posted.'+@subscription_notice
       else
         @replies = @conversation.replies
         render 'ournaropa_forum/conversations/show'

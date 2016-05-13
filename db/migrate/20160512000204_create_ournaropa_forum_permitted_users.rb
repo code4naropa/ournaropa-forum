@@ -5,6 +5,7 @@ class CreateOurnaropaForumPermittedUsers < ActiveRecord::Migration
       t.string :first_name
       t.string :last_name
       t.string :role
+      t.boolean :is_superuser, default: false, null: false
       t.boolean :has_signed_up, default: false, null: false
 
       t.timestamps null: false

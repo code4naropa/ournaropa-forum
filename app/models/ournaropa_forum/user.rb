@@ -40,6 +40,10 @@ module OurnaropaForum
     def authenticate password
       return self.password == password
     end
+    
+    def is_subscribed_to? conversation
+      return self.subscriptions.exists?(conversation.id)
+    end
 
     before_save do
       self.email.downcase!
