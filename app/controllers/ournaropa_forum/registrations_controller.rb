@@ -14,6 +14,8 @@ module OurnaropaForum
       # if not permitted, then show error
       if @p_user.nil?
         render :email_not_found
+      elsif @p_user.has_signed_up?
+        render :already_signed_up
       end
       
       

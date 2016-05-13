@@ -1,8 +1,39 @@
 <div id="ournaropa_forum_home_welcome" class="container">
-  <h1>Home#welcome</h1>
-  <p>Find me in app/views/ournaropa_forum/home/welcome.html.erb</p>
+  <h1 class="center-align">OurNaropa - Forum</h1>
   
-  <%= link_to "Sign Up", signup_path %><br/><br/>
-  <%= link_to "Log In", login_path %><br/><br/>
-  <%= link_to "Forgot Password", forgot_password_path %>
+  <div class="row">
+    <div class="col s12 m6 center-align">
+      <h4>New? Sign up!</h4>
+      <p>Sign up in three simple steps:</p>
+      <ol>
+        <li>Click the button below</li>
+        <li>Enter your email address</li>
+        <li>Set a new password</li>
+      </ol>
+      <%= link_to signup_path, class: "btn-large waves-effect waves-light" do %>
+        <i class="material-icons left">check_box</i> Sign Up
+      <% end %>
+    </div>
+    
+    <div class="row hide-on-med-and-up">
+      <div class="col s12">
+        <div class="section"></div>
+        <div class="divider"></div>
+      </div>
+    </div>
+    
+    <div class="col s12 m6 center-align">
+      <h4>Log In</h4>
+      <%= link_to login_path, class: "btn-large waves-effect waves-light" do %>
+        <i class="material-icons left">vpn_key</i> Log In
+      <% end %>
+      <br/><br/>
+      <%= link_to forgot_password_path, class: "btn-flat waves-effect waves-purple" do %>
+        forgot password
+      <% end %>
+    </div>
+    
+  </div>
+  
+
 </div>

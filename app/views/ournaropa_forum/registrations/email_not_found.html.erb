@@ -1,8 +1,18 @@
-<div id="ournaropa_forum_registrations_email_not_found" class="container">
+<div id="ournaropa_forum_registrations_create" class="container">
 
-  <h1>Sorry!</h1>
-  <p>We could not find an account for the email address <strong><%= params[:email] %></strong>.<br/><br/>Please check to make sure that the email address you entered is the same email address you use in your communication with Naropa. If you believe this is an error, please contact Karen Wills at the Admissions Office.</p>
-
+  <div class="row">
+    <div class="col l2 m3 s12 center-align">
+      <div class="section"></div>
+      <i class="material-icons superlarge red-text">error</i>
+    </div>
+  
+    <div class="col l10 m9 s12">
+      <h1>Email not found!</h1>
+      <p>We could not find an account for the email address <strong><%= params[:email] %></strong>.<br/><br/>Please check to make sure that the email address you entered is the same email address you use in your communication with Naropa. If you believe this is an error, please contact Karen Wills at the Admissions Office.</p>
+    </div>
+    
+  </div>
+  
   <div class="section"></div>
   
   <%= link_to signup_path, class: "waves-effect waves-light btn grey" do %>
