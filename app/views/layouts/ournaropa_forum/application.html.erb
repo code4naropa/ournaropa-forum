@@ -31,6 +31,7 @@
         <% end %>
       </ul>
       <ul class="side-nav" id="nav-mobile">
+        <li><%= link_to root_path do %><i class="material-icons left">home</i>Home<% end %></li>
         <% if current_user %>
           <% if current_user.is_superuser %>
             <li><%= link_to manage_access_path do %><i class="material-icons left">build</i>Manage Access<% end %></li>
