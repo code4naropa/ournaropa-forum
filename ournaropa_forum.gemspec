@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-rails'
   s.add_dependency 'turbolinks'
   s.add_dependency 'jquery-turbolinks'
+  s.add_dependency 'bcrypt'
   
   s.add_dependency 'sass-rails'
   s.add_dependency 'materialize-sass'

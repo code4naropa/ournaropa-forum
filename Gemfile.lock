@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     ournaropa_forum (0.0.3)
+      bcrypt
       jquery-rails
       jquery-turbolinks
       material_icons
