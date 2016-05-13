@@ -21,9 +21,13 @@ ActionMailer::Base.smtp_settings = {
   :authentication => :plain,
   :enable_starttls_auto => true
 }
++ install imagemagick
++ install gem paperclip on main
 + add missing avatar styles to public directory
++ set :linked_dirs, fetch(:linked_dirs, []).push('public/system') in config/deploy.rb
 
 
 
 To-Do:
 + redirect to original page after sign_in
++ add piwik tracking
