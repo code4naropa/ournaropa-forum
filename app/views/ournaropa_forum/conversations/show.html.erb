@@ -59,7 +59,7 @@
             <i class="material-icons tiny">schedule</i> <%= time_ago_in_words(@conversation.created_at.in_time_zone) %> ago
           </p>
           <h3><%= @conversation.title %></h3>
-          <%= render_text @conversation.body %>
+          <%= parse_text @conversation.body %>
         </div>
         
       </div>
@@ -78,7 +78,7 @@
                 <p class="time right right-align grey-text">
                   <i class="material-icons tiny">schedule</i> <%= time_ago_in_words(reply.created_at.in_time_zone) %> ago
                 </p>
-                <p class="no-margin-top"><%= render_text reply.body %></p>
+                <p class="no-margin-top"><%= parse_text reply.body %></p>
               </div>
 
             </div>

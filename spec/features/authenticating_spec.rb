@@ -1,16 +1,15 @@
 require 'rails_helper.rb'
 
+require "shared.rb"
+
 feature 'authentication' do
       
-  before do
-    @PASSWORD = "ABC"
-    @p_user = OurnaropaForum::PermittedUser.create! FactoryGirl.attributes_for(:ournaropa_forum_permitted_user)
-    #puts FactoryGirl.attributes_for(:ournaropa_forum_permitted_user)
-    @user = OurnaropaForum::User.new({:first_name => @p_user.first_name, :last_name => @p_user.last_name, :email => @p_user.email})
-    @user.password = @PASSWORD
-    @user.save
-  end
+  include_context "shared functions"  
   
+  before do
+    register_user_and_create_password
+  end
+    
   scenario "user goes to log in screen" do
     visit '/forum'
     click_link 'Log In'
@@ -29,7 +28,7 @@ feature 'authentication' do
     fill_in 'email', with: wrong_email
     fill_in 'password', with: @PASSWORD
     
-    click_button 'Log In'
+    click_button 'Log In', match: :first
     
     expect(page).to have_content("Sign in failed")
     expect(page).to have_content("Login")
@@ -47,7 +46,7 @@ feature 'authentication' do
     fill_in 'email', with: @user.email
     fill_in 'password', with: wrong_password
     
-    click_button 'Log In'
+    click_button 'Log In', match: :first
     
     expect(page).to have_content("Sign in failed")
     expect(page).to have_content("Login")
@@ -61,9 +60,24 @@ feature 'authentication' do
     fill_in 'email', with: @user.email
     fill_in 'password', with: @PASSWORD
     
-    click_button 'Log In'
+    click_button 'Log In', match: :first
     
     expect(page).to have_content("Conversations")
     expect(page).to have_content(@user.name)
   end
+  
+  scenario "user clicks forgot password" do
+    visit '/forum'
+    click_link 'Log In'
+    
+    click_link 'Forgot Password', match: :first
+    
+    expect(page.current_url).to end_with(forgot_password_path)
+    
+    expect(page).to have_content("Forgot Your Password?")
+  end
+  
+  #scenario "user wants to visit a specific URL but is prompted to sign in first" do
+  #  pending "expect re-direction after successful sign-in"
+  #end
 end

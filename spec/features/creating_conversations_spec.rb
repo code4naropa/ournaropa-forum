@@ -31,4 +31,5 @@ feature 'Conversations' do
     @conversation = OurnaropaForum::Conversation.first
     expect(@conversation.author).to be_present
   end
+
 end

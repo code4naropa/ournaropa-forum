@@ -1,25 +1,13 @@
 require 'rails_helper.rb'
 
+require "shared.rb"
+
 feature 'managing access' do
       
+  include_context "shared functions"  
+  
   before do
-    
-    # REGISTER
-    @PASSWORD = SecureRandom.uuid
-    @p_user = OurnaropaForum::PermittedUser.create! FactoryGirl.attributes_for(:ournaropa_forum_permitted_user)
-    #puts FactoryGirl.attributes_for(:ournaropa_forum_permitted_user)
-    @user = OurnaropaForum::User.new({:first_name => @p_user.first_name, :last_name => @p_user.last_name, :email => @p_user.email})
-    @user.password = @PASSWORD
-    @user.save
-    
-    
-    # SIGN IN
-    visit '/forum'
-    click_link 'Log In'
-    fill_in 'email', with: @user.email
-    fill_in 'password', with: @PASSWORD
-    click_button 'Log In' 
-    
+    create_and_sign_in_user
   end
   
   scenario "user is superuser" do
@@ -67,15 +55,15 @@ feature 'managing access' do
     expect(page).not_to have_content("Role")
   end
   
-  scenario "add new user" do
+  scenario "superuser grants access" do
     pending
   end
 
-  scenario "delete user" do
+  scenario "superuser revokes access" do
     pending
   end
 
-  scenario "cannot delete user that has signed up" do
+  scenario "superuser attempts to delete user who has already signed up" do
     pending
   end
   

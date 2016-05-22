@@ -99,10 +99,19 @@ feature 'Subscriptions' do
     @second_user.reload
     @conversation.subscriptions.reload
     
+    # expect both users to be subscribed to notifications
     expect(@conversation.subscriptions.count).to eq(2)
     expect(@conversation.subscriptions.exists?(@first_user.id)).to be true
     expect(@conversation.subscriptions.exists?(@second_user.id)).to be true
     
+  end
+  
+  scenario 'user uses the notification button at the top of a conversation' do
+    pending
+  end
+  
+  scenario 'user replies after unsubscribing and having created the conversation or a previous reply' do
+    pending "expect user to still be unsubscribed"
   end
   
   scenario 'unsubscribe by URL' do
@@ -117,22 +126,18 @@ feature 'Subscriptions' do
     
   end
   
-  scenario 'subscribe by URL' do
+  scenario 'subscribe and unsubscribe by URL' do
   
-    create_conversation
-    
+    # create conversation and expect subscription
+    create_conversation    
     expect(@conversation.subscriptions.exists?(@user.id)).to be true
     
-    # now unsubscribe
-    
+    # now unsubscribe by URL /forum/conversation/@id/unsubscribe
     visit '/forum/conversation/'+@conversation.id+'/unsubscribe'
-    
     expect(@conversation.subscriptions.exists?(@user.id)).to be false
     
-    # now subscribe again
-  
+    # now subscribe again by URL /forum/conversation/@id/subscribe
     visit '/forum/conversation/'+@conversation.id+'/subscribe'
-    
     expect(@conversation.subscriptions.exists?(@user.id)).to be true
     
   end

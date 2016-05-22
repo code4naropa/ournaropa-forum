@@ -1,26 +1,13 @@
 require 'rails_helper.rb'
 
+require "shared.rb"
+
 feature 'registration' do
       
-  before do
-    @p_user = OurnaropaForum::PermittedUser.create! FactoryGirl.attributes_for(:ournaropa_forum_permitted_user)
-    @p_user.email = "fwoelm@students.naropa.edu"
-    @p_user.save
-  end
-  
+  include_context "shared functions"
+    
   scenario "user signs up" do
-    visit '/forum'
-    click_link 'Sign Up'
-    
-    fill_in 'email', with: @p_user.email
-    
-    click_button 'verify'
-    
-    expect(page).to have_content("Awesome, " + @p_user.first_name)
-    
-    click_button 'yup'
-    
-    expect(page).to have_content("Ready to go!")
+    register_user
     
     # expect creation of a user
     expect(OurnaropaForum::User.count).to eq(1)
@@ -39,8 +26,16 @@ feature 'registration' do
     expect(@p_user.has_signed_up).to be true
   end
     
-  scenario 'user is already signed up' do
-    pending    
+  scenario "user enters email that is not permitted to access" do
+    create_access_for_user
+    
+    pending
+  end
+  
+  scenario "user enters email that has already been signed up" do
+    create_access_for_user
+    
+    pending
   end
     
 end

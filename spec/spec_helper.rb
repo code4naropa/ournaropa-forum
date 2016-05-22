@@ -12,6 +12,7 @@ require 'factory_girl_rails'
 require 'faker'
 require 'shoulda/matchers'
 require 'database_cleaner'
+require 'bcrypt'
 
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 abort("The Rails environment is running in development mode!") if Rails.env.development?
@@ -31,12 +32,14 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
- config.mock_with :rspec
- config.use_transactional_fixtures = false
- config.infer_base_class_for_anonymous_controllers = false
- config.order = "random"
- config.default_formatter = 'doc'
- config.color = true
+  config.mock_with :rspec
+  config.use_transactional_fixtures = false
+  config.infer_base_class_for_anonymous_controllers = false
+  config.order = "random"
+  config.default_formatter = 'doc'
+  config.color = true
+  config.include OurnaropaForum::Engine.routes.url_helpers
+  config.include OurnaropaForum::ApplicationHelper
   
  #config.filter_run :focus unless ENV["SKIP_RSPEC_FOCUS"].present?
  #config.run_all_when_everything_filtered = true

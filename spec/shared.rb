@@ -36,16 +36,37 @@ RSpec.shared_context "shared functions", :a => :b do
     expect(@user.info).to be_present
     
     # expect permitted_user to indicate sign_up
-    @p_user = OurnaropaForum::PermittedUser.first
+    @p_user = OurnaropaForum::PermittedUser.find_by email: @user.email
     expect(@p_user.has_signed_up).to be true
   end
   
-  def create_and_sign_in_user   
+  def register_user_and_create_password
+    
+    email = ActionMailer::Base.deliveries = []
+    
     register_user
     
+    # open email
+    email = ActionMailer::Base.deliveries.first
+    
+    expect(email.body).to include(default_url_options[:host] + "/forum/" + @user.id + "/reset-password/" + @user.reset_token)
+    
+    # navigate to finish signup by setting password
+    visit "http://" + default_url_options[:host] + "/forum/" + @user.id + "/reset-password/" + @user.reset_token
+    
     @PASSWORD = SecureRandom.hex
-    @user.password = @PASSWORD
-    @user.save
+    
+    fill_in 'password', with: @PASSWORD
+    fill_in 'password_confirmation', with: @PASSWORD
+    
+    click_button 'Save'
+    
+    @user.reload
+    expect(@user.authenticate(@PASSWORD))
+  end
+  
+  def create_and_sign_in_user   
+    register_user_and_create_password
     
     visit '/forum'
     click_link 'Log In'
@@ -53,7 +74,7 @@ RSpec.shared_context "shared functions", :a => :b do
     fill_in 'email', with: @user.email
     fill_in 'password', with: @PASSWORD
     
-    click_button 'Log In'
+    click_button 'Log In', match: :first
     
     expect(page).to have_content("Conversations")
     expect(page).to have_content(@user.name)

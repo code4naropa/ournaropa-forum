@@ -77,13 +77,9 @@ feature 'personal info' do
     expect(page).to have_content(data[:description])
     
   end
-  
-  scenario "user updates profile picture" do
-    pending
-  end 
-  
-  scenario "unsubscribe from all notifications" do
-    pending
-  end  
+    
+#  scenario "unsubscribe from all notifications" do
+#    pending
+#  end  
   
 end
