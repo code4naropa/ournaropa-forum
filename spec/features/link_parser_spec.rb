@@ -15,84 +15,70 @@ RSpec::Matchers.define :not_contain_link do |arg|
 end
 
 
-feature 'Conversations' do 
+feature 'Link Parser' do 
   
   include_context "shared functions"
-  
-  before do
-    create_and_sign_in_user
-  end
-  
+  include OurnaropaForum::ApplicationHelper
+
   scenario 'can correctly identify links and parse them' do
     
-    links = [
-      {:text => "www.ournaropa.org", :href => "http://www.ournaropa.org"},
-      {:text => "www.ournaropa.org/", :href => "http://www.ournaropa.org/"},
-      {:text => "ournaropa.org", :href => "http://ournaropa.org"},
-      {:text => "ournaropa.org/", :href => "http://ournaropa.org/"},
-      {:text => "http://www.ournaropa.org/", :href => "http://www.ournaropa.org/"},
-      {:text => "https://www.ournaropa.org/", :href => "https://www.ournaropa.org/"}]
     
-    not_links = [
-      "ournar@pa.org",
-      "jonas$thegreat.com"
-      ]
+    cases = [
+      "*LINK*", # link alone
+      "*LINK* " + Faker::Lorem.words(5).join(" "), # link at beginning of sentence
+      Faker::Lorem.words(5).join(" ") + " *LINK* " + Faker::Lorem.words(5).join(" "), # link at middle of sentence
+      Faker::Lorem.words(5).join(" ") + " *LINK*.", # link at end of sentence
+      Faker::Lorem.words(5).join(" ") + " *LINK*!", # link at end of sentence with exclamation mark
+      Faker::Lorem.words(5).join(" ") + " *LINK*?", # link at end of sentence with question mark
+      Faker::Lorem.words(5).join(" ") + " *LINK*...", # multiple dots
+      Faker::Lorem.words(5).join(" ") + " (*LINK*) " + Faker::Lorem.words(5).join(" "), # link in parenhthesis
+      Faker::Lorem.words(5).join(" ") + " (*LINK*).", # link in parenhthesis at end of sentence
+      Faker::Lorem.words(5).join(" ") + " \'*LINK*\' " + Faker::Lorem.words(5).join(" "), # link in quotes
+      Faker::Lorem.words(5).join(" ") + " \"*LINK*\" " + Faker::Lorem.words(5).join(" ") # link in quotes
+    ]    
+    
+    links = [
+      "www.ournaropa.org",
+      "www.ournaropa.org/",
+      "ournaropa.org",
+      "ournaropa.org/",
+      "http://www.ournaropa.org/",
+      "https://www.ournaropa.org/",
+      "http://127.0.0.1:3000",
+      "valid-url.com", #hyphenated url
+      "https://www.ournaropa.org.abc?what+is_love_baby_dont_hurt.me",
+      "https://www.ournaropa.org.abc?what+is_love_baby_dont_hurt.me%wo45;lol"
+    ]
+      
     
     links.each do |link|
       
-      # link alone
-      text_with_link = link[:text]
-      parsed_text = parse_text(text_with_link)
-      expect(parsed_text).to contain_link(link[:href], link[:text])
-      
-      # link at beginning of sentence
-      text_with_link = link[:text] + " " + Faker::Lorem.words(5).join(" ")
-      parsed_text = parse_text(text_with_link)
-      expect(parsed_text).to contain_link(link[:href], link[:text])
-      
-      # link at middle of sentence
-      text_with_link = Faker::Lorem.words(5).join(" ") + " " + link[:text] + " " + Faker::Lorem.words(5).join(" ")
-      parsed_text = parse_text(text_with_link)
-      expect(parsed_text).to contain_link(link[:href], link[:text])
-      
-      # link at end of sentence
-      text_with_link = Faker::Lorem.words(5).join(" ") + " " + link[:text] + "."
-      parsed_text = parse_text(text_with_link)
-      expect(parsed_text).to contain_link(link[:href], link[:text])
-      
-      # link in parenhthesis
-      text_with_link = Faker::Lorem.words(5).join(" ") + " (" + link[:text] + ") " + Faker::Lorem.words(5).join(" ")
-      parsed_text = parse_text(text_with_link)
-      expect(parsed_text).to contain_link(link[:href], link[:text])
+      cases.each do |test_case|
+        
+        text_with_link = parse_text test_case.gsub("*LINK*", link)
+        protocol = link.match(/^https?:\/\//).present? ? "" : "http://"
+        expect(text_with_link).to include("href=\"#{protocol}#{link}\"")
+        expect(text_with_link).to include(">#{link}<")
+        
+      end
       
     end
+ 
+    not_links = [
+      "ournar@pa.org",
+      "jonas$thegreat.com",
+      "multi\n\nline\nlink\n.com",
+      "invalid_url.com"
+      ]    
     
-    not_links.each do |link|
+    not_links.each do |not_link|
       
-      # link alone
-      text_with_link = link
-      parsed_text = parse_text(text_with_link)
-      expect(parsed_text).to not_contain_link
-      
-      # link at beginning of sentence
-      text_with_link = link + " " + Faker::Lorem.words(5).join(" ")
-      parsed_text = parse_text(text_with_link)
-      expect(parsed_text).to not_contain_link
-      
-      # link at middle of sentence
-      text_with_link = Faker::Lorem.words(5).join(" ") + " " + link + " " + Faker::Lorem.words(5).join(" ")
-      parsed_text = parse_text(text_with_link)
-      expect(parsed_text).to not_contain_link
-      
-      # link at end of sentence
-      text_with_link = Faker::Lorem.words(5).join(" ") + " " + link + "."
-      parsed_text = parse_text(text_with_link)
-      expect(parsed_text).to not_contain_link
-      
-      # link in parenhthesis
-      text_with_link = Faker::Lorem.words(5).join(" ") + " (" + link + ") " + Faker::Lorem.words(5).join(" ")
-      parsed_text = parse_text(text_with_link)
-      expect(parsed_text).to not_contain_link
+      cases.each do |test_case|
+        
+        text_with_no_link = parse_text test_case.gsub("*LINK*", not_link)
+        expect(text_with_no_link).not_to include("<a href=")
+        
+      end
       
     end
       

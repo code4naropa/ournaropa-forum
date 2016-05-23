@@ -13,7 +13,8 @@ feature 'Reset Password' do
   def reset_password
     @PASSWORD = SecureRandom.hex(5)
     
-    visit '/forum/'+@user.id+'/reset-password/'+@user.reset_token
+    visit new_password_after_reset_path(@user.id, @user.reset_token)
+    #visit '/forum/'+@user.id+'/reset-password/'+@user.reset_token
     
     fill_in 'password', with: @PASSWORD
     fill_in 'password_confirmation', with: @PASSWORD
@@ -25,7 +26,7 @@ feature 'Reset Password' do
     fill_in 'email', with: @user.email
     fill_in 'password', with: @PASSWORD
     
-    click_button 'Log In'
+    click_button 'Log In', match: :first
     
     expect(page).to have_content("Conversations")
     expect(page).to have_content(@user.name)
@@ -48,10 +49,10 @@ feature 'Reset Password' do
     
     expect(@user.reset_token).not_to be_present
     
-    visit '/forum/logout'
+    visit logout_path
     
-    visit '/forum'
-    click_link 'forgot password'
+    visit root_path
+    click_link 'Forgot Password', match: :first
     fill_in 'Email', with: @user.email
     click_button 'Reset'
 

@@ -27,15 +27,40 @@ feature 'registration' do
   end
     
   scenario "user enters email that is not permitted to access" do
-    create_access_for_user
     
-    pending
+    # generate random email
+    random_email = Faker::Internet.email
+    
+    # validate that no access for this email exists
+    expect(OurnaropaForum::PermittedUser.exists?(email: random_email)).to be false
+    
+    # try to sign up with this email addresss    
+    visit signup_path
+    fill_in 'Email', with: random_email
+    click_button 'Verify'
+    
+    # validate result
+    expect(page).to have_content("Email not found!")
+    
   end
   
   scenario "user enters email that has already been signed up" do
-    create_access_for_user
     
-    pending
+    # register a new user
+    register_user
+    
+    # validate that user is registered
+    @p_user.reload
+    expect(@p_user.has_signed_up).to be true
+    
+    # try to re-register user
+    visit signup_path
+    fill_in 'Email', with: @p_user.email
+    click_button 'Verify'    
+    
+    # validate error
+    expect(page).to have_content("Already signed up!")
+    
   end
     
 end

@@ -15,5 +15,11 @@ module OurnaropaForum
       self.email.downcase!
     end
     
+    before_destroy do
+      if self.has_signed_up
+        raise ActiveRecord::Rollback, "User has already signed up. Cannot revoke access."
+      end
+    end
+    
   end
 end

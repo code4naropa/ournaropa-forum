@@ -3,33 +3,15 @@ require "erb"
 module OurnaropaForum
   module ApplicationHelper
     
-    STARTER_CHARS = /[[:space:]]|\(|^/
-    LEGIT_CHARS = /[a-zA-Z0-9_]/
-    INTERCEPT_CHARS = /([[:space:]])|(\.([[:space:]]|$))|(\)[[:space:]])|$/
+    STARTER_CHARS = /[[:space:]]|&#39;|&quot;|[\(\{\[]|^/
+    LEGIT_CHARS = /[a-zA-Z0-9-]/
+    ENDING_CHARS_IF_FOLLOWED_BY_SPACE = /[\.!\?:;\)\]\}]/
+    ENDING_CHARS_IN_ANY_CASE = /[[[:space:]]\"]|&#39;|&quot;|$/
+    INTERCEPT_CHARS = /(#{ENDING_CHARS_IN_ANY_CASE})|(#{ENDING_CHARS_IF_FOLLOWED_BY_SPACE}+([[:space:]]|$))/
     URL_REGEX = /(#{STARTER_CHARS})((https?:\/\/)?#{LEGIT_CHARS}+?\.#{LEGIT_CHARS}+?.*?)(#{INTERCEPT_CHARS})/u
     
     include ERB::Util
-    
-    def render_text text
-      
-      # safe text
-      text = h(text)
-            
-      # add links
-      text.gsub!( /((http(s?):\/\/)?(\S*?\.\S*\.\S*))/, '<a href="http\3://\4" target="_blank">\1</a>' )
-      
-      # add line breaks
-      text.gsub!("\n","<br />")  
         
-      # strong text
-      #text.gsub!(/^(.*)\*(.*?)\*(.*)$/, '\1<strong>\2</strong>\3')  
-        
-      # italic text
-      #text.gsub!(/_(.*)_/, '<i>\1</i>')  
-        
-      return text.html_safe
-    end
-    
     # test case here: http://rubyfiddle.com/riddles/c4e0b/2
     def parse_text text
       

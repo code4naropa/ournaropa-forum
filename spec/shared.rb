@@ -15,7 +15,7 @@ RSpec.shared_context "shared functions", :a => :b do
     
     fill_in 'email', with: @p_user.email
     
-    click_button 'verify'
+    click_button 'Verify'
     
     expect(page).to have_content("Awesome, " + @p_user.first_name)
     
@@ -49,10 +49,11 @@ RSpec.shared_context "shared functions", :a => :b do
     # open email
     email = ActionMailer::Base.deliveries.first
     
-    expect(email.body).to include(default_url_options[:host] + "/forum/" + @user.id + "/reset-password/" + @user.reset_token)
+    #binding.pry
+    expect(email.body).to include(new_password_after_reset_url(@user.id, @user.reset_token))
     
     # navigate to finish signup by setting password
-    visit "http://" + default_url_options[:host] + "/forum/" + @user.id + "/reset-password/" + @user.reset_token
+    visit new_password_after_reset_path(@user.id, @user.reset_token)
     
     @PASSWORD = SecureRandom.hex
     
@@ -62,7 +63,7 @@ RSpec.shared_context "shared functions", :a => :b do
     click_button 'Save'
     
     @user.reload
-    expect(@user.authenticate(@PASSWORD))
+    expect(@user.authenticate(@PASSWORD)).to be true
   end
   
   def create_and_sign_in_user   
@@ -79,6 +80,53 @@ RSpec.shared_context "shared functions", :a => :b do
     expect(page).to have_content("Conversations")
     expect(page).to have_content(@user.name)
 
+    
+  end
+  
+  # creates a conversation
+  def create_conversation
+    title = Faker::Lorem.words(3).join(" ")
+    body = Faker::Lorem.sentences(3).join(" ")
+    
+    visit root_path
+    click_link 'Start A Conversation'
+    fill_in 'Title', with: title
+    fill_in 'Message', with: body
+    click_button 'Start Conversation'
+    
+    expect(page).to have_content(title)
+    expect(page).to have_content(body)
+    expect(page).to have_content("You are currently receiving email notifications about new replies in this conversation.")
+    
+    @user.conversations.reload
+    
+    expect(@user.conversations.count).to eq(1)
+    
+    @conversation = OurnaropaForum::Conversation.first
+    expect(@conversation.author).to be_present
+  end
+  
+  # creates a reply
+  def create_reply conversation_id
+    
+    # init
+    reply = Faker::Lorem.sentences(3).join(" ")
+    reply_count = OurnaropaForum::Conversation.find(conversation_id).replies.count
+    
+    # create reply
+    visit conversation_path(conversation_id)
+    fill_in 'Reply', with: reply
+    click_button 'Reply'
+    
+    # validate console
+    @reply = OurnaropaForum::Reply.last
+    expect(@reply.body).to eq(reply)
+    expect(@reply.author).to be_present
+    expect(OurnaropaForum::Conversation.find(conversation_id).replies.count).to eq(reply_count+1)
+    
+    # validate successful creation
+    expect(page).to have_content(reply)
+    expect(page.body).to include("Reply successfully posted.")
     
   end
   

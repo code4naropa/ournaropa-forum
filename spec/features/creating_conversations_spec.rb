@@ -12,24 +12,8 @@ feature 'Conversations' do
   
   scenario 'can create a conversation' do
     
-    title = 'Test Conversation' 
-    body = "Lorem Ipsum Dolorem\n" * 10
+    create_conversation
     
-    visit '/forum'
-    click_link 'Start A Conversation'
-    fill_in 'Title', with: title
-    fill_in 'Message', with: body
-    click_button 'start conversation'
-    
-    expect(page).to have_content(title)
-    expect(page).to have_content(body)
-    
-    @user.conversations.reload
-    
-    expect(@user.conversations.count).to eq(1)
-    
-    @conversation = OurnaropaForum::Conversation.first
-    expect(@conversation.author).to be_present
   end
 
 end

@@ -28,7 +28,7 @@ module OurnaropaForum
       @permitted_user = PermittedUser.new(permitted_user_params)
 
       if @permitted_user.save
-        redirect_to permitted_users_path, notice: 'Permitted user was successfully created.'
+        redirect_to permitted_users_path, notice: 'Access successfully granted.'
       else
         render :new
       end
@@ -45,9 +45,11 @@ module OurnaropaForum
 
     # DELETE /permitted_users/1
     def destroy
-      if not @permitted_user.has_signed_up
-        @permitted_user.destroy
-        redirect_to permitted_users_url, notice: 'Permitted user was successfully destroyed.'
+      
+      if @permitted_user.destroy
+        redirect_to permitted_users_url, notice: 'Access successfully revoked.'
+      else
+        redirect_to permitted_users_url, notice: 'Failed: User has already signed up.'
       end
     end
 

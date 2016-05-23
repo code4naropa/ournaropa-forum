@@ -18,7 +18,7 @@
     <p class="center-align">
       <i class="material-icons">location_city</i> <%= author.info.hometown %> &middot; <i class="material-icons">school</i> <%= author.info.major %>  &middot;  <i class="material-icons">today</i> Age: <%= author.info.age %><br/>
     </p>
-    <p class="center-align"><strong>About Me:</strong><br/><%= render_text author.info.description %></p>
+    <p class="center-align"><strong>About Me:</strong><br/><%= parse_text author.info.description %></p>
   </div>
   <div class="modal-footer">
     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>

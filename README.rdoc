@@ -25,6 +25,7 @@ ActionMailer::Base.smtp_settings = {
 + install gem paperclip on main
 + add missing avatar styles to public directory
 + set :linked_dirs, fetch(:linked_dirs, []).push('public/system') in config/deploy.rb
++ set config.action_mailer.default_url_options = { :host => 'www.example.com' }
 
 
 
