@@ -27,7 +27,7 @@
         <td><%= permitted_user.last_name %></td>
         <td><%= permitted_user.role %></td>
         <td><%= permitted_user.has_signed_up ? "Yes" : "No" %></td>
-        <td><%= permitted_user.has_signed_up ? "" : (link_to 'Delete', permitted_user, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
+        <td><%= permitted_user.has_signed_up ? "" : (link_to 'Delete', permitted_user, class: "link", method: :delete, data: { confirm: 'Are you sure?' }) %></td>
       </tr>
     <% end %>
   </tbody>

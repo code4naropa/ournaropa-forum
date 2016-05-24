@@ -1,6 +1,7 @@
 @import "materialize/components/color";
 
 $primary_color: #785a86;  
+$highlight_color: #E18416;
   
 #ournaropa_forum {
   
@@ -17,6 +18,10 @@ $primary_color: #785a86;
      of the button to still show through. */
       background-color: transparentize($primary_color, .35);
     }
+  
+  a.link, a.link:hover {
+    color: $highlight_color;
+  }
   
   // images in navbar
   #nav-mobile li img {

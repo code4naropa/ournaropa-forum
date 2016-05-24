@@ -42,8 +42,8 @@ div.custom-chip {
     //@extend .purple;
     //@extend .amber-text;
     background-color: $primary-color;
-    color: #eea94f;
-    border: 2px solid #eea94f;
+    color: $highlight_color;
+    border: 2px solid $highlight_color;
     box-shadow: 0px 0px 3px rgba(0,0,0,.3);
   }
 }
@@ -141,6 +141,10 @@ div.custom-chip {
     
     p {
       margin-bottom: 0px;
+    }
+    
+    a {
+      color: $highlight_color;
     }
   }
   
