@@ -8,7 +8,8 @@ module OurnaropaForum
     
     # PAPERCLIP
     has_attached_file :avatar, styles: { large: "300x300#", standard: "80x80#" }, default_url: "/images/:style/missing.png"
-    validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+    validates_with AttachmentContentTypeValidator, attributes: :avatar, content_type: /\Aimage\/.*\Z/
+    validates_with AttachmentSizeValidator, attributes: :avatar, less_than: 2.megabytes
     
     # Init first name and last name from user this info belongs to
     after_initialize do
