@@ -1,6 +1,22 @@
-$primary_color: #9c27b0;  
+@import "materialize/components/color";
+
+$primary_color: #785a86;  
   
 #ournaropa_forum {
+  
+  .primary-color {
+    background-color: $primary_color;
+  }
+  
+  .text-primary-color {
+    color: $primary_color;
+  }
+  
+  .waves-effect.primary-color .waves-ripple {
+     /* The alpha value allows the text and background color
+     of the button to still show through. */
+      background-color: transparentize($primary_color, .35);
+    }
   
   // images in navbar
   #nav-mobile li img {

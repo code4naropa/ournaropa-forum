@@ -7,9 +7,7 @@
   <div class="row">
     <div class="col s12">
       <div class="section">
-        <%= link_to root_path, class: "waves-effect waves-light btn grey" do %>
-          <i class="material-icons left">arrow_back</i>Back</a>
-        <% end %>  
+        <%= render partial: '/ournaropa_forum/shared/back_button', :locals => {:destination => root_path} %>
       </div>
     </div>
   </div>

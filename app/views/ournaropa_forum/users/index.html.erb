@@ -4,13 +4,29 @@
 
   <div class="row">
 
-    <% @users.each do |user| %>
+    <% @users.each_with_index do |user, index| %>      
+      <% 
+        if index != 0
+          # determine line break
+          puts index
+          if index % 4 == 0
+            break_line = ""
+          elsif index % 2 == 0
+            break_line = "hide-on-large-only"
+          else
+            break_line = "hide-on-med-and-up"
+        end %>
+
+        <div class="row <%= break_line %>">
+          <div class="col s12">
+            <div class="section"></div>
+            <div class="divider"></div>
+          </div>
+        </div>
+      <% end %>
+    
       <div class="col s12 m6 l3">
-
         <%= render :partial => "ournaropa_forum/conversations/render_author", :locals => {:author => user} %>
-
-        <div class="section hide-med-and-up"></div>
-        
       </div>
     <% end %>
   

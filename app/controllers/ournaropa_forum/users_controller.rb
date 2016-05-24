@@ -7,7 +7,9 @@ module OurnaropaForum
 
     # GET /users
     def index
-      @users = User.all.order(role: :desc)
+      @users = User.where(role: "Staff").order(first_name: :asc)
+      @users += User.where(role: "Current Student").order(first_name: :asc)
+      @users += User.where(role: "Incoming Student").order(first_name: :asc)
     end
 
     # GET /users/1

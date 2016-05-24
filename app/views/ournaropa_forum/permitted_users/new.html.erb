@@ -1,13 +1,24 @@
 <div class="container">
 
-<h1>New Permitted User</h1>
+  
+<div class="row">
+  <div class="col s12">
+    <div class="section"></div>
+    <%= render partial: '/ournaropa_forum/shared/back_button', :locals => {:destination => permitted_users_path} %>  
+  </div>
+</div>
+  
+  
+<div class="row">
+  <div class="col s12">
+    <h1>Grant Access</h1>
+  </div>
+</div>
 
 <%= render 'form' %>
+
+</div>
 
 <script type="text/javascript">
   $('select').material_select();
 </script>
-  
-<%= link_to 'Back', permitted_users_path %>
-
-</div>

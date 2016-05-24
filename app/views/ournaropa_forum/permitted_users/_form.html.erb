@@ -1,6 +1,6 @@
 
 <div class="row">
-  <%= form_for @permitted_user, class: "col s12" do |f| %>
+  <%= form_for @permitted_user, html: {class: "col s12"} do |f| %>
     <% if @permitted_user.errors.any? %>
       <div class="row">
         <div class="col s12">
