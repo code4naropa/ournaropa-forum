@@ -20,10 +20,9 @@
   <%= form_for(@user.info, url: update_profile_path, html: { multipart: true }, class: "col s12") do |f| %>
     <% if @user.info.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@user_info.errors.count, "error") %> prohibited this user_info from being saved:</h2>
-
+        <h2><%= pluralize(@user.info.errors.count, "error") %>:</h2>
         <ul>
-        <% @user_info.errors.full_messages.each do |message| %>
+        <% @user.info.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
         </ul>

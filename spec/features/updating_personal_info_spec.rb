@@ -11,7 +11,7 @@ feature 'personal info' do
   end
   
   scenario 'change password' do
-    visit '/forum'
+    visit root_path
     click_link("Hi, " + @user.name + "!", :match => :first)
     
     click_link "Change Password"
@@ -37,7 +37,7 @@ feature 'personal info' do
   end
   
   scenario "user goes to profile page" do
-    visit '/forum'
+    visit root_path
     click_link("Hi, " + @user.name + "!", :match => :first)
     expect(page).to have_content("Profile")
   end

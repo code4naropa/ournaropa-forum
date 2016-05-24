@@ -105,27 +105,26 @@ feature 'Subscriptions' do
     # validate that user is currently unsubscribed to conversation
     visit root_path
     click_link @conversation.title
-    expect(page).to have_content("You are currently not receiving email notifications about new replies in this conversation.")
-      
+    @user.subscriptions.reload
+    expect(@user.subscriptions.exists?(@conversation.id)).to be false  
+    
     # create a reply
     create_reply @conversation.id
         
-    # validate that user is now subscribed [front-end]
-    expect(page).to have_content("You are currently receiving email notifications about new replies in this conversation.")
+    # validate that user is now subscribed [back-end]
+    @user.subscriptions.reload
+    expect(@user.subscriptions.exists?(@conversation.id)).to be true     
     
-    # unsubscribe manually by clicking the switch
-    uncheck("subscription")
+    # unsubscribe
+    visit unsubscribe_path(@conversation.id)
     
-    # validate that user is now unsubscribed
-    expect(page).to have_content("You are currently not receiving email notifications about new replies in this conversation.")
+    # validate that user is now unsubscribed [back-end]
     @user.subscriptions.reload
     expect(@user.subscriptions.exists?(@conversation.id)).to be false 
     
     # post another reply
     create_reply @conversation.id
-    
-    expect(page).to have_content("You are currently not receiving email notifications about new replies in this conversation.")
-    
+        
     # validate that first user is and second user is not subscribed [back-end]
     @second_user = @user
     @second_user.reload
@@ -134,9 +133,6 @@ feature 'Subscriptions' do
     expect(@conversation.subscriptions.exists?(@first_user.id)).to be true
     expect(@conversation.subscriptions.exists?(@second_user.id)).to be false  
     
-    # validate that second user is not subscribed [front-end]
-    expect(page).to have_content("You are currently not receiving email notifications about new replies in this conversation.")
-
   end
   
   scenario 'unsubscribe by URL' do

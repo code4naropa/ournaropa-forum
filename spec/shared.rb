@@ -42,12 +42,13 @@ RSpec.shared_context "shared functions", :a => :b do
   
   def register_user_and_create_password
     
+    # clear all emails
     email = ActionMailer::Base.deliveries = []
     
     register_user
     
     # open email
-    email = ActionMailer::Base.deliveries.first
+    email = ActionMailer::Base.deliveries.last
     
     #binding.pry
     expect(email.body).to include(new_password_after_reset_url(@user.id, @user.reset_token))

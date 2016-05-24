@@ -8,10 +8,11 @@ module OurnaropaForum
     def edit
     end
 
-    def update
+    def update      
       if @user.info.update_attributes(user_info_params)
         redirect_to profile_path, notice: 'Your profile was successfully updated.'
       else
+        @user.info.avatar = nil if @user.info.errors.messages.include?(:avatar)
         render :edit
       end
     end

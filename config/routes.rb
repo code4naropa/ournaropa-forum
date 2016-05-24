@@ -6,8 +6,8 @@ OurnaropaForum::Engine.routes.draw do
   get 'conversation/:conversation_id/unsubscribe', to: 'subscriptions#unsubscribe', as: 'unsubscribe'
 
   # Passwords Controller
-  get 'passwords/forgot', to: 'passwords#forgot', as: 'forgot_password'
-  match 'passwords/reset', to: 'passwords#reset', via: :post, as: 'reset_password'
+  get 'forgot-password', to: 'passwords#forgot', as: 'forgot_password'
+  match 'reset-password', to: 'passwords#reset', via: :post, as: 'reset_password'
   get ':id/reset-password/:reset_token', to: 'passwords#new_after_reset', as: 'new_password_after_reset'
   match ':id/reset-password/:reset_token', to: 'passwords#update_after_reset', via: :post, as: 'update_password_after_reset'
   get 'change-password', to: 'passwords#new', as: 'new_password'

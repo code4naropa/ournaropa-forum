@@ -9,26 +9,34 @@ feature 'personal info' do
   before do
     create_and_sign_in_user
     
-    visit '/forum'
+    visit root_path
     click_link("Hi, " + @user.name + "!", :match => :first)
     
     expect(page).to have_content("Profile")
   end
   
   scenario 'user uploads PNG image' do
-    pending
+    attach_file('user_info_avatar', "spec/files/sample.png")
+    click_button 'Save'
+    expect(page).to have_css("img[src*='sample.png']")
   end
   
   scenario 'user uploads JPG image' do
-    pending
+    attach_file('user_info_avatar', "spec/files/sample.jpeg")
+    click_button 'Save'
+    expect(page).to have_css("img[src*='sample.jpeg']")
   end 
   
   scenario 'user uploads animated GIF image' do
-    pending
+    attach_file('user_info_avatar', "spec/files/sample.gif")
+    click_button 'Save'
+    expect(page).to have_css("img[src*='sample.gif']")
   end
   
   scenario 'user uploads illegal file format' do
-    pending
+    attach_file('user_info_avatar', "spec/files/sample.txt")
+    click_button 'Save'
+    expect(page).to have_content("Avatar is invalid")
   end
   
   scenario 'user uploads file eceeding max file size' do
