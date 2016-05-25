@@ -1,7 +1,7 @@
 <%
 # replace unsubscribe link in footer
 
-link_html = link_to(unsubscribe_path(@reply.conversation.id)){'<font color="#ffffff">Click here to disable</font>'.html_safe}
+link_html = link_to(unsubscribe_url(@reply.conversation.id)){'<font color="#ffffff">Click here to disable</font>'.html_safe}
 
 @footer.gsub!("*UNSUBSCRIBE_LINK*", link_html)
 

@@ -3,6 +3,8 @@ spec/dummy/tmp/
 spec/dummy/.sass-cache
 spec/dummy/public/system
 
+/original_images
+
 *.rbc
 capybara-*.html
 .rspec
