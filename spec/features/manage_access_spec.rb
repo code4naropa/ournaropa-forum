@@ -87,7 +87,16 @@ feature 'managing access' do
     # validate page
     expect(page).to have_content(attributes[:email])
     
-  end
+    # expect email to have been sent out with instructions
+    email = ActionMailer::Base.deliveries.last
+    expect(email.to).to eq(new_user.email)
+    expect(email.subject).to eq("Welcome to OurNaropa")
+    expect(email.body).to include(signup_url)
+    expect(email.body).to include(new_user.first_name)
+    expect(email.body).to include(@user.first_name)
+    expect(email.body).to include(@user.last_name)
+    
+  end 
 
   scenario "superuser revokes access" do
     

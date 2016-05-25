@@ -43,7 +43,7 @@ feature 'personal info' do
   end
   
   scenario "user updates all fields" do
-    visit '/forum'
+    visit root_path
     click_link("Hi, " + @user.name + "!", :match => :first)
     
     data = {:first_name => Faker::Name.first_name,
@@ -78,6 +78,36 @@ feature 'personal info' do
     
   end
     
+  scenario 'user shares email publicly' do
+    
+    # visit profile page
+    visit root_path
+    click_link("Hi, " + @user.name + "!", :match => :first)
+    expect(page).to have_current_path(profile_path)
+    expect(page).to have_content(@user.email)
+    
+    # validate that currently user is not sharing email address
+    expect(page).to have_unchecked_field("is_sharing_email")
+    expect(@user.is_sharing_email).to be false
+    
+    # check the box and save
+    check("is_sharing_email")
+    click_button "Save"
+    
+    # verify that is now shared
+    expect(page).to have_checked_field("is_sharing_email")
+    expect(@user.is_sharing_email).to be true
+    
+    # uncheck box and save
+    check("is_sharing_email")
+    click_button "Save"
+    
+    # validate that currently user is not sharing email address
+    expect(page).to have_unchecked_field("is_sharing_email")
+    expect(@user.is_sharing_email).to be false    
+    
+  end
+  
 #  scenario "unsubscribe from all notifications" do
 #    pending
 #  end  

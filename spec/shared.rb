@@ -70,7 +70,7 @@ RSpec.shared_context "shared functions", :a => :b do
   def create_and_sign_in_user   
     register_user_and_create_password
     
-    visit '/forum'
+    visit root_path
     click_link 'Log In'
     
     fill_in 'email', with: @user.email

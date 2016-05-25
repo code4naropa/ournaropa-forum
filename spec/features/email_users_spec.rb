@@ -67,11 +67,56 @@ feature 'User Notifier' do
     expect(email.body).to include(parse_text @reply.body)    
     
   end
-  
-  scenario 'users are notified after not checking in for seven days' do
     
-    pending
+  scenario 'user is notified after not checking in' do
+        
+    # register user and expect last_seen_at to be defined
+    register_user
+    expect(Time.now).to be < @user.last_seen_at + 1.minute
+       
+    # clear emails
+    ActionMailer::Base.deliveries = []    
+    
+    30.times_with_index do |index|
+      
+      # update user last seen at: index * days ago
+      @user.update_attributes(:last_seen_at => Time.now - index * 1.day)
+      
+      # simulate hitting of API webhook
+      visit daily_tasks(ENV["OURNAROPA_FORUM_API_KEY"])
+      
+    end
+
+    # expect four emails over the course of thirty days
+    expect(ActionMailer::Base.deliveries.count).to eq(4)    
     
   end
 
+  scenario 'user is unsubscribed from emails and is not notified after checking in' do
+        
+    # register user and expect last_seen_at to be defined
+    register_user
+    expect(Time.now).to be < @user.last_seen_at + 1.minute
+    
+    # set user to not receive reminder emails
+    @user.update_attributes(:is_receiving_reminders).to be false
+        
+    # clear emails
+    ActionMailer::Base.deliveries = []
+    
+    30.times_with_index do |index|
+      
+      # update user last seen at: index * days ago
+      @user.update_attributes(:last_seen_at => Time.now - index * 1.day)
+      
+      # simulate hitting of API webhook
+      visit daily_tasks(ENV["OURNAROPA_FORUM_API_KEY"])
+      
+    end
+
+    # expect zero emails over the course of thirty days
+    expect(ActionMailer::Base.deliveries.count).to eq(0)    
+    
+  end  
+  
 end
