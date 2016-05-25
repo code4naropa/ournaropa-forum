@@ -51,7 +51,7 @@ module OurnaropaForum
       @user = user
       @reply = reply
       
-      @footer = '<a href="#"><font color="#ffffff">Unsubscribe</font></a> from this newsletter instantly'
+      @footer = "You received this email because email notifications for this conversation are enabled. *UNSUBSCRIBE_LINK*."
 
       
       mail( :to => "#{@user.first_name} #{@user.last_name} <#{@user.email}>",

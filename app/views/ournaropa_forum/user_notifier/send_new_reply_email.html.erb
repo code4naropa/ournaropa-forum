@@ -1,14 +1,88 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-    <h1>Howdy, <%= @user.name %>!</h1>
-    <p>There has been a new reply in <a href="<%= conversation_url(@reply.conversation.id) %>"><%= @reply.conversation.title %></a> by <%= @reply.author.first_name + " " + @reply.author.last_name %>:</p>
-    <p><%= parse_text @reply.body %></p>
-    
-    <p>-----------------</p>
-    <p>Unsubscribe from email notifications about new replies in this conversation: <a href="<%= unsubscribe_url(@reply.conversation.id) %>">Unsubscribe</a> </p>
-  </body>
-</html>
+<%
+# replace unsubscribe link in footer
+
+link_html = link_to(unsubscribe_path(@reply.conversation.id)){'<font color="#ffffff">Click here to disable</font>'.html_safe}
+
+@footer.gsub!("*UNSUBSCRIBE_LINK*", link_html)
+
+%>
+<tr>
+  <td class="innerpadding no-padding-bottom">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+          <h2>Hello <%= @user.name %>,</h2>
+        </td>
+      </tr>
+      <tr class="bodycopy">
+        <td>
+          there is a new reply in <%= link_to conversation_url(@reply.conversation.id), class: "link" do %><font color="<%= @highlight_color %>"><b><%= @reply.conversation.title %></b></font><% end %>:
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td class="innerpadding no-padding-bottom">
+    <table width="115" align="left" border="0" cellpadding="0" cellspacing="0">  
+      <tr>
+        <td align="center" height="115" style="padding: 0 20px 10px 0;">
+          <%= image_tag @reply.author.info.avatar.url(:large), :class => "circle", :alt => "#{@reply.author.first_name}'s Avatar", :width => "115", :height => "115", :border => "0" %>
+          <!--<img src="images/article1.png" width="115" height="115" border="0" alt="" />-->
+        </td>
+      </tr>
+      <tr>
+        <td align="center" class="bodycopy" style="padding: 0 20px 0px 0;">
+          <b><%= @reply.author.first_name %></b>
+        </td>
+      </tr>
+    </table>
+    <!--[if (gte mso 9)|(IE)]>
+      <table width="380" align="left" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td>
+    <![endif]-->
+    <table class="col380" align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 380px;">  
+      <tr>
+        <td>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="bodycopy">
+                <%= parse_text @reply.body %>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!--[if (gte mso 9)|(IE)]>
+          </td>
+        </tr>
+    </table>
+    <![endif]-->
+  </td>
+</tr>
+
+<tr>
+  <td class="innerpadding">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td style="padding: 0;">
+          <table class="buttonwrapper" bgcolor="<%= @primary_color %>" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="button" height="45">
+                <%= link_to "View Reply", conversation_url(@reply.conversation.id) %>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding: 5px 0 0 0;" class="fine_print">
+          (or click here: <%= link_to conversation_url(@reply.conversation.id) do %><font color="<%= @faded_color %>"><%= conversation_url(@reply.conversation.id) %></font><% end %>)
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>

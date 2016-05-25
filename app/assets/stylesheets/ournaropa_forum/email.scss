@@ -23,7 +23,14 @@ body {
   color: #ffffff;
 }
 
-.innerpadding {padding: 30px 30px 30px 30px;}
+.innerpadding {
+  padding: 30px 30px 30px 30px;
+  a.link {
+    color: $highlight_color;
+    text-decoration: none;
+    font-weight: bold;
+  }
+}
 .borderbottom {border-bottom: 1px solid #f2eeed;}
 
 .footer {padding: 20px 30px 20px 30px;}
@@ -42,6 +49,11 @@ h2 {padding: 0 0 15px 0; font-size: 24px; line-height: 28px; font-weight: bold; 
   
   font-size: 12px;
   color: $faded_color;
+}
+
+// Images
+img.circle {
+  border-radius: 50%;
 }
 
 // Buttons
