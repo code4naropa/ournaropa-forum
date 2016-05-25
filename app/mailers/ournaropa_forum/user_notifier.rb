@@ -1,9 +1,11 @@
 module OurnaropaForum
   class UserNotifier < ActionMailer::Base
-    
+        
     add_template_helper(ApplicationHelper)
     include ApplicationHelper
     
+    include Roadie::Rails::Automatic
+        
     layout '/ournaropa_forum/email'
     
     default :from => "OurNaropa <info@ournaropa.org>"
@@ -37,10 +39,10 @@ module OurnaropaForum
       
       # set footer
       @footer = 'You are received this email because someone triggered a password reset for your account.'
-
-      
-      mail( :to => "#{@user.first_name} #{@user.last_name} <#{@user.email}>",
-        :subject => '[OurNaropa] Password Recovery' )
+            
+      mail :to => "#{@user.first_name} #{@user.last_name} <#{@user.email}>",
+        :subject => '[OurNaropa] Password Recovery',
+        :skip_premailer => false
     end     
       
     def send_new_reply_email(user, reply, domain_base = "")
@@ -57,6 +59,12 @@ module OurnaropaForum
       mail( :to => "#{@user.first_name} #{@user.last_name} <#{@user.email}>",
         :subject => "[OurNaropa] New Reply in #{@reply.conversation.title}" )
           
+    end
+  
+    private
+
+    def roadie_options
+      super unless Rails.env.test?
     end
     
   end

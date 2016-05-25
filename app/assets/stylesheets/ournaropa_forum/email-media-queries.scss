@@ -1,0 +1,15 @@
+@import "init";
+
+// fix for apple mail
+@media only screen and (min-device-width: 601px) {
+  .content {width: 600px !important;}
+  .col425 {width: 425px !important;}
+  .col380 {width: 380px !important;}
+}
+
+// make whole button clickable on mobile
+@media only screen and (max-width: 600px), screen and (max-device-width: 600px) {
+  body[yahoo] .buttonwrapper {background-color: transparent!important;}
+  body[yahoo] .button a {background-color: $primary_color; padding: 15px 15px 13px!important; display: block!important;}
+  body[yahoo] .button {padding: 0px !important;}
+}

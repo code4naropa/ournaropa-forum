@@ -1,12 +1,5 @@
 @import "init";
 
-// fix for apple mail
-@media only screen and (min-width: 601px) {
-  .content {width: 600px !important;}
-  .col425 {width: 425px !important;}
-  .col380 {width: 380px !important;}
-}
-
 // remove spacing on body
 body {
   margin: 0px !important;
@@ -59,10 +52,3 @@ img.circle {
 // Buttons
 .button {text-align: center; font-size: 18px; font-family: sans-serif; font-weight: bold; padding: 0 30px 0 30px;}
 .button a {color: #ffffff; text-decoration: none;}
-
-// make whole button clickable on mobile
-@media only screen and (max-width: 600px), screen and (max-device-width: 600px) {
-  body[yahoo] .buttonwrapper {background-color: transparent!important;}
-  body[yahoo] .button a {background-color: $primary_color; padding: 15px 15px 13px!important; display: block!important;}
-  body[yahoo] .button {padding: 0px !important;}
-}

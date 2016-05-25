@@ -20,8 +20,8 @@ module OurnaropaForum
       @user.save
       
       # send email
-      UserNotifier.send_password_reset_email(@user, request.base_url).deliver_later
-      
+      email = UserNotifier.send_password_reset_email(@user)
+      email.deliver_later
     end
 
     def new_after_reset
