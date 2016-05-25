@@ -16,7 +16,7 @@ link_html = link_to(unsubscribe_path(@reply.conversation.id)){'<font color="#fff
       </tr>
       <tr class="bodycopy">
         <td>
-          there is a new reply in <%= link_to conversation_url(@reply.conversation.id), class: "link" do %><font color="<%= @highlight_color %>"><b><%= @reply.conversation.title %></b></font><% end %>:
+          there has been a new reply in <%= link_to conversation_url(@reply.conversation.id), class: "link" do %><font color="<%= @highlight_color %>"><b><%= @reply.conversation.title %></b></font><% end %>:
         </td>
       </tr>
     </table>
