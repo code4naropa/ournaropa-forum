@@ -30,7 +30,10 @@ module OurnaropaForum
     def create
       @conversation = Conversation.new(conversation_params)
       @conversation.author = @user
+      
+      redirect_to conversation_path(Conversation.where(:author_id => @conversation.author.id).recent.where(:title => @conversation.title).take) and return unless @conversation.is_not_a_double_post?
 
+      # prevent double posting
       if @conversation.save
         redirect_to @conversation, notice: 'Conversation was successfully created. You will receive email notifications about new replies.'
       else

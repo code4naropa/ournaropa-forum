@@ -30,6 +30,9 @@ module OurnaropaForum
       @reply = Reply.new(reply_params)
       @reply.conversation = @conversation
       @reply.author = @user
+      
+      # prevent double posting
+      redirect_to conversation_path(Reply.where(:author_id => @reply.author.id).recent.where(:body => @reply.body).take.conversation) and return unless @reply.is_not_a_double_post?
 
       if @reply.save
         
