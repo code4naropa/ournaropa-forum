@@ -7,7 +7,9 @@ PATH
       jquery-turbolinks
       material_icons
       materialize-sass
+      nokogiri
       paperclip (~> 5.0.0.beta1)
+      premailer-rails
       rails (~> 4.2.6)
       sass-rails
       turbolinks
@@ -236,12 +238,10 @@ DEPENDENCIES
   launchy
   material_icons
   materialize-sass
-  nokogiri
   ournaropa_forum!
   paperclip
   pg
   poltergeist
-  premailer-rails
   pry-rails
   rspec-rails
   sass-rails

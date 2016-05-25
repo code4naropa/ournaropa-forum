@@ -1,3 +1,56 @@
+@import "init";
+
+// fix for apple mail
+@media only screen and (min-width: 601px) {
+  .content {width: 600px !important;}
+  .col425 {width: 425px !important;}
+  .col380 {width: 380px !important;}
+}
+
+// remove spacing on body
 body {
-  //background-color: blue !important;
+  margin: 0px !important;
+}
+
+// General
+.no-padding-bottom {
+  padding-bottom: 0px !important;
+}
+
+// sections
+.header {
+  padding: 40px 30px 20px 30px;
+  color: #ffffff;
+}
+
+.innerpadding {padding: 30px 30px 30px 30px;}
+.borderbottom {border-bottom: 1px solid #f2eeed;}
+
+.footer {padding: 20px 30px 20px 30px;}
+.footercopy {font-family: sans-serif; font-size: 12px; color: #ffffff;}
+.footercopy a {color: #ffffff; text-decoration: underline;}
+
+// Text styles
+.subhead {font-size: 15px; font-family: sans-serif; letter-spacing: 10px;}
+.h1, .h2, h2, .h3, .bodycopy {font-family: sans-serif;}
+.h1 {font-size: 33px; line-height: 38px; font-weight: bold;}
+h2 {padding: 0 0 15px 0; font-size: 24px; line-height: 28px; font-weight: bold; margin: 0px;}
+.h3 {padding: 0 0 15px 0; font-size: 14px; line-height: 20px; font-weight: bold; margin: 0px;}
+.bodycopy {font-size: 16px; line-height: 22px;}
+
+.fine_print, .fine_print > a {
+  
+  font-size: 12px;
+  color: $faded_color;
+}
+
+// Buttons
+.button {text-align: center; font-size: 18px; font-family: sans-serif; font-weight: bold; padding: 0 30px 0 30px;}
+.button a {color: #ffffff; text-decoration: none;}
+
+// make whole button clickable on mobile
+@media only screen and (max-width: 600px), screen and (max-device-width: 600px) {
+  body[yahoo] .buttonwrapper {background-color: transparent!important;}
+  body[yahoo] .button a {background-color: $primary_color; padding: 15px 15px 13px!important; display: block!important;}
+  body[yahoo] .button {padding: 0px !important;}
 }

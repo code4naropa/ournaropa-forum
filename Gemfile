@@ -18,9 +18,6 @@ gem 'materialize-sass'
 gem 'material_icons'
 gem 'bcrypt'
 
-gem 'premailer-rails'
-gem 'nokogiri'
-
 group :development, :test do
   gem 'jquery-rails'
   # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

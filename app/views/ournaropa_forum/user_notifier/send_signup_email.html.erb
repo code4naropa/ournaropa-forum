@@ -1,10 +1,63 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-    <h1>Welcome to OurNaropa, <%= @user.name %>!</h1>
-    <p>Click here to set your password: <a href="<%= new_password_after_reset_url(@user.id, @user.reset_token) %>"><%= new_password_after_reset_url(@user.id, @user.reset_token) %></a></p>
-  </body>
-</html>
+<tr>
+  <td class="innerpadding no-padding-bottom" style="padding-bottom: 0px;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+          <h2 class="no-padding-bottom">Welcome to OurNaropa, <%= @user.name %>!</h2>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td class="innerpadding borderbottom">
+    <table width="115" align="left" border="0" cellpadding="0" cellspacing="0">  
+      <tr>
+        <td height="115" style="padding: 0 20px 20px 0;">
+          <%= image_tag "ournaropa_forum/icon_key.png", :alt => "key icon", :width => "115", :height => "115", :border => "0" %>
+          <!--<img src="images/article1.png" width="115" height="115" border="0" alt="" />-->
+        </td>
+      </tr>
+    </table>
+    <!--[if (gte mso 9)|(IE)]>
+      <table width="380" align="left" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td>
+    <![endif]-->
+    <table class="col380" align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 380px;">  
+      <tr>
+        <td>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="bodycopy">
+                We are so glad you are here. It's time to set your password. Then you'll be all set to log in and dive into the conversations right away.
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 20px 0 0 0;">
+                <table class="buttonwrapper" bgcolor="<%= @primary_color %>" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td class="button" height="45">
+                      <%= link_to "Set Password", new_password_after_reset_url(@user.id, @user.reset_token) %>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 5px 0 0 0;" class="fine_print">
+                (or click here: <%= link_to new_password_after_reset_url(@user.id, @user.reset_token) do %><font color="<%= @faded_color %>"><%= new_password_after_reset_url(@user.id, @user.reset_token) %></font><% end %>)
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!--[if (gte mso 9)|(IE)]>
+          </td>
+        </tr>
+    </table>
+    <![endif]-->
+  </td>
+</tr>

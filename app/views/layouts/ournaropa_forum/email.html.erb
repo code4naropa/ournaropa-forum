@@ -1,23 +1,87 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      <title>A Simple Responsive HTML Email</title>
-      <%= stylesheet_link_tag 'ournaropa_forum/email', media: 'all', 'data-turbolinks-track' => true %>
-    </head>
-    <body yahoo bgcolor="#f6f8f1">
-        <table width="100%" bgcolor="#f6f8f1" border="0" cellpadding="0" cellspacing="0">
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <title>A Simple Responsive HTML Email</title>
+    <%= stylesheet_link_tag 'ournaropa_forum/email', media: 'all', 'data-turbolinks-track' => true %>
+  </head>
+  <body yahoo bgcolor="#f6f8f1">
+    <table width="100%" bgcolor="#f6f8f1" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td>
+          <!--[if (gte mso 9)|(IE)]>
+          <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
             <tr>
-                <td>
-                    <table class="content" align="center" cellpadding="0" cellspacing="0" border="0">
+              <td>
+                <![endif]-->
+                <table class="content" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" >
+                  <tr>
+                    <td class="header" bgcolor="<%= @primary_color %>">
+                      <table width="70" align="left" border="0" cellpadding="0" cellspacing="0">
                         <tr>
-                            <td>
-                                <%= yield %>
-                            </td>
+                          <td height="70" style="padding: 0 20px 20px 0;">
+                            <img src="images/icon.gif" width="70" height="70" border="0" alt="" / >
+                          </td>
                         </tr>
-                    </table>
-                </td>
+                      </table>
+                      <!--[if mso]>
+                         </td><td>
+                      <![endif]-->
+                      <!--[if (gte mso 9)|(IE)]>
+                      <table width="425" align="left" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                          <td>
+                          <![endif]-->
+                            <table class="col425" align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 425px;">
+                              <tr>
+                                <td height="70">
+                                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                      <td class="subhead" style="padding: 0 0 0 3px;">
+                                        FORUM
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="h1" style="padding: 5px 0 0 0;">
+                                        OurNaropa
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </td>
+                              </tr>
+                            </table>
+                          <!--[if (gte mso 9)|(IE)]>
+                          </td>
+                        </tr>
+                      </table>
+                      <![endif]-->
+                    </td>
+                  </tr>
+                  
+                  <%= yield %>
+                  
+                  
+                  <tr>
+                    <td class="footer" bgcolor="<%= @faded_color %>">
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td align="left" class="footercopy">
+                            <span class="h3">OurNaropa</span><br/>
+                            <%= @footer.html_safe %>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                </tr>
+                  
+                </table>
+                <!--[if (gte mso 9)|(IE)]>
+              </td>
             </tr>
-        </table>
-    </body>
+          </table>
+          <![endif]-->
+        </td>
+      </tr>
+    </table>
+  </body>
 </html>
