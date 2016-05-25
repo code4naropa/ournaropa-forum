@@ -4,6 +4,8 @@ module OurnaropaForum
     add_template_helper(ApplicationHelper)
     include ApplicationHelper
     
+    layout '/ournaropa_forum/email'
+    
     default :from => "OurNaropa <info@ournaropa.org>"
     
     # send a signup email to the user, pass in the user object that   contains the user's email address
