@@ -25,7 +25,7 @@ module OurnaropaForum
     
     # Only allow a trusted parameter "white list" through.
     def user_info_params
-      params.require(:user_info).permit(:first_name, :last_name, :hometown, :major, :age, :description, :show_email, :avatar)
+      params.require(:user_info).permit(:first_name, :last_name, :hometown, :major, :age, :description, :share_email, :avatar)
     end
     
   end

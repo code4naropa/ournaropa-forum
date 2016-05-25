@@ -84,7 +84,7 @@ feature 'personal info' do
     visit root_path
     click_link("Hi, " + @user.name + "!", :match => :first)
     expect(page).to have_current_path(profile_path)
-    expect(page).to have_content(@user.email)
+    expect(page.find("#user_info_email").value).to eq(@user.email)
     
     # validate that currently user is not sharing email address
     expect(page).to have_unchecked_field("is_sharing_email")

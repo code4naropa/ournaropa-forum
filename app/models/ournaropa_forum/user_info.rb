@@ -3,6 +3,7 @@ module OurnaropaForum
     belongs_to :user
         
     attr_accessor :first_name, :last_name
+    attr_accessor :email
     
     validates_presence_of :first_name, :last_name, on: :update
     
@@ -16,6 +17,7 @@ module OurnaropaForum
       if self.user.present?
         self.first_name = self.user.first_name unless self.first_name.present?
         self.last_name = self.user.last_name unless self.last_name.present?
+        self.email = self.user.email unless self.email.present?
       end
     end
   

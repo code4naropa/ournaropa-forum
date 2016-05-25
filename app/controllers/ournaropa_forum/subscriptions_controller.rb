@@ -3,8 +3,13 @@ require_dependency "ournaropa_forum/application_controller"
 module OurnaropaForum
   class SubscriptionsController < ApplicationController
     before_action :authorize
-    before_filter :set_conversation
+    before_filter :set_conversation, only: {:subscribe, :unsubscribe}
     before_action :set_user
+    
+    # show all subscriptions of user
+    def index
+      
+    end
     
     def subscribe
       

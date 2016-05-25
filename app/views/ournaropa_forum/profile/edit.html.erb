@@ -1,20 +1,36 @@
 <div class="container">
+  
+  <div class="row">
+    <div class="col s12">
+
+      <h1>Settings</h1>
+
+      <div class="row">
+        <div class="col s12">
+          <%= link_to new_password_path, class: "btn waves-effect waves-light" do %>
+            <i class="material-icons left">vpn_key</i> Change Password
+          <% end %>
+        </div>    
+      </div>
+      
+      <div class="row">
+        <div class="col s12">
+          <%= link_to manage_email_notifications_path, class: "btn waves-effect waves-light" do %>
+            <i class="material-icons left">notifications</i> Manage Notifications
+          <% end %>
+        </div>
+      </div>
+      
+    </div>
+  </div>  
+  
+  
   <div class="row">
     <div class="col s12">
       <h1>Your Profile</h1>  
     </div>
   </div>
-  
-  <div class="row">
-    <div class="col s12">
-      <%= link_to new_password_path, class: "btn waves-effect waves-light" do %>
-        <i class="material-icons left">vpn_key</i> Change Password
-      <% end %>
-    </div>
-  </div>
-  
-  <div class="section"></div>
-  
+    
   <div class="row">
   
   <%= form_for(@user.info, url: update_profile_path, html: { multipart: true }, class: "col s12") do |f| %>
@@ -30,10 +46,12 @@
     <% end %>
         
     <div class="row">
-      <div class="col s12 m6 l4">
+      
+      
+      <div class="col s12 m6 l4 offset-l1">
         
         <div class="row">
-          <div class="col s12">
+          <div class="col s12 center-align">
             <%= image_tag @user.info.avatar.url(:large), class: "responsive-img circle" %>
           </div>
         </div>
@@ -52,23 +70,50 @@
           </div>
         </div>
           
-      </div>
+      </div>      
       
-      <div class="col s12 m6 l8">
-
+      <div class="col s12 m6 l6 offset-l1">
         <div class="row">
-          <div class="input-field col s12 l6">
+          <div class="input-field col s12">
             <i class="material-icons prefix">face</i>
             <%= f.text_field :first_name %>
             <%= f.label :first_name %>
           </div>
-          
-          <div class="input-field col s12 l6">
+        </div>
+        
+        <div class="row">
+          <div class="input-field col s12">
             <i class="material-icons prefix">star</i>
             <%= f.text_field :last_name %>
             <%= f.label :last_name %>
           </div>
         </div>
+          
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">email</i>
+            <%= f.text_field :email, :disabled => "disabled" %>
+            <%= f.label :email %>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">email</i>
+            <%= f.check_box :share_email %>
+            <%= f.label :share_email %>
+          </div>
+        </div>
+        
+        
+      </div>
+      
+    </div>
+      
+    
+    <div class="row">
+      
+      <div class="col s12 m12 l12">
         
         <div class="row">
           <div class="input-field col s12">
@@ -100,10 +145,9 @@
             <%= f.text_area :description, class: "materialize-textarea" %>
             <%= f.label :description, "About Me" %>
           </div>
-        </div>
-        
-    </div>
-    
+        </div> 
+      </div>
+    </div>    
         
     <div class="row">
       <div class="col s12 right-align">
