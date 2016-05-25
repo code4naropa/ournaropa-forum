@@ -15,13 +15,51 @@
     </div>
     <h4 class="center-align"><%= author.first_name + " " + author.last_name %></h4>
     <h5 class="center-align grey-text"><%= author.role %></h5>
+    
+    <% #show email address %>
+    <% if author.info.share_email %>
+      <p class="center-align">
+        <i class="material-icons">email</i> <%= author.email %>
+      </p>
+    <% end %>
+    
+    <% # show other info %>
     <p class="center-align">
-      <i class="material-icons">location_city</i> <%= author.info.hometown %> &middot; <i class="material-icons">school</i> <%= author.info.major %>  &middot;  <i class="material-icons">today</i> Age: <%= author.info.age %><br/>
+      
+      <% # show location %>
+      <% if author.info.hometown.present? %>
+        <i class="material-icons">location_city</i> <%= author.info.hometown %>
+      
+        <% if author.info.major.present? or author.info.age.present? %>
+          <span class="hide-on-med-and-up"><br/></span><span class="hide-on-small-only"> &middot; </span>
+        <% end %>
+      
+      <% end %>
+      
+      <% # show school %>
+      <% if author.info.major.present? %>
+        <i class="material-icons">school</i> <%= author.info.major %>
+      
+        <% if author.info.age.present? %>
+          <span class="hide-on-med-and-up"><br/></span><span class="hide-on-small-only"> &middot; </span>
+        <% end %>
+      
+      <% end %>
+      
+      <% # show age %>
+      <% if author.info.age.present? %>
+        <i class="material-icons">cake</i> <%= author.info.age %>
+      <% end %>
+      
     </p>
-    <p class="center-align"><strong>About Me:</strong><br/><%= parse_text author.info.description %></p>
+    
+    <% # show about me %>
+    <% if author.info.description.present? %>
+      <p class="center-align"><strong>About Me:</strong><br/><%= parse_text author.info.description %></p>
+    <% end %>
+    
   </div>
   <div class="modal-footer">
     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
   </div>
 </div>
-<!-- purple white-text and grey lighten-2 -->

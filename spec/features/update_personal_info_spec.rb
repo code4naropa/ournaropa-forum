@@ -87,29 +87,27 @@ feature 'personal info' do
     expect(page.find("#user_info_email").value).to eq(@user.email)
     
     # validate that currently user is not sharing email address
-    expect(page).to have_unchecked_field("is_sharing_email")
-    expect(@user.is_sharing_email).to be false
+    expect(page).to have_unchecked_field("user_info_share_email")
+    expect(@user.info.share_email).to be false
     
     # check the box and save
-    check("is_sharing_email")
+    check("user_info_share_email")
     click_button "Save"
     
     # verify that is now shared
-    expect(page).to have_checked_field("is_sharing_email")
-    expect(@user.is_sharing_email).to be true
+    expect(page).to have_checked_field("user_info_share_email")
+    @user.info.reload
+    expect(@user.info.share_email).to be true
     
     # uncheck box and save
-    check("is_sharing_email")
+    uncheck("user_info_share_email")
     click_button "Save"
     
     # validate that currently user is not sharing email address
-    expect(page).to have_unchecked_field("is_sharing_email")
-    expect(@user.is_sharing_email).to be false    
+    expect(page).to have_unchecked_field("user_info_share_email")
+    @user.info.reload
+    expect(@user.info.share_email).to be false    
     
   end
-  
-#  scenario "unsubscribe from all notifications" do
-#    pending
-#  end  
   
 end
