@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20160525124238) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.boolean  "share_email",         default: false, null: false
   end
 
   add_index "ournaropa_forum_user_infos", ["user_id"], name: "index_ournaropa_forum_user_infos_on_user_id", using: :btree
@@ -87,7 +88,6 @@ ActiveRecord::Schema.define(version: 20160525124238) do
     t.boolean  "is_superuser",  default: false, null: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.boolean  "share_email",   default: false, null: false
   end
 
   add_index "ournaropa_forum_users", ["email"], name: "index_ournaropa_forum_users_on_email", unique: true, using: :btree
