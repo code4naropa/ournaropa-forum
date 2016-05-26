@@ -18,19 +18,19 @@ feature 'personal info' do
   scenario 'user uploads PNG image' do
     attach_file('user_info_avatar', "spec/files/sample.png")
     click_button 'Save'
-    expect(page).to have_css("img[src*='sample.png']")
+    expect(page).to have_css("img[src*='avatar.jpg']")
   end
   
   scenario 'user uploads JPG image' do
     attach_file('user_info_avatar', "spec/files/sample.jpeg")
     click_button 'Save'
-    expect(page).to have_css("img[src*='sample.jpeg']")
+    expect(page).to have_css("img[src*='avatar.jpg']")
   end 
   
   scenario 'user uploads animated GIF image' do
     attach_file('user_info_avatar', "spec/files/sample.gif")
     click_button 'Save'
-    expect(page).to have_css("img[src*='sample.gif']")
+    expect(page).to have_css("img[src*='avatar.jpg']")
   end
   
   scenario 'user uploads illegal file format' do
@@ -50,14 +50,14 @@ feature 'personal info' do
     # attach profile picture
     attach_file('user_info_avatar', "spec/files/sample.png")
     click_button 'Save'
-    expect(page).to have_css("img[src*='sample.png']")
+    expect(page).to have_css("img[src*='avatar.jpg']")
     
     # user does not change profile picture, but changes some other fields
     fill_in "Hometown", with: Faker::Lorem.words(3).join(" ")
     click_button 'Save'
     
     # expect image to still exist
-    expect(page).to have_css("img[src*='sample.png']")
+    expect(page).to have_css("img[src*='avatar.jpg']")
     
   end
   
