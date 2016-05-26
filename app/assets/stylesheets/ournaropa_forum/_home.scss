@@ -1,0 +1,58 @@
+@import "init";
+
+@import "materialize";
+
+#ournaropa_forum_home_welcome {
+  
+  .no-margin-bottom {
+    margin-bottom: 0px !important;
+  }
+  
+  .no-margin-top {
+    margin-top: 0px !important;
+  }
+  
+  #action-column {
+    //border-left: 1px solid gray;
+  }
+  
+  #preview-column {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center top;
+    
+    padding:0px;
+    
+    // darken image
+    #image-overlay {
+      background-color: rgba(0,0,0, .66);
+      color: white;
+      padding: 0px 15px;
+    }
+    
+    #content-wrapper {
+      @media #{$medium-and-down} {
+        padding: 1px; // prevents margin-top from creating weird white space
+      }
+      @media #{$large-and-up} {
+        padding: 50px 0px;
+      }
+      
+      margin: 0 auto;
+      max-width: 600px;
+  
+      // style image
+      img {
+        padding: 20px;
+      }
+    }
+  }
+  
+  @media #{$medium-and-down} {
+    #image-overlay {
+      height: auto !important;
+    }
+  }
+  
+  
+}

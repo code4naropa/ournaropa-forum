@@ -1,43 +1,89 @@
-<div id="ournaropa_forum_home_welcome" class="container">
-  <h1 class="center-align">Welcome!</h1>
+<div id="ournaropa_forum_home_welcome" class="container-fluid">
   
-  <div class="row">
-    <div class="col s12">
-      <p>This is a place for incoming Naropa students to get to know each other and to interact with current students.<br/><br/>Right now we are in a beta testing phase and access is limited to a few select individuals. If you would like to be involved and help us test, please contact Finn at fwoelm@students.naropa.edu.<br/><br/>This forum is made by students for students. That is a wonderful thing, but please note that this website is <strong>not</strong> an official Naropa website. The official Naropa website can be found at <a href="http://www.naropa.edu" target="_blank" class="link">naropa.edu</a>.</p>
-    </div>
-  </div>
-  
-  <div class="row">
-    <div class="col s12 m6 center-align">
-      <h4>New? Sign up!</h4>
-      <p>Sign up in three simple steps:</p>
-      <ol>
-        <li>Click the button below</li>
-        <li>Enter your email address</li>
-        <li>Set a new password</li>
-      </ol>
-      <%= link_to signup_path, class: "btn-large waves-effect waves-light" do %>
-        <i class="material-icons left">check_box</i> Sign Up
-      <% end %>
-    </div>
+  <div class="row no-margin-bottom">
     
-    <div class="row hide-on-med-and-up">
-      <div class="col s12">
-        <div class="section"></div>
-        <div class="divider"></div>
+    <%# left column %>
+    <div id="preview-column" class="col s12 l8" style="background-image: url(<%= image_url("ournaropa_forum/preview.png") %>);">
+    
+      <div id="image-overlay">
+        <div id="content-wrapper" class="center-align">
+          
+          <%= image_tag "ournaropa_forum/icon-transparent.png", width: 250 %>
+          
+         <h1 class="center-align no-margin-top">OurNaropa</h1>
+
+          <div class="row">
+            <div class="col s12">
+              <p class="flow-text center-align">This is a place for you to meet your peers.<br/></br/>See who else is coming to Naropa. Ask questions of current students. Engage in conversations. Make friends. Build community.</p>
+            </div>
+          </div>
+        </div>
       </div>
+        
+      
     </div>
+  
+    <%# right column %>
+    <div id="action-column" class="col s12 l4">
     
-    <div class="col s12 m6 center-align">
-      <h4>Log In</h4>
-      <%= link_to login_path, class: "btn-large waves-effect waves-light" do %>
-        <i class="material-icons left">vpn_key</i> Log In
-      <% end %>
-      <br/><br/>
-      <%= render partial: '/ournaropa_forum/passwords/forgot_password_button' %>
-    </div>
+      <div class="row">
+        <div class="col s12  center-align">
+          <h4>Sign up</h4>
+          <%= link_to signup_path, class: "btn-large waves-effect waves-light" do %>
+            <i class="material-icons left">check_box</i> Sign Up
+          <% end %>
+          <p>Sign up is by invitation only.</p>
+          <p>
+          Would you like to join? Please email Finn at fwoelm@students.naropa.edu.
+          </p>
+        
+        </div>
+      </div>
+
+        <div class="row">
+          <div class="col s12 l12">
+            <div class="section"></div>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+      <div class="row">
+        <div class="col s12 center-align">
+          <h4>Log In</h4>
+          <%= link_to login_path, class: "btn-large waves-effect waves-light" do %>
+            <i class="material-icons left">vpn_key</i> Log In
+          <% end %>
+          <br/><br/>
+          <%= render partial: '/ournaropa_forum/passwords/forgot_password_button' %>
+        </div>
+
+      </div>      
+      
+    </div>  
     
   </div>
   
 
+
 </div>
+
+<script type="text/javascript">
+  
+  // sets the height of the preview pane
+  function set_overlay_height() {
+    navbar_height = $("nav").height();
+    browser_height = window.innerHeight - navbar_height;
+    log_in_pane_height = $("#action-column").height();
+    content_height = $("#content-wrapper").height() - navbar_height;
+    
+    $("#image-overlay").height(Math.max(browser_height, log_in_pane_height, content_height));
+  }
+  
+  // full-height image overlay
+  set_overlay_height();
+  //$("#image-overlay").style("min-height", (-$("nav").height());
+  
+  $( window ).resize(function() {
+    set_overlay_height();
+  });
+</script>

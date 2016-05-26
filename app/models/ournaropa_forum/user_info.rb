@@ -8,7 +8,7 @@ module OurnaropaForum
     validates_presence_of :first_name, :last_name, on: :update
     
     # PAPERCLIP
-    has_attached_file :avatar, styles: { large: "300x300#", standard: "80x80#" }, default_url: "/images/:style/missing.png"
+    has_attached_file :avatar, styles: { large: "300x300#", standard: "80x80#" }, default_url: "/images/:style/contemplation.png"
     validates_with AttachmentContentTypeValidator, attributes: :avatar, content_type: /\Aimage\/.*\Z/
     validates_with AttachmentSizeValidator, attributes: :avatar, less_than: 2.megabytes
     
