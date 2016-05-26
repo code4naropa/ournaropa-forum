@@ -16,7 +16,7 @@ link_html = link_to(unsubscribe_url(@reply.conversation.id)){'<font color="#ffff
       </tr>
       <tr class="bodycopy">
         <td>
-          there has been a new reply in <%= link_to conversation_url(@reply.conversation.id), class: "link" do %><font color="<%= @highlight_color %>"><b><%= @reply.conversation.title %></b></font><% end %>:
+          there has been a new reply in <%= link_to conversation_url(@reply.conversation.slug), class: "link" do %><font color="<%= @highlight_color %>"><b><%= @reply.conversation.title %></b></font><% end %>:
         </td>
       </tr>
     </table>
@@ -72,7 +72,7 @@ link_html = link_to(unsubscribe_url(@reply.conversation.id)){'<font color="#ffff
           <table class="buttonwrapper" bgcolor="<%= @primary_color %>" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td class="button" height="45">
-                <%= link_to "View Reply", conversation_url(@reply.conversation.id) %>
+                <%= link_to "View Reply", conversation_url(@reply.conversation.slug) %>
               </td>
             </tr>
           </table>
@@ -80,7 +80,7 @@ link_html = link_to(unsubscribe_url(@reply.conversation.id)){'<font color="#ffff
       </tr>
       <tr>
         <td style="padding: 5px 0 0 0;" class="fine_print">
-          (or click here: <%= link_to conversation_url(@reply.conversation.id) do %><font color="<%= @faded_color %>"><%= conversation_url(@reply.conversation.id) %></font><% end %>)
+          (or click here: <%= link_to conversation_url(@reply.conversation.slug) do %><font color="<%= @faded_color %>"><%= conversation_url(@reply.conversation.slug) %></font><% end %>)
         </td>
       </tr>
     </table>

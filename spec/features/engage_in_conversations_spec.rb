@@ -44,7 +44,7 @@ feature 'Conversations' do
     expect(@user.conversations.count).to eq(1)
     
     # should be redirected to the actual conversation
-    expect(page).to have_current_path(conversation_path(@conversation.id)) 
+    expect(page).to have_current_path(conversation_path(@conversation.slug)) 
     
   end
   
@@ -68,7 +68,7 @@ feature 'Conversations' do
     expect(@conversation.replies.count).to eq(1)
     
     # should be redirected to the actual conversation
-    expect(page).to have_current_path(conversation_path(@conversation.id)) 
+    expect(page).to have_current_path(conversation_path(@conversation.slug)) 
     
   end
 

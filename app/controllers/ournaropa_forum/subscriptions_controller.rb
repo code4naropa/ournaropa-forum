@@ -45,7 +45,7 @@ module OurnaropaForum
     private
     
     def set_conversation
-      @conversation = Conversation.find(params[:conversation_id])
+      @conversation = Conversation.friendly.find(params[:conversation_id])
     end
     
     def set_user
