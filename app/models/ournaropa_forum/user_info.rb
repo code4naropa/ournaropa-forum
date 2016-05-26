@@ -8,7 +8,13 @@ module OurnaropaForum
     validates_presence_of :first_name, :last_name, on: :update
     
     # PAPERCLIP
-    has_attached_file :avatar, styles: { large: "300x300#", standard: "80x80#" }, default_url: "/images/:style/contemplation.png"
+    has_attached_file :avatar, styles: { large: ["300x300#", :jpg], standard: ["80x80#", :jpg] },
+      default_url: "/ournaropa_forum/:style/contemplation.png",
+      path: ":rails_root/public/system/ournaropa_forum/user/:user_id/:attachment/:style/avatar.jpg",
+      url: "/system/ournaropa_forum/user/:user_id/:attachment/:style/avatar.jpg"
+    Paperclip.interpolates :user_id do |attachment, style|
+      attachment.instance.user.id
+    end
     validates_with AttachmentContentTypeValidator, attributes: :avatar, content_type: /\Aimage\/.*\Z/
     validates_with AttachmentSizeValidator, attributes: :avatar, less_than: 2.megabytes
     

@@ -1,4 +1,5 @@
 module OurnaropaForum
+  
   class UserNotifier < ActionMailer::Base
         
     include Roadie::Rails::Automatic
@@ -9,18 +10,12 @@ module OurnaropaForum
     layout '/ournaropa_forum/email'
     
     default :from => "OurNaropa <info@ournaropa.org>"
-    
-    def init_colors
-      @primary_color = "#785a86"
-      @highlight_color = "#E18416"
-      @faded_color = "#616161"
-    end
-    
+        
     # invitation email
     def send_invitation_email(new_user, invited_by_user)
       
       # initialize vars for email
-      init_colors
+      init_vars
       @new_user = new_user
       @invited_by_user = invited_by_user
       
@@ -36,7 +31,7 @@ module OurnaropaForum
     def send_signup_email(user)
       
       # initialize vars for email
-      init_colors
+      init_vars
       @user = user
       
       # set footer
@@ -49,7 +44,7 @@ module OurnaropaForum
     def send_password_reset_email(user)
       
       # initialize colors for email
-      init_colors
+      init_vars
       
       @user = user
       
@@ -63,7 +58,7 @@ module OurnaropaForum
     def send_new_reply_email(user, reply)
       
       # initialize colors for email
-      init_colors
+      init_vars
       
       @user = user
       @reply = reply
@@ -79,7 +74,7 @@ module OurnaropaForum
     def send_inactivity_email(user, conversation_ids)
       
       # initialize colors for email
-      init_colors     
+      init_vars     
       @user = user
       @conversations = []
       
@@ -97,8 +92,18 @@ module OurnaropaForum
     
     private
 
+    def init_vars
+      @primary_color = "#785a86"
+      @highlight_color = "#E18416"
+      @faded_color = "#616161"
+      
+      @image_host = ENV["OURNAROPA_ASSET_HOST"] + "/public/ournaropa_forum/"
+    end
+    
     def roadie_options
+
       super unless Rails.env.test?
+      
     end
     
   end

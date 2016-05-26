@@ -29,7 +29,7 @@ link_html = link_to(disable_inactivity_email_url){'<font color="#ffffff">Click h
     <table width="115" align="left" border="0" cellpadding="0" cellspacing="0">  
       <tr>
         <td align="center" height="115" style="padding: 0 20px 10px 0;">
-          <%= image_tag conversation.author.info.avatar.url(:large), :class => "circle", :alt => "#{conversation.author.first_name}'s Avatar", :width => "115", :height => "115", :border => "0" %>
+          <%= image_tag ActionMailer::Base.default_url_options[:protocol] + "://" + ActionMailer::Base.default_url_options[:host] + "/public" + conversation.author.info.avatar.url(:large), :class => "circle", :alt => "#{conversation.author.first_name}'s Avatar", :width => "115", :height => "115", :border => "0" %>
           <!--<img src="images/article1.png" width="115" height="115" border="0" alt="" />-->
         </td>
       </tr>
