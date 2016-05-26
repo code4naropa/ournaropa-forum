@@ -3,6 +3,7 @@ PATH
   specs:
     ournaropa_forum (0.1.3)
       bcrypt
+      friendly_id (~> 5.1.0)
       jquery-rails
       jquery-turbolinks
       material_icons

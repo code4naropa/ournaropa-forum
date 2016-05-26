@@ -24,7 +24,11 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'factory_girl_rails'  
   
+  # For CSS to inline in emails
   s.add_dependency 'roadie-rails', '~> 1.0'
+  
+  # For turning conversation titles into slugs
+  s.add_dependency 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
     
   s.add_dependency 'jquery-rails'
   s.add_dependency 'turbolinks'
