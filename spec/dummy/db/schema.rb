@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160526075505) do
+ActiveRecord::Schema.define(version: 20160526125532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,15 +94,18 @@ ActiveRecord::Schema.define(version: 20160526075505) do
   add_index "ournaropa_forum_user_infos", ["user_id"], name: "index_ournaropa_forum_user_infos_on_user_id", using: :btree
 
   create_table "ournaropa_forum_users", id: :uuid, default: "uuid_generate_v4()", force: :cascade do |t|
-    t.string   "email",                         null: false
+    t.string   "email",                                         null: false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "role"
-    t.string   "password_hash",                 null: false
+    t.string   "password_hash",                                 null: false
     t.string   "reset_token"
-    t.boolean  "is_superuser",  default: false, null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.boolean  "is_superuser",                  default: false, null: false
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.boolean  "is_receiving_inactivity_email", default: true,  null: false
+    t.datetime "inactivity_email_sent_at"
+    t.datetime "seen_at"
   end
 
   add_index "ournaropa_forum_users", ["email"], name: "index_ournaropa_forum_users_on_email", unique: true, using: :btree

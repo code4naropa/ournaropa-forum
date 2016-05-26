@@ -84,6 +84,9 @@ RSpec.shared_context "shared functions", :a => :b do
   
   # creates a conversation
   def create_conversation
+    
+    conversations_count = @user.conversations.count
+    
     title = Faker::Lorem.words(3).join(" ")
     body = Faker::Lorem.sentences(3).join(" ")
     
@@ -99,7 +102,7 @@ RSpec.shared_context "shared functions", :a => :b do
     
     @user.conversations.reload
     
-    expect(@user.conversations.count).to eq(1)
+    expect(@user.conversations.count).to eq(conversations_count+1)
     
     @conversation = OurnaropaForum::Conversation.first
     expect(@conversation.author).to be_present

@@ -17,9 +17,9 @@ feature 'managing email notifications' do
     expect(page).to have_current_path(profile_path)
     
     # visit subscription management
-    click_link("Manage Email Notifications")
+    click_link("Manage Notifications")
     expect(page).to have_current_path(manage_email_notifications_path)
-    expect(page).to have_content("Manage Email Notifications")
+    expect(page).to have_content("Email Notifications")
   end
     
   scenario "user turns off an email notification" do
@@ -33,13 +33,12 @@ feature 'managing email notifications' do
     expect(page).to have_current_path(profile_path)
     
     # visit subscription management
-    click_link("Manage Email Notifications")
+    click_link("Manage Notifications")
     expect(page).to have_current_path(manage_email_notifications_path)
-    expect(page).to have_content("Manage Email Notifications")
+    expect(page).to have_content("Email Notifications")
     
     # conversation should be shown
     expect(page).to have_content(@conversation.title)
-    expect(page).to have_content(@conversation.updated_at)
     
     # delete email notification
     click_link "Disable"
@@ -48,7 +47,7 @@ feature 'managing email notifications' do
     expect(page).not_to have_content(@conversation.title)
     
     # verify success [back-end]
-    expect(@user.is_subscribed_to?(@conversation.id)).to be false
+    expect(@user.is_subscribed_to?(@conversation)).to be false
     
   end
   
@@ -65,29 +64,30 @@ feature 'managing email notifications' do
     expect(page).to have_current_path(profile_path)
     
     # visit subscription management
-    click_link("Manage Email Notifications")
+    click_link("Manage Notifications")
     expect(page).to have_current_path(manage_email_notifications_path)
-    expect(page).to have_content("Manage Email Notifications")
+    expect(page).to have_content("Email Notifications")
     
     # conversations should be shown and user should be subscribed
-    expect(page.all("tr").count).to eq(5)
+    expect(page.all("tr").count).to eq(5+2)
     expect(@user.subscriptions.count).to eq(5)    
     
     # delete all email notifications
-    click_link "Disable All"
+    click_link "Disable all"
     
     # verify success [front-end]
-    expect(page).to have_content("You are currently not receiving email notifications about any conversations")
+    expect(page).to have_content("You are currently not receiving email notifications about new replies in conversations")
     
     # verify success [back-end]
     expect(@user.subscriptions.count).to eq(0)    
+    expect(OurnaropaForum::Conversation.count).to eq(5)
     
   end
   
   scenario "user turns off and on not-checked-in-reminder", :js => true do
 
     # validate that user is subscribed
-    expect(@user.is_receiving_reminders).to be true
+    expect(@user.is_receiving_inactivity_email).to be true
     
     # visit profile page
     visit root_path
@@ -95,23 +95,25 @@ feature 'managing email notifications' do
     expect(page).to have_current_path(profile_path)
     
     # visit subscription management
-    click_link("Manage Email Notifications")
+    click_link("Manage Notifications")
     expect(page).to have_current_path(manage_email_notifications_path)
-    expect(page).to have_content("Manage Email Notifications")
+    expect(page).to have_content("Email Notifications")
     
     # turn off
     page.find("#subscribe-switch").click
     
     # validate
-    expect(page).to have_content("You are currently not receiving email reminders when you have been gone for seven days.")
-    expect(@user.is_receiving_reminders).to be false
+    expect(page).to have_content("You will not receive an email with the latest conversations after 7 days of inactivity.")
+    @user.reload
+    expect(@user.is_receiving_inactivity_email).to be false
     
     # turn on
     page.find("#subscribe-switch").click
     
     # validate
-    expect(page).to have_content("You are currently receiving email reminders when you have been gone for seven days.")
-    expect(@user.is_receiving_reminders).to be true    
+    expect(page).to have_content("You will receive an email with the latest conversations after 7 days of inactivity.")
+    @user.reload
+    expect(@user.is_receiving_inactivity_email).to be true    
     
   end
   

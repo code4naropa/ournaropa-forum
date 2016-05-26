@@ -4,7 +4,13 @@ OurnaropaForum::Engine.routes.draw do
   # Subscriptions Controller
   get 'conversation/:conversation_id/subscribe', to: 'subscriptions#subscribe', as: 'subscribe'
   get 'conversation/:conversation_id/unsubscribe', to: 'subscriptions#unsubscribe', as: 'unsubscribe'
+  
+  # Manage Notifications
   get 'manage-notifications', to: 'subscriptions#index', as: 'manage_email_notifications'
+  match 'manage-notifications/:conversation_id/unsubscribe', to: 'subscriptions#destroy', via: [:delete], as: 'disable_notification'
+  match 'manage-notifications/unsubscribe-all', to: 'subscriptions#destroy_all', via: [:delete], as: 'disable_all_notifications'
+  get 'manage-notifications/enable-inactivity-email', to: 'subscriptions#enable_inactivity_email', as: 'enable_inactivity_email'
+  get 'manage-notifications/disable-inactivity-email', to: 'subscriptions#disable_inactivity_email', as: 'disable_inactivity_email'
   
   # Passwords Controller
   get 'forgot-password', to: 'passwords#forgot', as: 'forgot_password'

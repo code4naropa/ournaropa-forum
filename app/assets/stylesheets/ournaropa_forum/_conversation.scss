@@ -51,24 +51,7 @@ div.custom-chip {
 }
 
 #ournaropa_forum_index, #ournaropa_forum_show, #ournaropa_forum_conversations_new {
-  
-  div.switch {
-    display:inline-block;
-    margin-left: 10px;
-  }
-  
-  #subscribe-switch-loader {
-    float: left;
-    position: relative;
-    left: -50px;
-    margin-right: -50px;
-    display: none;
-  }
-  
-  .subscription-help-text {
-    margin-top:0px;
-  }
-  
+    
   // add new reply: reduce whitespace
   .reply .input-field {
     margin-top: 0px;

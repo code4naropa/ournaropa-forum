@@ -1,0 +1,97 @@
+<div class="container">
+
+<h1>Email Notifications</h1>
+      
+<h4>General</h4>
+<div class="row">
+    <div class="col s12">
+      
+      <div id="subscribe-switch-loader" class="preloader-wrapper small active">
+        <div class="spinner-layer spinner-green-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+      
+      <i id="subscription-subscribed-icon" class="material-icons small left">notifications_active</i>
+      <i id="subscription-unsubscribed-icon" class="material-icons small left">notifications_off</i>
+
+        <strong>Inactivity Notifications: </strong>
+        <!-- Switch -->
+        <div class="switch">
+          <label>
+            Off
+            <%= check_box_tag :subscription, 'subscribe', @user.is_receiving_inactivity_email %>
+            <span id="subscribe-switch" class="lever"></span>
+            On
+          </label>
+        </div>
+      <p id="subscription-subscribed-help-text" class="grey-text text-darken-2 subscription-help-text">You will receive an email with the latest conversations after 7 days of inactivity.</p>
+      <p id="subscription-unsubscribed-help-text" class="grey-text text-darken-2 subscription-help-text">You will not receive an email with the latest conversations after 7 days of inactivity.</p>
+    </div>
+  </div>
+  
+<h4>Notifications about New Replies</h4>  
+  
+<% if @subscriptions.any? %>  
+<table>
+  <thead>
+    <tr>
+      <th>Conversation Title</th>
+      <th>Replies</th>
+      <th>Last Activity</th>
+      <th>Disable</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @subscriptions.each do |subscription| %>
+      <tr>
+        <td><%= link_to subscription.title, subscription, class: "link" %></td>
+        <td><%= subscription.replies.count %></td>
+        <td><%= time_ago_in_words subscription.updated_at %> ago</td>
+        <td><%= link_to 'Disable', disable_notification_path(subscription.slug), class: "link", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    
+    <tr class="grey lighten-3">
+      <td colspan="3"><b>Total # of conversations: <%= @subscriptions.count %></b></td>
+      <td><b><%= link_to 'Disable all', disable_all_notifications_path, class: "link", method: :delete, data: { confirm: "Are you sure you want to disable notifications for #{pluralize(@subscriptions.count, "conversation")}?" } %></b></td>
+    </tr>
+  </tbody>
+</table>
+  <% else %>
+  <p>You are currently not receiving email notifications about new replies in conversations.</p>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  
+  if($("#subscription").prop("checked")) {
+    $("#subscription-unsubscribed-help-text").hide(0);
+    $("#subscription-unsubscribed-icon").hide(0);
+  }
+  else {
+    $("#subscription-subscribed-help-text").hide(0);
+    $("#subscription-subscribed-icon").hide(0);
+  }
+  
+  $('#subscribe-switch').click(function(){    
+
+    $('#subscribe-switch-loader').show(200);
+    
+    if($("#subscription").prop("checked")) {
+      $.ajax({url: "<%= disable_inactivity_email_path %>", dataType: "script"}).done(function() {});
+    }
+    else {
+      $.ajax({url: "<%= enable_inactivity_email_path %>", dataType: "script"}).done(function() {});
+    }
+    
+  });
+  
+</script>

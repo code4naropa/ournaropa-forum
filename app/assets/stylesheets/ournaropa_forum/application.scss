@@ -94,6 +94,23 @@
     margin-top: 0px !important;
   }
 
+  div.switch {
+    display:inline-block;
+    margin-left: 10px;
+  }
+  
+  #subscribe-switch-loader {
+    float: left;
+    position: relative;
+    left: -50px;
+    margin-right: -50px;
+    display: none;
+  }
+  
+  .subscription-help-text {
+    margin-top:0px;
+  }  
+  
 }
 
 @import "conversation";
