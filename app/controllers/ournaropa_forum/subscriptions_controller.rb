@@ -37,9 +37,7 @@ module OurnaropaForum
           redirect_to(@conversation, notice: @notice) and return
           return          
         }
-        format.js {
-          render :subscribe
-        }
+        format.js
       end
     
     end

@@ -69,21 +69,27 @@ feature 'User Notifier' do
   end
     
   scenario 'user is notified after not checking in' do
-        
-    # register user and expect last_seen_at to be defined
-    register_user
-    expect(Time.now).to be < @user.last_seen_at + 1.minute
+            
+    # register user and expect seen_at to be defined
+    create_and_sign_in_user
+    
+    3.times do
+      create_conversation
+    end
+    
+    expect(Time.now).to be < @user.seen_at + 1.minute
        
     # clear emails
     ActionMailer::Base.deliveries = []    
     
-    30.times_with_index do |index|
-      
+    30.times do |index|
+          
       # update user last seen at: index * days ago
-      @user.update_attributes(:last_seen_at => Time.now - index * 1.day)
-      
+      @user.reload
+      @user.update_attributes(:seen_at => Time.now - index * 1.day, :inactivity_email_sent_at => (@user.inactivity_email_sent_at.nil? ? Time.now : @user.inactivity_email_sent_at) - 1.day)
+            
       # simulate hitting of API webhook
-      visit daily_tasks(ENV["OURNAROPA_FORUM_API_KEY"])
+      visit '/forum/tasks/send-inactivity-emails/'+ENV["WEBHOOK_KEY"]
       
     end
 
@@ -91,26 +97,52 @@ feature 'User Notifier' do
     expect(ActionMailer::Base.deliveries.count).to eq(4)    
     
   end
+  
+  scenario 'user is not notified after not checking in if there are no new conversations' do
+        
+    # register user and expect seen_at to be defined
+    register_user
+    expect(Time.now).to be < @user.seen_at + 1.minute
+       
+    # clear emails
+    ActionMailer::Base.deliveries = []    
+    
+    30.times do |index|
+      
+      # update user last seen at: index * days ago
+      @user.reload
+      @user.update_attributes(:seen_at => Time.now - index * 1.day, :inactivity_email_sent_at => (@user.inactivity_email_sent_at.nil? ? Time.now : @user.inactivity_email_sent_at) - 1.day)      
+      
+      # simulate hitting of API webhook
+      visit '/forum/tasks/send-inactivity-emails/'+ENV["WEBHOOK_KEY"]
+      
+    end
+
+    # expect four emails over the course of thirty days
+    expect(ActionMailer::Base.deliveries.count).to eq(0)    
+    
+  end
 
   scenario 'user is unsubscribed from emails and is not notified after checking in' do
         
     # register user and expect last_seen_at to be defined
     register_user
-    expect(Time.now).to be < @user.last_seen_at + 1.minute
+    expect(Time.now).to be < @user.seen_at + 1.minute
     
     # set user to not receive reminder emails
-    @user.update_attributes(:is_receiving_reminders).to be false
+    @user.update_attributes(:is_receiving_inactivity_email => false)
         
     # clear emails
     ActionMailer::Base.deliveries = []
     
-    30.times_with_index do |index|
+    30.times do |index|
       
       # update user last seen at: index * days ago
-      @user.update_attributes(:last_seen_at => Time.now - index * 1.day)
+      @user.reload
+      @user.update_attributes(:seen_at => Time.now - index * 1.day, :inactivity_email_sent_at => (@user.inactivity_email_sent_at.nil? ? Time.now : @user.inactivity_email_sent_at) - 1.day)      
       
       # simulate hitting of API webhook
-      visit daily_tasks(ENV["OURNAROPA_FORUM_API_KEY"])
+      visit '/forum/tasks/send-inactivity-emails/'+ENV["WEBHOOK_KEY"]
       
     end
 

@@ -23,5 +23,12 @@ module OurnaropaForum
     def new_reply
       UserNotifier.send_new_reply_email(User.first, Reply.first)
     end
+    
+    def inactivity_email
+      
+      conversations = OurnaropaForum::Conversation.where("created_at > ?", Time.now - 7.days).order(updated_at: :desc).limit(3)
+      
+      UserNotifier.send_inactivity_email(User.first, conversations)
+    end
   end
 end

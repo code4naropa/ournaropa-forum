@@ -15,6 +15,7 @@ module OurnaropaForum
 
     def authorize
       redirect_to login_path and return unless current_user
+      @current_user.touch(:seen_at)
     end
     
     def authorize_superuser

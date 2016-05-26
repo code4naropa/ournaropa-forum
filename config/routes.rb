@@ -1,6 +1,9 @@
 OurnaropaForum::Engine.routes.draw do
   
   
+  # Tasks
+  get 'tasks/send-inactivity-emails/:webhook_key', to: 'tasks#send_inactivity_emails'
+
   # Subscriptions Controller
   get 'conversation/:conversation_id/subscribe', to: 'subscriptions#subscribe', as: 'subscribe'
   get 'conversation/:conversation_id/unsubscribe', to: 'subscriptions#unsubscribe', as: 'unsubscribe'

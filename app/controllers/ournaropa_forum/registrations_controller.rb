@@ -32,6 +32,7 @@ module OurnaropaForum
       @user.is_superuser = p_user.is_superuser
       @user.reset_token = User.generate_reset_token
       @user.password = SecureRandom.uuid  
+      @user.seen_at = Time.now
       
       @user.save
       

@@ -1,0 +1,119 @@
+<%
+# replace unsubscribe link in footer
+
+link_html = link_to(disable_inactivity_email_url){'<font color="#ffffff">Click here to disable</font>'.html_safe}
+
+@footer.gsub!("*UNSUBSCRIBE_LINK*", link_html)
+
+%>
+<tr>
+  <td class="innerpadding no-padding-bottom">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+          <h2>Hi <%= @user.name %>,</h2>
+        </td>
+      </tr>
+      <tr class="bodycopy">
+        <td>
+          it's been a while since you've last checked in. Here is what has been happening.
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<% @conversations.each do |conversation| %>
+<tr>
+  <td class="innerpadding borderbottom">
+    <table width="115" align="left" border="0" cellpadding="0" cellspacing="0">  
+      <tr>
+        <td align="center" height="115" style="padding: 0 20px 10px 0;">
+          <%= image_tag conversation.author.info.avatar.url(:large), :class => "circle", :alt => "#{conversation.author.first_name}'s Avatar", :width => "115", :height => "115", :border => "0" %>
+          <!--<img src="images/article1.png" width="115" height="115" border="0" alt="" />-->
+        </td>
+      </tr>
+      <tr>
+        <td align="center" class="bodycopy" style="padding: 0 20px 0px 0;">
+          <b><%= conversation.author.first_name %></b>
+        </td>
+      </tr>
+    </table>
+    <!--[if (gte mso 9)|(IE)]>
+      <table width="380" align="left" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td>
+    <![endif]-->
+    <table class="col380" align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 380px;">  
+      <tr>
+        <td>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="bodycopy">
+                <%= link_to conversation_url(conversation), class: "link" do %><font color="<%= @highlight_color %>"><b><%= conversation.title %></b></font><% end %><br/>
+                <%= parse_text(conversation.body).truncate_words(50) %>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 20px 0 0 0;">
+                <table class="buttonwrapper" bgcolor="<%= @primary_color %>" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td class="button" height="45">
+                      <%= link_to "Read More", conversation_url(conversation) %>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!--[if (gte mso 9)|(IE)]>
+          </td>
+        </tr>
+    </table>
+    <![endif]-->
+  </td>
+</tr>
+<% end %>
+
+<tr>
+  <td class="innerpadding no-padding-bottom">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="left">
+          <h2>It's been a while...</h2>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td class="innerpadding no-padding-top borderbottom">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="width: 100%; max-width: 540px;">
+      <tr>
+        <td class="bodycopy">
+          Why don't you check in again?
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="padding: 20px 0 0 0;">
+          <table class="buttonwrapper" bgcolor="<%= @primary_color %>" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="button" height="45">
+                <%= link_to "Visit OurNaropa", signup_url %>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="padding: 5px 0 0 0;" class="fine_print">
+          (or click here: <%= link_to root_url do %><font color="<%= @faded_color %>"><%= root_url %></font><% end %>)
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>

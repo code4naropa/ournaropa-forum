@@ -57,8 +57,7 @@ module OurnaropaForum
       @footer = 'You received this email because someone triggered a password reset for your account.'
             
       mail :to => "#{@user.first_name} #{@user.last_name} <#{@user.email}>",
-        :subject => '[OurNaropa] Password Recovery',
-        :skip_premailer => false
+        :subject => '[OurNaropa] Password Recovery'
     end     
       
     def send_new_reply_email(user, reply)
@@ -76,7 +75,26 @@ module OurnaropaForum
         :subject => "[OurNaropa] New Reply in #{@reply.conversation.title}" )
           
     end
-  
+
+    def send_inactivity_email(user, conversation_ids)
+      
+      # initialize colors for email
+      init_colors     
+      @user = user
+      @conversations = []
+      
+      conversation_ids.each do |id|
+        @conversations << Conversation.find(id)
+      end
+            
+      @footer = "You received this email because email notifications for inactivity are enabled. *UNSUBSCRIBE_LINK*."
+      
+      mail( :to => "#{@user.first_name} #{@user.last_name} <#{@user.email}>",
+        :subject => "[OurNaropa] It's been a while!" )
+                
+    end
+    
+    
     private
 
     def roadie_options
