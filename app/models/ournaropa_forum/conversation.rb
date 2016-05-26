@@ -1,6 +1,6 @@
 module OurnaropaForum
   class Conversation < ActiveRecord::Base
-    
+        
     # Assocations
     has_many :replies
     belongs_to :author, class_name: "User"
@@ -13,6 +13,9 @@ module OurnaropaForum
     validates_presence_of :title, :body, :author_id
     validate :is_not_a_double_post?, on: :create
     
+    # Parameterize slug
+    extend FriendlyId
+    friendly_id :title, use: :slugged
     
     # verify that this is not a double post
     def is_not_a_double_post?
