@@ -17,6 +17,7 @@ gem 'sass-rails'
 gem 'materialize-sass'
 gem 'material_icons'
 gem 'bcrypt'
+gem 'roadie-rails', '~> 1.0'
 
 group :development, :test do
   gem 'jquery-rails'

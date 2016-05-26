@@ -36,7 +36,8 @@ module OurnaropaForum
       @user.save
       
       # send email
-      UserNotifier.send_signup_email(@user, request.base_url).deliver_later
+      email = UserNotifier.send_signup_email(@user)
+      email.deliver_later
       
     end
   end

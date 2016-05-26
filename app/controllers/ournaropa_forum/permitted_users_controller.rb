@@ -28,7 +28,12 @@ module OurnaropaForum
       @permitted_user = PermittedUser.new(permitted_user_params)
 
       if @permitted_user.save
-        redirect_to permitted_users_path, notice: 'Access successfully granted.'
+        
+        # send email
+        email = UserNotifier.send_invitation_email(@permitted_user, current_user)
+        email.deliver_later
+        
+        redirect_to permitted_users_path, notice: 'Access granted. Email invitation successfully sent.'
       else
         render :new
       end

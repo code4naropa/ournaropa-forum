@@ -38,7 +38,10 @@ module OurnaropaForum
         
         # check subscriptions
         @reply.conversation.subscriptions.each do |sub|
-          UserNotifier.send_new_reply_email(sub, @reply, request.base_url).deliver_later unless sub.id == current_user.id
+          if sub.id != @reply.author.id
+            email = UserNotifier.send_new_reply_email(sub, @reply)
+            email.deliver_later
+          end
         end
         
         @subscription_notice = ""

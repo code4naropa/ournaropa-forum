@@ -1,6 +1,13 @@
 module OurnaropaForum
   # Preview all emails at http://localhost:3000/rails/mailers/user_notifier
   class UserNotifierPreview < ActionMailer::Preview
+    
+    include ApplicationHelper
+    
+    def invitation
+      UserNotifier.send_invitation_email(PermittedUser.first, User.last)
+    end
+    
     def welcome
       u = User.first
       u.reset_token = User.generate_reset_token
@@ -14,7 +21,7 @@ module OurnaropaForum
     end
     
     def new_reply
-      UserNotifier.send_new_reply_email(User.first, Reply.first, "http://localhost:3000")
+      UserNotifier.send_new_reply_email(User.first, Reply.first)
     end
   end
 end

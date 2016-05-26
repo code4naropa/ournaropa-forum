@@ -47,10 +47,8 @@ RSpec.shared_context "shared functions", :a => :b do
     
     register_user
     
-    # open email
+    # open email and validate
     email = ActionMailer::Base.deliveries.last
-    
-    binding.pry
     expect(email.body).to include(new_password_after_reset_url(@user.id, @user.reset_token))
     
     # navigate to finish signup by setting password
