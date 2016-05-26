@@ -234,7 +234,6 @@ DEPENDENCIES
   factory_girl_rails
   faker (~> 1.6.1)
   figaro
-  friendly_id (~> 5.1.0)
   jquery-rails
   jquery-turbolinks
   launchy

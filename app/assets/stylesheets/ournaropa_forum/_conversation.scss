@@ -96,6 +96,10 @@ div.custom-chip {
   a.open-conversation .topic{
     
     transition: all .3s;
+    
+    .content h3, p {
+      transition: all .3s;
+    }
   }
   
   // style the author icon
