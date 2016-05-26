@@ -23,9 +23,11 @@ Rails.application.configure do
   config.active_record.migration_error = :page_load
   
   config.action_mailer.preview_path = "#{Rails.root}/../../spec/mailers"
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-  config.action_mailer.delivery_method = :smtp
-  #config.action_mailer.delivery_method = :test
+  config.action_mailer.default_url_options = { :host => 'localhost:3000', :protocol => 'http'}
+  #config.action_mailer.default_url_options = { :host => 'www.ournaropa.org' }
+  #config.action_mailer.asset_host = "http://www.ournaropa.org"
+  #config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :test
   ActionMailer::Base.smtp_settings = {
     :user_name => ENV["SENDGRID_SMTP_USERNAME"],
     :password => ENV["SENDGRID_SMTP_PASSWORD"],
