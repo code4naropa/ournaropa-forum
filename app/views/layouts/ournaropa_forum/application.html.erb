@@ -2,6 +2,35 @@
 <html>
 <head>
   <title>OurNaropa - Elevating Collaboration and Empowering Community</title>
+  
+  <%# favicons %>
+  <% apple_sizes = ["57", "60", "72", "76", "114", "120", "144", "152", "180"]
+android_sizes = ["192"] 
+icon_sizes = ["32", "96", "16"] %>
+  <% apple_sizes.each do |size| %>
+    <%= favicon_link_tag "ournaropa_forum/favicons/apple-icon-#{size}x#{size}.png", rel: 'apple-touch-icon', sizes: "#{size}x#{size}" %>
+  <% end %>
+  <% android_sizes.each do |size| %>
+  <%= favicon_link_tag "ournaropa_forum/favicons/android-icon-#{size}x#{size}.png", rel: 'icon', type: "image.png", sizes: "#{size}x#{size}" %>
+  <% end %>
+  <% icon_sizes.each do |size| %>
+  <%= favicon_link_tag "ournaropa_forum/favicons/favicon-#{size}x#{size}.png", rel: 'icon', type: "image.png", sizes: "#{size}x#{size}" %>
+  <% end %>
+  <link rel="manifest" href="<%= image_path("ournaropa_forum/favicons/manifest.json") %>">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="<%= image_path("ournaropa_forum/favicons/ms-icon-144x144.png") %>">
+  <meta name="theme-color" content="#ffffff">
+  
+  <!-- 
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">-->
+  
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ournaropa_forum (1.0.0)
+    ournaropa_forum (1.0.1)
       bcrypt
       friendly_id (~> 5.1.0)
       jquery-rails

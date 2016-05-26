@@ -97,7 +97,7 @@ module OurnaropaForum
       @highlight_color = "#E18416"
       @faded_color = "#616161"
       
-      @image_host = ENV["OURNAROPA_ASSET_HOST"] + "/public/ournaropa_forum/"
+      @image_host = ENV["OURNAROPA_ASSET_HOST"]
     end
     
     def roadie_options

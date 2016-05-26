@@ -14,8 +14,15 @@ link_html = link_to(unsubscribe_url(@reply.conversation.id)){'<font color="#ffff
           <h2>Hello <%= @user.name %>,</h2>
         </td>
       </tr>
-      <tr class="bodycopy">
-        <td>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td class="innerpadding no-padding-top borderbottom">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="width: 100%; max-width: 540px;">
+      <tr>
+        <td class="bodycopy">
           there has been a new reply in <%= link_to conversation_url(@reply.conversation.slug), class: "link" do %><font color="<%= @highlight_color %>"><b><%= @reply.conversation.title %></b></font><% end %>:
         </td>
       </tr>
@@ -28,7 +35,7 @@ link_html = link_to(unsubscribe_url(@reply.conversation.id)){'<font color="#ffff
     <table width="115" align="left" border="0" cellpadding="0" cellspacing="0">  
       <tr>
         <td align="center" height="115" style="padding: 0 20px 10px 0;">
-          <%= image_tag ActionMailer::Base.default_url_options[:protocol] + "://" + ActionMailer::Base.default_url_options[:host] + "/public" + @reply.author.info.avatar.url(:large), :class => "circle", :alt => "#{@reply.author.first_name}'s Avatar", :width => "115", :height => "115", :border => "0" %>
+          <%= image_tag @image_host + @reply.author.info.avatar.url(:large), :class => "circle", :alt => "#{@reply.author.first_name}'s Avatar", :width => "115", :height => "115", :border => "0" %>
           <!--<img src="images/article1.png" width="115" height="115" border="0" alt="" />-->
         </td>
       </tr>
