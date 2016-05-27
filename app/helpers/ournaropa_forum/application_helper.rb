@@ -5,7 +5,7 @@ module OurnaropaForum
     
     STARTER_CHARS = /[[:space:]]|&#39;|&quot;|[\(\{\[]|^/
     LEGIT_CHARS = /[a-zA-Z0-9-]/
-    ENDING_CHARS_IF_FOLLOWED_BY_SPACE = /[\.!\?:;\)\]\}]/
+    ENDING_CHARS_IF_FOLLOWED_BY_SPACE = /[\.,!\?:;\)\]\}]/
     ENDING_CHARS_IN_ANY_CASE = /[[[:space:]]\"]|&#39;|&quot;|$/
     INTERCEPT_CHARS = /(#{ENDING_CHARS_IN_ANY_CASE})|(#{ENDING_CHARS_IF_FOLLOWED_BY_SPACE}+([[:space:]]|$))/
     URL_REGEX = /(#{STARTER_CHARS})((https?:\/\/)?#{LEGIT_CHARS}+?\.#{LEGIT_CHARS}+?.*?)(#{INTERCEPT_CHARS})/u
