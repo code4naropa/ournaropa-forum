@@ -9,7 +9,7 @@ module OurnaropaForum
         
     layout '/ournaropa_forum/email'
     
-    default :from => "OurNaropa <info@ournaropa.org>"
+    default :from => "The Cushion <forum@thecushion.org>"
         
     # invitation email
     def send_invitation_email(new_user, invited_by_user)
@@ -20,10 +20,10 @@ module OurnaropaForum
       @invited_by_user = invited_by_user
       
       # set footer
-      @footer = "You received this email because #{@invited_by_user.first_name} #{@invited_by_user.last_name} invited you to join OurNaropa."
+      @footer = "You received this email because #{@invited_by_user.first_name} #{@invited_by_user.last_name} invited you to join The Cushion."
       
       mail( :to => "#{@new_user.first_name} #{@new_user.last_name} <#{@new_user.email}>",
-        :subject => 'You are invited to join OurNaropa' )
+        :subject => 'You are invited to join The Cushion' )
       
     end
     
@@ -38,7 +38,7 @@ module OurnaropaForum
       @footer = 'You received this email because you registered an account.'
       
       mail( :to => "#{@user.first_name} #{@user.last_name} <#{@user.email}>",
-        :subject => 'Welcome to OurNaropa' )
+        :subject => 'Welcome to The Cushion' )
     end
     
     def send_password_reset_email(user)
@@ -52,7 +52,7 @@ module OurnaropaForum
       @footer = 'You received this email because someone triggered a password reset for your account.'
             
       mail :to => "#{@user.first_name} #{@user.last_name} <#{@user.email}>",
-        :subject => '[OurNaropa] Password Recovery'
+      :subject => '[The Cushion] Password Recovery'
     end     
       
     def send_new_reply_email(user, reply)
@@ -67,7 +67,7 @@ module OurnaropaForum
 
       
       mail( :to => "#{@user.first_name} #{@user.last_name} <#{@user.email}>",
-        :subject => "[OurNaropa] New Reply in #{@reply.conversation.title}" )
+        :subject => "[The Cushion] New Reply in #{@reply.conversation.title}" )
           
     end
 
