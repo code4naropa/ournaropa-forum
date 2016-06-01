@@ -30,5 +30,20 @@ module OurnaropaForum
       
       UserNotifier.send_inactivity_email(User.first, conversations)
     end
+    
+    def task_summary
+      
+      developer = User.find_by is_developer: true
+      
+      users = OurnaropaForum::User.where(:is_receiving_inactivity_email => true).where("seen_at IS NULL or seen_at < ?", Time.now - 7.days).where("inactivity_email_sent_at IS NULL or inactivity_email_sent_at < ?", Time.now - 7.days)
+      users_emailed = []
+      
+      users.each do |user|
+        users_emailed << user.id
+      end
+            
+      UserNotifier.send_task_summary_email(developer, users_emailed)
+    end
+    
   end
 end

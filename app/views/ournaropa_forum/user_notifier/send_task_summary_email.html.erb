@@ -1,0 +1,59 @@
+<tr>
+  <td class="innerpadding no-padding-bottom" style="padding-bottom: 0px;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+          <h2 class="no-padding-bottom">Inactivity Emails Were Sent Successfully (<%= Time.now.strftime("%D") %>)</h2>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td class="innerpadding borderbottom">
+    <table width="115" align="left" border="0" cellpadding="0" cellspacing="0">  
+      <tr>
+        <td height="115" style="padding: 0 20px 20px 0;">
+          <%= image_tag @image_host + "/ournaropa_forum/icon_success.png", :alt => "success icon", :width => "115", :height => "115", :border => "0" %>
+        </td>
+      </tr>
+    </table>
+    <!--[if (gte mso 9)|(IE)]>
+      <table width="380" align="left" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td>
+    <![endif]-->
+    <table class="col380" align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 380px;">  
+      <tr>
+        <td>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td class="bodycopy">
+                Timestamp: <%= Time.now %><br/><br/>
+                This is an automated email sent from The Cushion's Task Scheduler informing you that inactivity emails were sent successfully. Here is a list of users who have been emailed:<br/><br/>
+                <% if @users.any? %>
+          
+                  <% @users.each do |user| %>
+                    <%= user.first_name + " " + user.last_name + " <" + user.email + ">" %><br/>
+                  <% end %>
+                
+                <% else %>
+                  <i>No user has been emailed.</i>
+                <% end %>
+                
+                <br/><br/>
+                Have a splendid day :)
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!--[if (gte mso 9)|(IE)]>
+          </td>
+        </tr>
+    </table>
+    <![endif]-->
+  </td>
+</tr>

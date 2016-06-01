@@ -90,7 +90,7 @@ feature 'managing access' do
     # expect email to have been sent out with instructions
     email = ActionMailer::Base.deliveries.last
     expect(email.to.first).to eq(new_user.email)
-    expect(email.subject).to eq("You are invited to join OurNaropa")
+    expect(email.subject).to eq("You are invited to join The Cushion")
     expect(email.body).to include(signup_url)
     expect(email.body).to include(new_user.first_name)
     expect(email.body).to include(@user.first_name)

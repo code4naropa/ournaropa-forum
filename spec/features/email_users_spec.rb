@@ -37,7 +37,7 @@ feature 'User Notifier' do
     
     # expect @first_user to receive that email
     expect(email.to.first).to eq(@first_user.email)
-    expect(email.subject).to eq("[OurNaropa] New Reply in #{@conversation.title}")
+    expect(email.subject).to eq("[The Cushion] New Reply in #{@conversation.title}")
     expect(email.body).to include(parse_text @reply.body)
     
     # create a new user
@@ -57,19 +57,25 @@ feature 'User Notifier' do
     # expect @first_user to receive the first email
     email = ActionMailer::Base.deliveries.first
     expect(email.to.first).to eq(@first_user.email)
-    expect(email.subject).to eq("[OurNaropa] New Reply in #{@conversation.title}")
+    expect(email.subject).to eq("[The Cushion] New Reply in #{@conversation.title}")
     expect(email.body).to include(parse_text @reply.body)
     
     # expect @second_user to receive the second email
     email = ActionMailer::Base.deliveries.last
     expect(email.to.first).to eq(@second_user.email)
-    expect(email.subject).to eq("[OurNaropa] New Reply in #{@conversation.title}")
+    expect(email.subject).to eq("[The Cushion] New Reply in #{@conversation.title}")
     expect(email.body).to include(parse_text @reply.body)    
     
   end
     
   scenario 'user is notified after not checking in' do
             
+    # create superuser
+    create_and_sign_in_user
+    @user.update_attributes(:is_developer => true)
+    developer = @user
+    visit logout_path
+    
     # register user and expect seen_at to be defined
     create_and_sign_in_user
     
@@ -92,9 +98,26 @@ feature 'User Notifier' do
       visit '/forum/tasks/send-inactivity-emails/'+ENV["WEBHOOK_KEY"]
       
     end
-
-    # expect four emails over the course of thirty days
-    expect(ActionMailer::Base.deliveries.count).to eq(4)    
+    
+    # divide emails by recipient (user and developer)
+    emails_to_user = []
+    emails_to_developer = []
+    
+    ActionMailer::Base.deliveries.each do |email|
+      
+      if email.to.first == developer.email
+        emails_to_developer << email
+      elsif email.to.first == @user.email
+        emails_to_user << email
+      end
+        
+    end
+    
+    # expect thirty emails to developer over the course of thirty days
+    expect(emails_to_developer.count).to eq(30)   
+    
+    # expect four emails to user over the course of thirty days
+    expect(emails_to_user.count).to eq(4)    
     
   end
   
@@ -118,7 +141,7 @@ feature 'User Notifier' do
       
     end
 
-    # expect four emails over the course of thirty days
+    # expect zero emails over the course of thirty days
     expect(ActionMailer::Base.deliveries.count).to eq(0)    
     
   end

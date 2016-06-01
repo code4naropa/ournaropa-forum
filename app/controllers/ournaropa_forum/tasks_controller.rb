@@ -8,6 +8,7 @@ module OurnaropaForum
       
       # send email
       users = User.all
+      user_ids = []
       
       conversations = Conversation.where("created_at > ?", Time.now - 7.days).order(updated_at: :desc).limit(3)
       conversation_ids = []
@@ -23,18 +24,27 @@ module OurnaropaForum
               if user.inactivity_email_sent_at.nil? || user.inactivity_email_sent_at < Time.now - 7.days
 
                 # email them  
-                email = OurnaropaForum::UserNotifier.send_inactivity_email(user, conversation_ids)
-                #binding.pry
+                email = UserNotifier.send_inactivity_email(user, conversation_ids)
                 email.deliver_later
 
                 # update last email sent
                 user.touch(:inactivity_email_sent_at)
+                
+                user_ids << user.id
 
               end
             end
           end
         end
         
+      end
+      
+      # email devs
+      developers = User.where(:is_developer => true)
+      
+      developers.each do |dev|
+        email = UserNotifier.send_task_summary_email(dev, user_ids)
+        email.deliver_later
       end
         
     end

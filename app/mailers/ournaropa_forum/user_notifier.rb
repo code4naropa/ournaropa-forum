@@ -85,7 +85,26 @@ module OurnaropaForum
       @footer = "You received this email because email notifications for inactivity are enabled. *UNSUBSCRIBE_LINK*."
       
       mail( :to => "#{@user.first_name} #{@user.last_name} <#{@user.email}>",
-        :subject => "[OurNaropa] It's been a while!" )
+        :subject => "[The Cushion] It's been a while!" )
+                
+    end
+    
+    # sends an email to the administrator summarizing the task controller action
+    def send_task_summary_email(user, user_ids)
+      
+      # initialize variables for email
+      init_vars     
+      @user = user
+      @users = []
+      
+      user_ids.each do |id|
+        @users << User.find(id)
+      end
+            
+      @footer = "This is an automated email sent by The Cushion's Task Scheduler."
+      
+      mail( :to => "#{@user.first_name} #{@user.last_name} <#{@user.email}>",
+        :subject => "[The Cushion] Inactivity Emails Were Sent Successfully" )
                 
     end
     
