@@ -5,9 +5,11 @@ module OurnaropaForum
     before_filter :authorize    
     before_action :set_user
     
+    # render profile
     def edit
     end
-
+    
+    # update profile
     def update      
       if @user.info.update_attributes(user_info_params)
         redirect_to profile_path, notice: 'Your profile was successfully updated.'

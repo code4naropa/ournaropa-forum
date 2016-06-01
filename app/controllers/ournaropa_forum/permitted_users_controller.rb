@@ -3,33 +3,25 @@ require_dependency "ournaropa_forum/application_controller"
 module OurnaropaForum
   class PermittedUsersController < ApplicationController
     before_filter :authorize_superuser
-    before_action :set_permitted_user, only: [:show, :edit, :update, :destroy]
+    before_action :set_permitted_user, only: [:destroy]
 
-    # GET /permitted_users
+    # list all permitted users
     def index
       @permitted_users = PermittedUser.all
     end
 
-    # GET /permitted_users/1
-    def show
-    end
-
-    # GET /permitted_users/new
+    # form for a new permitted user
     def new
       @permitted_user = PermittedUser.new
     end
 
-    # GET /permitted_users/1/edit
-    def edit
-    end
-
-    # POST /permitted_users
+    # create the new permitted user
     def create
       @permitted_user = PermittedUser.new(permitted_user_params)
 
       if @permitted_user.save
         
-        # send email
+        # send email invitation to new permitted user
         email = UserNotifier.send_invitation_email(@permitted_user, current_user)
         email.deliver_later
         
@@ -39,16 +31,7 @@ module OurnaropaForum
       end
     end
 
-    # PATCH/PUT /permitted_users/1
-    def update
-      if @permitted_user.update(permitted_user_params)
-        redirect_to @permitted_user, notice: 'Permitted user was successfully updated.'
-      else
-        render :edit
-      end
-    end
-
-    # DELETE /permitted_users/1
+    # delete user
     def destroy
       
       if @permitted_user.destroy

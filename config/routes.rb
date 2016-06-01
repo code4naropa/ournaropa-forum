@@ -1,9 +1,5 @@
 OurnaropaForum::Engine.routes.draw do
   
-  
-  # Tasks
-  get 'tasks/send-inactivity-emails/:webhook_key', to: 'tasks#send_inactivity_emails'
-
   # Subscriptions Controller
   get 'conversation/:conversation_id/subscribe', to: 'subscriptions#subscribe', as: 'subscribe'
   get 'conversation/:conversation_id/unsubscribe', to: 'subscriptions#unsubscribe', as: 'unsubscribe'
@@ -23,10 +19,8 @@ OurnaropaForum::Engine.routes.draw do
   get 'change-password', to: 'passwords#new', as: 'new_password'
   match 'change-password', to: 'passwords#update', via: :post, as: 'update_password'  
   
-  # Users Controller
+  # Directory
   get '/directory', to: 'users#index', as: 'directory'
-
-  get 'home/welcome'
 
   # Sessions Controller
   get 'login', to: 'sessions#new', as: 'login'
@@ -43,14 +37,19 @@ OurnaropaForum::Engine.routes.draw do
   get '/manage-access', to: 'permitted_users#index', as: 'manage_access'
   resources :permitted_users, only: [:index, :new, :create, :destroy], path: '/manage-access'
 
-  # Edit User Profile
+  # User Profile
   get '/profile', to: 'profile#edit', as: 'profile'
   match '/profile', to: 'profile#update', as: 'update_profile', via: [:patch, :put]
   
+  # Conversations
   get '/conversation/:id/reply', to: 'conversations#show'
   resources :conversations, path: '/conversation', only: [:show, :new, :create] do
     resources :replies, path: '/reply', only: [:create]
   end
   
+  # CRON Tasks
+  get 'tasks/send-inactivity-emails/:webhook_key', to: 'tasks#send_inactivity_emails'
+  
+  # Home Page
   root :to => "home#welcome"
 end

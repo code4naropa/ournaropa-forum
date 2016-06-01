@@ -11,6 +11,7 @@ module OurnaropaForum
       @subscriptions = @user.subscriptions.order(updated_at: :desc)
     end
     
+    # subscribe user to a conversation
     def subscribe
       
       @conversation.subscriptions << @user unless @conversation.subscriptions.exists?(@user.id)
@@ -23,10 +24,10 @@ module OurnaropaForum
         }
         format.js
       end
-      
 
     end
 
+    # unsubscribe user from a conversation
     def unsubscribe
       
       @conversation.subscriptions.delete(@user) if @conversation.subscriptions.exists?(@user.id)
@@ -42,6 +43,7 @@ module OurnaropaForum
     
     end
     
+    # enable inactivity emails that are sent after 7 days of inactivity
     def enable_inactivity_email
       @user.update_attributes(:is_receiving_inactivity_email => true)
       @notice = "You have enabled inactivity notifications."
@@ -58,6 +60,7 @@ module OurnaropaForum
       end
     end
     
+    # dsiable inactivity emails that are sent after 7 days of inactivity
     def disable_inactivity_email
       @user.update_attributes(:is_receiving_inactivity_email => false)
       @notice = "You have disabled inactivity notifications."
@@ -73,6 +76,7 @@ module OurnaropaForum
       end
     end
     
+    # disable subscription
     def destroy
       
       @conversation.subscriptions.delete(@user) if @conversation.subscriptions.exists?(@user.id)
@@ -82,6 +86,7 @@ module OurnaropaForum
       
     end
     
+    # disable all subscriptions
     def destroy_all
       @user.subscriptions.each do |subscription|
         subscription.subscriptions.delete(@user)
@@ -89,7 +94,7 @@ module OurnaropaForum
       
       @notice = "All notifications about new replies in conversations disabled."
       
-      redirect_to manage_email_notifications_path      
+      redirect_to manage_email_notifications_path and return     
     end
     
     private
