@@ -2,6 +2,9 @@ module OurnaropaForum
   class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
     
+    # force secure connection
+    force_ssl unless: -> { Rails.env.in? ['development', 'test'] }
+    
     # get the user who is currently signed in
     def current_user
       
