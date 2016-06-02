@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>The Cushion - Elevating Collaboration and Empowering Community</title>
   
   <%# favicons %>
   <% apple_sizes = ["57", "60", "72", "76", "114", "120", "144", "152", "180"]
@@ -21,15 +20,31 @@ icon_sizes = ["32", "96", "16"] %>
   <meta name="msapplication-TileImage" content="<%= image_path("ournaropa_forum/favicons/ms-icon-144x144.png") %>">
   <meta name="theme-color" content="#ffffff">
   
-  <!-- 
-<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<meta name="msapplication-TileColor" content="#ffffff">
-<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">-->
+  <%# Social Media Sharing %>
+  <title>The Cushion: Forum</title>
+  <meta name="description" content="The Cushion is a place for incoming Naropa students to meer their peers: Engage in conversations. Ask questions. Make friends. Build community." />
+
+  <!-- Schema.org markup for Google+ -->
+  <meta itemprop="name" content="The Cushion: Forum">
+  <meta itemprop="description" content="The Cushion is a place for incoming Naropa students to meer their peers: Engage in conversations. Ask questions. Make friends. Build community.">
+  <meta itemprop="image" content="https://www.thecushion.org/ournaropa_forum/social_media.jpg">
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@publisher_handle">
+  <meta name="twitter:title" content="Page Title">
+  <meta name="twitter:description" content="Page description less than 200 characters">
+  <meta name="twitter:creator" content="@author_handle">
+  <!-- Twitter summary card with large image must be at least 280x150px -->
+  <meta name="twitter:image:src" content="https://www.thecushion.org/ournaropa_forum/social_media.jpg">
+
+  <!-- Open Graph data -->
+  <meta property="og:title" content="The Cushion: Forum" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.thecushion.org/forum" />
+  <meta property="og:image" content="https://www.thecushion.org/ournaropa_forum/social_media.jpg" />
+  <meta property="og:description" content="The Cushion is a place for incoming Naropa students to meer their peers: Engage in conversations. Ask questions. Make friends. Build community." />
+  <meta property="og:site_name" content="The Cushion" />
   
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
