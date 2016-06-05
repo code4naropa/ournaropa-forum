@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  
+
   <%# favicons %>
   <% apple_sizes = ["57", "60", "72", "76", "114", "120", "144", "152", "180"]
-android_sizes = ["192"] 
+android_sizes = ["192"]
 icon_sizes = ["32", "96", "16"] %>
   <% apple_sizes.each do |size| %>
     <%= favicon_link_tag "ournaropa_forum/favicons/apple-icon-#{size}x#{size}.png", rel: 'apple-touch-icon', sizes: "#{size}x#{size}" %>
@@ -19,7 +19,7 @@ icon_sizes = ["32", "96", "16"] %>
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="<%= image_path("ournaropa_forum/favicons/ms-icon-144x144.png") %>">
   <meta name="theme-color" content="#ffffff">
-  
+
   <%# Social Media Sharing %>
   <title>The Cushion: Forum</title>
   <meta name="description" content="The Cushion is a place for incoming Naropa students to meer their peers: Engage in conversations. Ask questions. Make friends. Build community." />
@@ -31,10 +31,9 @@ icon_sizes = ["32", "96", "16"] %>
 
   <!-- Twitter Card data -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@publisher_handle">
-  <meta name="twitter:title" content="Page Title">
-  <meta name="twitter:description" content="Page description less than 200 characters">
-  <meta name="twitter:creator" content="@author_handle">
+  <meta name="twitter:title" content="The Cushion: Forum">
+  <meta name="twitter:description" content="The Cushion is a place for incoming Naropa students to meer their peers: Engage in conversations. Ask questions. Make friends. Build community.">
+  <meta name="twitter:creator" content="@FinnWoelm">
   <!-- Twitter summary card with large image must be at least 280x150px -->
   <meta name="twitter:image:src" content="https://www.thecushion.org/ournaropa_forum/social_media.jpg">
 
@@ -45,18 +44,22 @@ icon_sizes = ["32", "96", "16"] %>
   <meta property="og:image" content="https://www.thecushion.org/ournaropa_forum/social_media.jpg" />
   <meta property="og:description" content="The Cushion is a place for incoming Naropa students to meer their peers: Engage in conversations. Ask questions. Make friends. Build community." />
   <meta property="og:site_name" content="The Cushion" />
-  
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <%# put Piwik tracking %>
+  <%= piwik_tracking_tag %>
+
 </head>
 <body id="ournaropa_forum">
 
 
-  
+
  <nav>
   <div class="nav-wrapper primary-color">
     <div class="container">
@@ -89,7 +92,7 @@ icon_sizes = ["32", "96", "16"] %>
       </ul>
     </div>
   </div>
-</nav>  
+</nav>
 
 <%= yield %>
 
@@ -99,11 +102,11 @@ icon_sizes = ["32", "96", "16"] %>
     Materialize.toast("<%= escape_javascript notice %>", 5000) // 4000 is the duration of the toast
   </script>
 <% end %>
-  
-<!-- Initialize mobile menu -->  
+
+<!-- Initialize mobile menu -->
 <script type="text/javascript">
-  $(".button-collapse").sideNav();  
-</script>  
-  
+  $(".button-collapse").sideNav();
+</script>
+
 </body>
 </html>

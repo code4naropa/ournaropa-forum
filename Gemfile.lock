@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ournaropa_forum (1.1.2)
+    ournaropa_forum (1.2.0)
       bcrypt
       friendly_id (~> 5.1.0)
       jquery-rails
@@ -134,6 +134,10 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
     pg (0.18.4)
+    piwik_analytics (1.0.2)
+      actionpack
+      activesupport
+      rails (>= 3.0.0)
     poltergeist (1.9.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -248,6 +252,7 @@ DEPENDENCIES
   ournaropa_forum!
   paperclip
   pg
+  piwik_analytics (~> 1.0.0)
   poltergeist
   pry-rails
   roadie-rails (~> 1.0)

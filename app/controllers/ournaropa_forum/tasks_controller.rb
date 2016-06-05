@@ -11,6 +11,8 @@ module OurnaropaForum
       # get three conversations from the last 7 days
       conversations = Conversation.where("created_at > ?", Time.now - 7.days).order(updated_at: :desc).limit(3)
 
+      users_emailed = []
+
       if conversations.any?
 
         # create an array of the conversation ids
@@ -21,7 +23,6 @@ module OurnaropaForum
         
         # determine who to email
         users = OurnaropaForum::User.where(:is_receiving_inactivity_email => true).where("seen_at IS NULL or seen_at < ?", Time.now - 7.days).where("inactivity_email_sent_at IS NULL or inactivity_email_sent_at < ?", Time.now - 7.days)
-        users_emailed = []
         
         # begin email procedure
         users.each do |user|
