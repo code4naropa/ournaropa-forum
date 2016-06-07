@@ -26,7 +26,7 @@ link_html = link_to(disable_inactivity_email_url){'<font color="#ffffff">Click h
 <% @conversations.each do |conversation| %>
 <tr>
   <td class="innerpadding borderbottom">
-    <table width="115" align="left" border="0" cellpadding="0" cellspacing="0">  
+    <table width="115" align="left" border="0" cellpadding="0" cellspacing="0">
       <tr>
         <td align="center" height="115" style="padding: 0 20px 10px 0;">
           <%= image_tag @image_host + conversation.author.info.avatar.url(:large), :class => "circle", :alt => "#{conversation.author.first_name}'s Avatar", :width => "115", :height => "115", :border => "0" %>
@@ -44,7 +44,7 @@ link_html = link_to(disable_inactivity_email_url){'<font color="#ffffff">Click h
         <tr>
           <td>
     <![endif]-->
-    <table class="col380" align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 380px;">  
+    <table class="col380" align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 380px;">
       <tr>
         <td>
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -103,7 +103,7 @@ link_html = link_to(disable_inactivity_email_url){'<font color="#ffffff">Click h
           <table class="buttonwrapper" bgcolor="<%= @primary_color %>" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td class="button" height="45">
-                <%= link_to "Visit OurNaropa", signup_url %>
+                <%= link_to "Visit The Cushion", root_url %>
               </td>
             </tr>
           </table>
